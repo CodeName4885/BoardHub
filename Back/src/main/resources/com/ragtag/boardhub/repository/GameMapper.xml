@@ -5,7 +5,11 @@
 <mapper namespace="com.ragtag.boardhub.repository.GameMapper">
 
     <select id="getList" resultType="com.ragtag.boardhub.domain.Games">
-        select * from mygame
+        SELECT * FROM mygame
+    </select>
+
+    <select id="getListWithSort" resultType="Games">
+        SELECT * FROM mygame m JOIN cate_mapping c ON m.game_id = c.game_id WHERE category_id = #{category}
     </select>
 
 </mapper>

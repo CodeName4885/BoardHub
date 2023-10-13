@@ -4,11 +4,10 @@ import "../static/game-warrior/css/bootstrap.min.css";
 import "../static/game-warrior/css/style.css";
 
 export function GameListItemComponent(item) {
-    console.log(item)
 
     return (
         <>
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-3 col-md-6 mt-4">
                 <div className="review-item">
                     <div
                         className="review-cover"
