@@ -8,18 +8,18 @@ export function Header() {
 
 
   return (
-    <header class="header-section">
-        <div class="container">
-            <a class="site-logo">
+    <header className="header-section">
+        <div className="container">
+            <a className="site-logo">
                 <p>BoardHub</p>
             </a>
-            <div class="user-panel">
+            <div className="user-panel">
                 <a href="#">Login</a>  /  <a href="#">Register</a>
             </div>
-            <div class="nav-switch">
-                <i class="fa fa-bars"></i>
+            <div className="nav-switch">
+                <i className="fa fa-bars"></i>
             </div>
-            <nav class="main-menu">
+            <nav className="main-menu">
                 <ul>
                     <li><a href="">게임 정보</a></li>
                     <li><a href="">게임 후기</a></li>
