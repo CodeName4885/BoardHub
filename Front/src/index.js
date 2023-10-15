@@ -6,6 +6,9 @@ import { GameDetailPage } from "./game/GameDetailPage";
 import { GameListPage } from "./game/GameListPage";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+import Join from "./user/Join";
+import JoinAgree from "./user/JoinAgree";
+import Entryinfo from "./user/Entryinfo";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,6 +20,9 @@ root.render(
             <Route path="list" element={<GameListPage />}/>
             <Route path="detail" element={<GameDetailPage />}/>
         </Route>
+        <Route path="join" element={<Join />} />
+        <Route path="joinagree" element={<JoinAgree />} />
+        <Route path="entry-info" element={<Entryinfo />} />
       </Routes>
     </Router>
   </React.StrictMode>
