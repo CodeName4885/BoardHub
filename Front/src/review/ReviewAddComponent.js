@@ -3,20 +3,17 @@ import { CkEditor } from "../upload/CkEditor";
 
 export function ReviewAddComponent() {
     const [editorData, setEditorData] = useState(''); // 초기값을 빈 문자열로 설정
-    const [title,setTitle] = useState('');
+    const [title, setTitle] = useState('');
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const dataTosand = {
-                title: title,
-                editorData: editorData
-            };
             const response = await fetch('http://localhost:8080/api/reviews', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ editorData }), // 객체로 감싸지 않도록 수정
+                body: JSON.stringify({ content: editorData, title: title }), // Send content and title
             });
             if (response.ok) {
                 // 성공 처리
@@ -29,6 +26,7 @@ export function ReviewAddComponent() {
             console.error('Error:', error);
         }
     };
+
     return (
         <form>
             <input
