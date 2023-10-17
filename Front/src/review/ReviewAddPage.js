@@ -4,7 +4,6 @@ import "../static/game-warrior/css/animate.css";
 import "../static/game-warrior/css/bootstrap.min.css";
 import "../static/game-warrior/css/style.css";
 import { ReviewAddComponent} from "./ReviewAddComponent";
-import { useState } from "react"; // Import useState
 
 export function ReviewAddPage() {
 
