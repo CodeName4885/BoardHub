@@ -6,6 +6,7 @@ import { GameDetailPage } from "./game/GameDetailPage";
 import { GameListPage } from "./game/GameListPage";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+import {ReviewAddPage} from "./review/ReviewAddPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -19,6 +20,14 @@ root.render(
         </Route>
       </Routes>
     </Router>
+      <Router>
+          <Routes>
+              <Route index element={<App />} />
+              <Route path="review">
+              <Route path="add" element={<ReviewAddPage/>}/>
+              </Route>
+          </Routes>
+      </Router>
   </React.StrictMode>
 );
 

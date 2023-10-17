@@ -14,7 +14,6 @@ export function ReviewAddPage() {
                 <div className="review-container"></div>
                 <br />
                 <h2>제목</h2>
-                <input type="text" placeholder="제목" name="title" />
             <ReviewAddComponent />
             <Footer/>
             </div>
