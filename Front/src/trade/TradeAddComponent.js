@@ -1,15 +1,15 @@
 import {CkEditor} from "../upload/CkEditor";
 import {useState} from "react";
 
-export function SolutionAddComponent() {
- const [editorData, setEditorData] = useState('');
+export function TradeAddComponent() {
+    const [editorData, setEditorData] = useState('');
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('1');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch('http://localhost:8080/add/solutions', {
+            const response = await fetch('http://localhost:8080/add/trade', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -45,9 +45,9 @@ export function SolutionAddComponent() {
                 value={category}
                 onChange={(event) => setCategory(event.target.value)}
             >
-                <option value="1">리뷰</option>
-                <option value="2">프리뷰</option>
-                <option value="3">모임</option>
+                <option value="1">구매</option>
+                <option value="2">판매</option>
+                <option value="3">완료</option>
             </select>
             <button type="submit" onClick={handleSubmit}>Submit</button>
         </form>

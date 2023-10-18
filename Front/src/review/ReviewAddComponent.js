@@ -2,24 +2,27 @@ import React, { useState } from 'react';
 import { CkEditor } from "../upload/CkEditor";
 
 export function ReviewAddComponent() {
-    const [editorData, setEditorData] = useState(''); // 초기값을 빈 문자열로 설정
+    const [editorData, setEditorData] = useState('');
     const [title, setTitle] = useState('');
+    const [category, setCategory] = useState('1');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch('http://localhost:8080/api/reviews', {
+            const response = await fetch('http://localhost:8080/add/reviews', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ content: editorData, title: title }), // Send content and title
+                body: JSON.stringify({
+                    content: editorData,
+                    title: title,
+                    category: category,
+                }),
             });
             if (response.ok) {
-                // 성공 처리
                 console.log('Form submitted successfully.');
             } else {
-                // 실패 처리
                 console.error('Form submission failed.');
             }
         } catch (error) {
@@ -34,9 +37,18 @@ export function ReviewAddComponent() {
                 placeholder="제목"
                 name="title"
                 value={title}
-                onChange={(event) => setTitle(event.target.value)} // 입력 값 변경 시 title 상태 업데이트
+                onChange={(event) => setTitle(event.target.value)}
             />
             <CkEditor editorData={editorData} setEditorData={setEditorData} />
+            <select
+                id="category"
+                value={category}
+                onChange={(event) => setCategory(event.target.value)}
+            >
+                <option value="1">리뷰</option>
+                <option value="2">프리뷰</option>
+                <option value="3">모임</option>
+            </select>
             <button type="submit" onClick={handleSubmit}>Submit</button>
         </form>
     );

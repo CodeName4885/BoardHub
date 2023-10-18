@@ -4,13 +4,19 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import App from "./App";
 import { GameDetailPage } from "./game/GameDetailPage";
 import { GameListPage } from "./game/GameListPage";
+import {ReviewAddPage} from "./review/ReviewAddPage";
+import {SolutionAddPage} from "./solution/SolutionAddPage";
+import {SolutionListPage} from "./solution/SolutionListPage";
+import {TradeAddPage} from "./trade/TradeAddPage";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import {ReviewAddPage} from "./review/ReviewAddPage";
+
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+
     <Router>
       <Routes>
         <Route index element={<App />} />
@@ -20,6 +26,7 @@ root.render(
         </Route>
       </Routes>
     </Router>
+
       <Router>
           <Routes>
               <Route index element={<App />} />
@@ -28,6 +35,26 @@ root.render(
               </Route>
           </Routes>
       </Router>
+
+     <Router>
+         <Routes>
+             <Route index element={<App />} />
+             <Route path="trade">
+                 <Route path="add" element={<TradeAddPage/>}/>
+             </Route>
+         </Routes>
+     </Router>
+
+      <Router>
+          <Routes>
+              <Route index element={<App />} />
+              <Route path="solution">
+                  <Route path="add" element={<SolutionAddPage/>}/>
+                  <Route path="list" element={<SolutionListPage/>}/>
+              </Route>
+          </Routes>
+      </Router>
+
   </React.StrictMode>
 );
 
