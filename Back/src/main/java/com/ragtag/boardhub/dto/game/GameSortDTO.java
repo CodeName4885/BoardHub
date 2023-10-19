@@ -1,4 +1,4 @@
-package com.ragtag.boardhub.dto;
+package com.ragtag.boardhub.dto.game;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.ragtag.boardhub.domain;
+package com.ragtag.boardhub.domain.game;
 
 import lombok.Data;
 
@@ -6,9 +6,8 @@ import lombok.Data;
 public class Games {
 
     private Long game_id;
-    private Long board_game_id;
     private String title;
-    private String eng_title;
+    private String org_title;
     private String thumbnail;
     private String image;
     private int release_date;

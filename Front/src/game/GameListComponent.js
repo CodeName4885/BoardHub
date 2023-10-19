@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
 import "../static/game-warrior/css/animate.css";
 import "../static/game-warrior/css/bootstrap.min.css";
 import "../static/game-warrior/css/style.css";
-import { GameListItemComponent } from "./GameListItemComponent";
-import { API_URL, CATEGORY, GAME_LIST } from "../Constants";
 import { Select, Tabs } from "antd";
+import { useEffect, useState } from "react";
+import { CATEGORY } from "../../Constants";
+import { fetchList } from "../../repositories/GameRepository";
+import { GameListItemComponent } from "./GameListItemComponent";
 
 export function GameListComponent() {
-    const [url, setUrl] = useState(API_URL + GAME_LIST);
     const [games, setGames] = useState([]);
     const [sort, setSort] = useState({});
 
@@ -63,36 +63,31 @@ export function GameListComponent() {
     ];
 
     useEffect(() => {
-        getApi(url);
+        getGameList();
     }, [sort]);
 
-    async function getApi(url) {
-        const response = await fetch(url, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(sort),
-        });
-        const data = await response.json();
+    async function getGameList() {
+        const data = await fetchList(sort);
         setGames(data);
     }
 
     return (
         <>
-            <div className="container">
-                <Tabs
-                    defaultActiveKey="1"
-                    size="large"
-                    items={items}
-                    onChange={onChange}
-                />
-            </div>
-            <div className="row">
-                {games.map((item, key) => (
-                    <GameListItemComponent key={key} games={item} />
-                ))}
-            </div>
+            <section className="review-section spad">
+                <div className="container">
+                    <Tabs
+                        defaultActiveKey="1"
+                        size="large"
+                        items={items}
+                        onChange={onChange}
+                    />
+                    <div className="row">
+                        {games.map((item, key) => (
+                            <GameListItemComponent key={key} games={item} />
+                        ))}
+                    </div>
+                </div>
+            </section>
         </>
     );
 }
