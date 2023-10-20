@@ -33,7 +33,7 @@ export function GameDetailItem({ game }) {
                         <h4>
                             {game.orgTitle} ({game.releaseDate})
                         </h4>
-                        <h4>{game.orgTitle}</h4>
+                        <h4>{game.title}</h4>
                     </div>
                 </div>
                 <div>

@@ -3,13 +3,14 @@ import "../static/game-warrior/css/bootstrap.min.css";
 import "../static/game-warrior/css/style.css";
 import { Select, Tabs } from "antd";
 import { useEffect, useState } from "react";
-import { CATEGORY } from "../../Constants";
-import { fetchList } from "../../repositories/GameRepository";
+import { fetchList } from "../repositories/GameRepository";
 import { GameListItemComponent } from "./GameListItemComponent";
+import { CATEGORY } from "../Constants";
 
 export function GameListComponent() {
     const [games, setGames] = useState([]);
     const [sort, setSort] = useState({});
+    const [loading, setLoading] = useState(true);
 
     // 1 = 베스트50, 2 = 최신게임, 3 = 장르별
     const [tab, setTab] = useState(1);
@@ -32,6 +33,7 @@ export function GameListComponent() {
             label: CATEGORY[i],
         });
     }
+    console.log("list");
 
     const items = [
         {
@@ -69,6 +71,17 @@ export function GameListComponent() {
     async function getGameList() {
         const data = await fetchList(sort);
         setGames(data);
+        if (games) {
+            setLoading(false);
+        }
+    }
+
+    if (loading) {
+        return (
+            <div id="preloder">
+                <div class="loader"></div>
+            </div>
+        );
     }
 
     return (

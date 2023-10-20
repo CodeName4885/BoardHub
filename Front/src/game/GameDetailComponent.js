@@ -7,10 +7,9 @@ import "../static/game-warrior/css/animate.css";
 import "../static/game-warrior/css/bootstrap.min.css";
 import "../static/game-warrior/css/style.css";
 import { useParams } from "react-router-dom";
-
 import { GameDetailCategory } from "./GameDetailCategory";
 import { GameDetailItem } from "./GameDetailItem";
-import { GameDetailCompare } from "./GameDetailCopare";
+import { GameDetailCompare } from "./GameDetailCompare";
 
 export function GameDetailComponent() {
     const params = useParams();
@@ -59,12 +58,12 @@ export function GameDetailComponent() {
                     <div className="col-md-12">
                         <div className="review-item row">
                             <GameDetailItem game={game} />
-                            <div className="col-md-12">
-                                <GameDetailCategory categories={categories} />
+                        </div>
+                        <div className="col-md-12 row">
+                            <GameDetailCategory categories={categories} />
 
-                                <div className="col-md-12">
-                                    <GameDetailCompare game={game} />
-                                </div>
+                            <div className="col-md-12">
+                                <GameDetailCompare game={game} />
                             </div>
                         </div>
                     </div>
