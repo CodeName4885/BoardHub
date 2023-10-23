@@ -5,10 +5,8 @@ export function ReviewAddComponent() {
     const [editorData, setEditorData] = useState('');
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('1');
-    const [selectedImage, setSelectedImage] = useState(null);
+
     const handleSubmit = async (event) => {
-        const file = event.target.files[0];
-        setSelectedImage(file);
         event.preventDefault();
         try {
             const response = await fetch('http://localhost:8080/add/reviews', {
