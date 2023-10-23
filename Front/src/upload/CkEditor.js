@@ -7,6 +7,7 @@ function MyCustomUploadAdapterPlugin(editor) {
     editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
         return new UploadAdapter(loader);
     };
+    editor.plugins.get('Image').allowDataUrls = true;
 }
 
 export function CkEditor({ editorData, setEditorData }) { // editorData와 setEditorData를 props로 받음

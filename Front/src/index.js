@@ -29,7 +29,6 @@ root.render(
 
       <Router>
           <Routes>
-              <Route index element={<App />} />
               <Route path="review">
               <Route path="add" element={<ReviewAddPage/>}/>
               </Route>
@@ -38,7 +37,6 @@ root.render(
 
      <Router>
          <Routes>
-             <Route index element={<App />} />
              <Route path="trade">
                  <Route path="add" element={<TradeAddPage/>}/>
              </Route>
@@ -47,7 +45,6 @@ root.render(
 
       <Router>
           <Routes>
-              <Route index element={<App />} />
               <Route path="solution">
                   <Route path="add" element={<SolutionAddPage/>}/>
                   <Route path="list" element={<SolutionListPage/>}/>
