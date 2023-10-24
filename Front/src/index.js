@@ -8,6 +8,8 @@ import {ReviewAddPage} from "./review/ReviewAddPage";
 import {SolutionAddPage} from "./solution/SolutionAddPage";
 import {SolutionListPage} from "./solution/SolutionListPage";
 import {TradeAddPage} from "./trade/TradeAddPage";
+import {ReviewDetailPage} from "./review/ReviewDetailPage";
+import {ReviewListPage} from "./review/ReviewListPage";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
@@ -29,16 +31,16 @@ root.render(
 
       <Router>
           <Routes>
-              <Route index element={<App />} />
               <Route path="review">
               <Route path="add" element={<ReviewAddPage/>}/>
+              <Route path="detail" element={<ReviewDetailPage/>}/>
+              <Route path="list" element={<ReviewListPage/>}/>
               </Route>
           </Routes>
       </Router>
 
      <Router>
          <Routes>
-             <Route index element={<App />} />
              <Route path="trade">
                  <Route path="add" element={<TradeAddPage/>}/>
              </Route>
@@ -47,7 +49,6 @@ root.render(
 
       <Router>
           <Routes>
-              <Route index element={<App />} />
               <Route path="solution">
                   <Route path="add" element={<SolutionAddPage/>}/>
                   <Route path="list" element={<SolutionListPage/>}/>

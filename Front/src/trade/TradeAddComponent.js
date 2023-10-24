@@ -1,4 +1,4 @@
-import {CkEditor} from "../upload/CkEditor";
+
 import {useState} from "react";
 
 export function TradeAddComponent() {
@@ -39,7 +39,6 @@ export function TradeAddComponent() {
                 value={title}
                 onChange={(event) => setTitle(event.target.value)}
             />
-            <CkEditor editorData={editorData} setEditorData={setEditorData} />
             <select
                 id="category"
                 value={category}

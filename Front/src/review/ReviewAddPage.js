@@ -6,6 +6,7 @@ import "../static/game-warrior/css/style.css";
 import { ReviewAddComponent} from "./ReviewAddComponent";
 
 export function ReviewAddPage() {
+
     return (
         <>
             <Header/>

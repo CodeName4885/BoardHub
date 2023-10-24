@@ -2,6 +2,8 @@ package com.ragtag.boardhub.repository;
 
 import com.ragtag.boardhub.domain.Community;
 
+import java.util.List;
+
 
 public interface CommunityRepository {
 
@@ -11,5 +13,5 @@ public interface CommunityRepository {
 
     void addCommunityWithSolution(Community community);
 
-    void showReview(Community community);
+    List<Community> showReview();
 }

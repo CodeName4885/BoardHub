@@ -2,6 +2,7 @@ package com.ragtag.boardhub.service;
 
 import com.ragtag.boardhub.domain.Community;
 
+import java.util.List;
 
 
 public interface CommunityService {
@@ -12,6 +13,6 @@ public interface CommunityService {
 
     void addCommunityWithSolution(Community community);
 
-    void showReview(Community community);
+    List<Community> showReview();
 }
 

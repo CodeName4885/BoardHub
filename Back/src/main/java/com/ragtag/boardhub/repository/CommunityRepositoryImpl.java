@@ -4,13 +4,15 @@ import com.ragtag.boardhub.domain.Community;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Repository
 public class CommunityRepositoryImpl implements CommunityRepository {
     private final CommunityMapper communityMapper;
     @Override
     public void addCommunityWithReview(Community community) {
-        System.out.println("reviewData Repository : " + community);
+
      communityMapper.addCommunityWithReview(community);
      communityMapper.addReview(community);
     }
@@ -30,7 +32,9 @@ public class CommunityRepositoryImpl implements CommunityRepository {
     }
 
     @Override
-    public void showReview(Community community) {
-        communityMapper.showReview(community);
+    public List<Community> showReview() {
+        return communityMapper.showReview();
     }
+
+
 }

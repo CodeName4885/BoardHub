@@ -3,6 +3,8 @@ package com.ragtag.boardhub.repository;
 import com.ragtag.boardhub.domain.Community;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 
 @Mapper
 public interface CommunityMapper {
@@ -19,5 +21,6 @@ public interface CommunityMapper {
 
     void addSolution(Community community);
 
-    void showReview(Community community);
+
+    List<Community> showReview();
 }

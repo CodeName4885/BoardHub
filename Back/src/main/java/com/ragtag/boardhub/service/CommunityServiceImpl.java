@@ -5,6 +5,8 @@ import com.ragtag.boardhub.repository.CommunityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 
@@ -12,7 +14,6 @@ public class CommunityServiceImpl implements CommunityService {
     private final CommunityRepository communityRepository;
     @Override
     public void addCommunityWithReview(Community community) {
-        System.out.println("reviewDataService : " + community);
          communityRepository.addCommunityWithReview(community);
 
     }
@@ -29,8 +30,12 @@ public class CommunityServiceImpl implements CommunityService {
         communityRepository.addCommunityWithSolution(community);
     }
 
-    @Override
-    public void showReview(Community community) {
-        communityRepository.showReview(community);
-    }
+        @Override
+        public List<Community> showReview() {
+            // 여기에서 검색 조건에 따라 리뷰를 가져오는 코드 작성
+            List<Community> reviewList = communityRepository.showReview();
+            return reviewList;
+        }
+
+
 }

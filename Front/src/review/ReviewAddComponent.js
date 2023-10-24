@@ -1,10 +1,11 @@
+// ReviewAddComponent.js
 import React, { useState } from 'react';
-import { CkEditor } from "../upload/CkEditor";
+import { Editor } from '../upload/Editor';
 
 export function ReviewAddComponent() {
-    const [editorData, setEditorData] = useState('');
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('1');
+    const [editorContent, setEditorContent] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -15,9 +16,9 @@ export function ReviewAddComponent() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    content: editorData,
                     title: title,
                     category: category,
+                    content: editorContent, // 에디터 내용 추가
                 }),
             });
             if (response.ok) {
@@ -39,7 +40,7 @@ export function ReviewAddComponent() {
                 value={title}
                 onChange={(event) => setTitle(event.target.value)}
             />
-            <CkEditor editorData={editorData} setEditorData={setEditorData} />
+
             <select
                 id="category"
                 value={category}
@@ -49,7 +50,8 @@ export function ReviewAddComponent() {
                 <option value="2">프리뷰</option>
                 <option value="3">모임</option>
             </select>
-            <button type="submit" onClick={handleSubmit}>Submit</button>
+            <Editor onChange={setEditorContent} /> {/* 에디터 컴포넌트를 추가하고 변경된 내용을 전달 */}
+            <button type="submit" onClick={handleSubmit} style={{ marginTop: '50px' }}>Submit</button>
         </form>
     );
 }
