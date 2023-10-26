@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ragtag.boardhub.repository.UserMapper">
+    <insert id="join">
+        <selectKey keyProperty="user_id" resultType="long" order="BEFORE">
+            select user_id_seq.nextval from dual
+        </selectKey>
+        insert into users(user_id, username, password, profile, name, nickname, user_status, phone, user_email, user_role, user_reg, log_date)
+        values(#{user_id}, #{username}, #{password}, #{profile}, #{name}, #{nickname}, 1, #{phone}, #{user_email}, #{role}, sysdate, sysdate)
+    </insert>
+
+    <select id="usernameChk" resultType="int">
+        select count(*) from users where username=#{username}
+    </select>
+    <select id="getByCredentials" resultType="Users">
+        select * from users where username=#{username} and password=#{password}
+    </select>
+    <select id="findByUsername" resultType="Users">
+        select * from users where username=#{username}
+    </select>
+    <update id="modifynickname">
+        update users
+        set nickname = #{nickname}
+        where username = #{username}
+    </update>
+    <update id="modifyphone">
+        update users
+        set phone = #{phone}
+        where username = #{username}
+    </update>
+    <update id="drawUser">
+        update users
+        set user_status = 0
+        where username = #{username}
+    </update>
+    <update id="activateUser">
+        update users
+        set user_status = 1
+        where username = #{username}
+    </update>
+    <select id="emailCheck" resultType="String">
+        select user_email from users where username=#{username}
+    </select>
+    <select id="passwordChk" resultType="String">
+        select password from users where username = #{username}
+    </select>
+    <update id="modifypassword">
+        update users
+        set password = #{password}
+        where username = #{username}
+    </update>
+    <select id="getSocailUser" resultType="int">
+        select count(*) from users where username = #{email}
+    </select>
+    <insert id="addSocailUser">
+        insert into users(user_id, username, password, profile, name, nickname, user_status, phone, user_email, user_role, user_reg, log_date)
+        values(#{user_id}, #{email}, 1234, #{profileimage}, #{name}, #{name}, 1, 1, #{email}, 'ROLE_USER', sysdate, sysdate)
+    </insert>
+</mapper>

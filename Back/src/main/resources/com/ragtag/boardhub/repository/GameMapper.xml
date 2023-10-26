@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ragtag.boardhub.repository.GameMapper">
+
+    <select id="getList" resultType="Games">
+        select * from games
+    </select>
+
+    <select id="getListWithSort" resultType="Games">
+        select * from games m join cate_mapping c on m.game_id = c.game_id where category_id = #{category}
+    </select>
+
+    <select id="findGameById" resultType="Games">
+        select * from games where game_id = #{game_id}
+    </select>
+
+    <update id="updateGame">
+        update games set
+            title = #{title}, 
+            thumbnail = #{thumbnail},
+            image = #{image},
+            release_date = #{release_date},
+            min_player = #{min_player},
+            max_player = #{max_player},
+            playing_time = #{playing_time},
+            min_age = #{min_age}
+    </update>
+
+    <insert id="insertGame">
+        <selectKey resultType="long" keyProperty="game_id" order="BEFORE">
+            select games_seq.nextval from dual
+        </selectKey>
+        insert into games(game_id, title, org_title, thumbnail, image, release_date, min_player, max_player, playing_time, min_age)
+        values(#{game_id}, #{title}, #{org_title}, #{thumbnail}, #{image}, #{release_date}, #{min_player}, #{max_player}, #{playing_time}, #{min_age})
+    </insert>
+
+    <select id="getCategoriesByGameId" resultType="com.ragtag.boardhub.domain.game.Categories">
+        select * from categories c join cate_mapping m on c.category_id = m.category_id where m.game_id = #{game_id}
+    </select>
+
+</mapper>
