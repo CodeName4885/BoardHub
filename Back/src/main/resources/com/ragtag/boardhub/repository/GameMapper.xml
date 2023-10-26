@@ -18,7 +18,7 @@
 
     <update id="updateGame">
         update games set
-            title = #{title}, 
+            title = #{title},
             thumbnail = #{thumbnail},
             image = #{image},
             release_date = #{release_date},
@@ -36,8 +36,61 @@
         values(#{game_id}, #{title}, #{org_title}, #{thumbnail}, #{image}, #{release_date}, #{min_player}, #{max_player}, #{playing_time}, #{min_age})
     </insert>
 
-    <select id="getCategoriesByGameId" resultType="com.ragtag.boardhub.domain.game.Categories">
+    <select id="getCategoryList" resultType="Categories">
+        select * from categories
+    </select>
+
+    <select id="getMechanicList" resultType="Mechanics">
+        select * from mechanics
+    </select>
+
+    <select id="getDesignerList" resultType="Designers">
+        select * from designers
+    </select>
+
+    <select id="getArtistList" resultType="Artists">
+        select * from artists
+    </select>
+
+    <select id="getPublisherList" resultType="Publishers">
+        select * from publishers
+    </select>
+
+    <select id="getCategoriesByGameId" resultType="Categories">
         select * from categories c join cate_mapping m on c.category_id = m.category_id where m.game_id = #{game_id}
     </select>
+
+    <select id="getMechanicsByGameId" resultType="Mechanics">
+        select * from mechanics c join mech_mapping m on c.mechanic_id = m.mechanic_id where m.game_id = #{game_id}
+    </select>
+
+    <select id="getArtistsByGameId" resultType="Artists">
+        select * from artists a join arti_mapping m on a.artist_id = m.artist_id where m.game_id = #{game_id}
+    </select>
+
+    <select id="getDesignersByGameId" resultType="Designers">
+        select * from designers d join designer_mapping m on d.designer_id = m.designer_id where m.game_id = #{game_id}
+    </select>
+
+    <select id="getPublishersByGameId" resultType="Publishers">
+        select * from publishers p join publish_mapping m on p.publisher_id = m.publisher_id where m.game_id = #{game_id}
+    </select>
+
+    <update id="updateCategoryByGameId">
+        update categories set
+            category = #{category},
+            translate = #{translate}
+        where category_id = #{category_id}
+    </update>
+
+    <select id="checkCatMapping">
+        select count(*) from cate_mapping
+        where category_id = #{categoryId} and game_id = #{gameId}
+    </select>
+
+    <insert id="addCatMapping">
+        insert into cate_mapping(category_id, game_id)
+        values(#{categoryId}, #{gameId})
+    </insert>
 
 </mapper>

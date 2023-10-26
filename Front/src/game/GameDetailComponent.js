@@ -1,44 +1,40 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
     fetchByGameId,
-    getCategoriesById,
+    fetchCategoriesByGameId,
 } from "../repositories/GameRepository";
-import "../static/game-warrior/css/animate.css";
-import "../static/game-warrior/css/bootstrap.min.css";
-import "../static/game-warrior/css/style.css";
-import { useParams } from "react-router-dom";
 import { GameDetailCategory } from "./GameDetailCategory";
-import { GameDetailItem } from "./GameDetailItem";
 import { GameDetailCompare } from "./GameDetailCompare";
+import { GameDetailItem } from "./GameDetailItem";
+import { Button } from "react-bootstrap";
 
 export function GameDetailComponent() {
     const params = useParams();
+    const { gameId } = params;
     const [game, setGame] = useState(undefined);
     const [loading, setLoading] = useState(true);
     const [categories, setCategories] = useState();
+    const navigate = useNavigate();
 
     console.log(params);
     console.log(game);
 
     useEffect(() => {
-        console.log("useEffect");
-        getApi();
-    }, [params]);
+        getGame();
+    }, [gameId]);
 
-    async function getApi() {
-        try {
-            const data = await fetchByGameId(params.id);
+    async function getGame() {
+        await fetchByGameId(gameId).then(async (data) => {
             setGame(data);
-            await getCategories();
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
+            await getCategories().then(() => {
+                setLoading(false);
+            });
+        });
     }
 
     async function getCategories() {
-        const data = await getCategoriesById(params.id);
+        const data = await fetchCategoriesByGameId(gameId);
         console.log(data);
         setCategories(data);
     }
@@ -46,7 +42,7 @@ export function GameDetailComponent() {
     if (loading) {
         return (
             <div id="preloder">
-                <div class="loader"></div>
+                <div className="loader"></div>
             </div>
         );
     }
@@ -56,6 +52,13 @@ export function GameDetailComponent() {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
+                        <div className="d-flex justify-content-end">
+                            <Button
+                                onClick={() => navigate(`/game/edit/${gameId}`)}
+                            >
+                                수정요청
+                            </Button>
+                        </div>
                         <div className="review-item row">
                             <GameDetailItem game={game} />
                         </div>

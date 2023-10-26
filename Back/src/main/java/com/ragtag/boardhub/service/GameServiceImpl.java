@@ -1,11 +1,7 @@
 package com.ragtag.boardhub.service;
 
-import com.ragtag.boardhub.domain.game.Categories;
-import com.ragtag.boardhub.domain.game.Games;
-import com.ragtag.boardhub.dto.game.CategoryResponse;
-import com.ragtag.boardhub.dto.game.GameForm;
-import com.ragtag.boardhub.dto.game.GameResponse;
-import com.ragtag.boardhub.dto.game.GameSortDTO;
+import com.ragtag.boardhub.domain.game.*;
+import com.ragtag.boardhub.dto.game.*;
 import com.ragtag.boardhub.repository.GameRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,15 +44,63 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public boolean updateGame(GameForm form) {
-        return gameRepository.updateGame(form.toEntity());
+        boolean result = gameRepository.updateGame(form.toEntity());
+
+        return result;
     }
 
     @Override
-    public List<CategoryResponse> getCategoriesByGameId(Long gameId) {
+    public List<CategoryDTO> getCategoriesByGameId(Long gameId) {
         return gameRepository.getCategoriesByGameId(gameId)
                 .stream()
-                .map(cate -> new CategoryResponse(cate))
+                .map(cat -> new CategoryDTO(cat))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<CategoryDTO> getCategoryList() {
+        List<Categories> findList = gameRepository.getCategoryList();
+        return findList.stream()
+                .map(cat -> new CategoryDTO(cat))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public GameDataDTO getAllDataList() {
+        List<Categories> catList = gameRepository.getCategoryList();
+        List<Mechanics> mechList = gameRepository.getMechanicList();
+        List<Designers> desList = gameRepository.getDesignerList();
+        List<Artists> artiList = gameRepository.getArtistList();
+        List<Publishers> pubList = gameRepository.getPublisherList();
+        return new GameDataDTO(catList, mechList, desList, artiList, pubList);
+    }
+
+    @Override
+    public void updateCategoryByGameId(Long gameId, List<CategoryDTO> list) {
+        for(CategoryDTO cat : list ) {
+            boolean res1 = gameRepository.updateCategoryByGameId(cat.toEntity());
+            if(res1) {
+                int res2 = gameRepository.checkCatMapping(gameId, cat.getCategoryId());
+                if(res2 == 1) {
+                    gameRepository.addCatMapping(gameId, cat.getCategoryId());
+                }
+            }
+        }
+    }
+
+    @Override
+    public GameDataDTO getAllDataByGameId(Long gameId) {
+        List<Categories> catList = gameRepository.getCategoriesByGameId(gameId);
+        List<Mechanics> mechList = gameRepository.getMechanicsByGameId(gameId);
+        log.info("mechList: {}" , mechList);
+        List<Designers> desList = gameRepository.getDesignersByGameId(gameId);
+        log.info("desList: {}" , desList);
+        List<Artists> artiList = gameRepository.getArtistsByGameId(gameId);
+        log.info("artiList: {}" , artiList);
+        List<Publishers> pubList = gameRepository.getPublishersByGameId(gameId);
+        log.info("pubList: {}" , pubList);
+        return new GameDataDTO(catList, mechList, desList, artiList, pubList);
+    }
+
 
 }

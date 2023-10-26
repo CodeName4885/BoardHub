@@ -112,7 +112,6 @@ class TranslateThread extends Thread {
             for (BggLinkDTO type : bggLinkList) {
                 System.out.println("ID: " + type.getId() + ", Name: " + type.getName());
                 String translated = translateTxt(type.getName());
-                System.out.println("translated = " + translated);
                 PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate);
                 if(translated != null) {
                     statement.setString(1, translated);
@@ -128,6 +127,7 @@ class TranslateThread extends Thread {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("끝");
         stopRunning();
     }
 
@@ -192,7 +192,6 @@ class TranslateThread extends Thread {
     }
 
     private static String post(String apiUrl, Map<String, String> requestHeaders, String text) {
-        System.out.println("Post");
         HttpURLConnection con = connect(apiUrl);
         String postParams =  text;
         try {

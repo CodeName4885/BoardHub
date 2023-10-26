@@ -3,20 +3,18 @@ import { API_URL } from "../Constants";
 const url = API_URL + "game";
 
 export async function fetchList(sort) {
-    console.log("asdasd");
+    const query = `tab=${sort.tab}&cat=${sort.category}`;
     try {
-        const response = await fetch(`${url}/list`, {
-            method: "post",
+        const response = await fetch(`${url}/list?${query}`, {
+            method: "get",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(sort),
         });
         const data = await response.json();
         return data;
     } catch (error) {
         console.error(error);
-        return [];
     }
 }
 
@@ -29,24 +27,11 @@ export async function fetchByGameId(gameId) {
         return data;
     } catch (error) {
         console.error(error);
-        return [];
-    }
-}
-
-export async function getCategoriesById(gameId) {
-    try {
-        const response = await fetch(`${url}/${gameId}/categories`, {
-            method: "get",
-        });
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error(error);
-        return [];
     }
 }
 
 export async function editGame(form) {
+    console.log(form);
     try {
         const response = await fetch(`${url}/${form.gameId}`, {
             method: "put",
@@ -59,11 +44,38 @@ export async function editGame(form) {
         return data;
     } catch (error) {
         console.error(error);
-        return [];
     }
 }
 
-export async function getCategoriesByGameId(gameId) {
+export async function createGame(form) {
+    try {
+        const response = await fetch(`${url}/create`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(form),
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function fetchAllCategories() {
+    try {
+        const response = await fetch(`${url}/categories`, {
+            method: "get",
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function fetchCategoriesByGameId(gameId) {
     try {
         const response = await fetch(`${url}/${gameId}/category`, {
             method: "get",
@@ -72,11 +84,22 @@ export async function getCategoriesByGameId(gameId) {
         return data;
     } catch (error) {
         console.error(error);
-        return [];
     }
 }
 
-export async function getMechaicsByGameId(gameId) {
+export async function fetchAllMechanics() {
+    try {
+        const response = await fetch(`${url}/mechanics`, {
+            method: "get",
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function fetchMechanicsByGameId(gameId) {
     try {
         const response = await fetch(`${url}/${gameId}/mechanic`, {
             method: "get",
@@ -85,11 +108,22 @@ export async function getMechaicsByGameId(gameId) {
         return data;
     } catch (error) {
         console.error(error);
-        return [];
     }
 }
 
-export async function getDesignersByGameId(gameId) {
+export async function fetchAllDesigners() {
+    try {
+        const response = await fetch(`${url}/designers`, {
+            method: "get",
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function fetchDesignersByGameId(gameId) {
     try {
         const response = await fetch(`${url}/${gameId}/designer`, {
             method: "get",
@@ -98,11 +132,22 @@ export async function getDesignersByGameId(gameId) {
         return data;
     } catch (error) {
         console.error(error);
-        return [];
     }
 }
 
-export async function getArtistsByGameId(gameId) {
+export async function fetchAllArtists() {
+    try {
+        const response = await fetch(`${url}/artists`, {
+            method: "get",
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function fetchArtistsByGameId(gameId) {
     try {
         const response = await fetch(`${url}/${gameId}/artist`, {
             method: "get",
@@ -111,11 +156,22 @@ export async function getArtistsByGameId(gameId) {
         return data;
     } catch (error) {
         console.error(error);
-        return [];
     }
 }
 
-export async function getPublisherByGameId(gameId) {
+export async function fetchAllPublishers() {
+    try {
+        const response = await fetch(`${url}/publishers`, {
+            method: "get",
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function fetchPublishersByGameId(gameId) {
     try {
         const response = await fetch(`${url}/${gameId}/publisher`, {
             method: "get",
@@ -124,6 +180,29 @@ export async function getPublisherByGameId(gameId) {
         return data;
     } catch (error) {
         console.error(error);
-        return [];
+    }
+}
+
+export async function fetchAllDataByGameId(gameId) {
+    try {
+        const response = await fetch(`${url}/data/${gameId}`, {
+            method: "get",
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function fetchAllData() {
+    try {
+        const response = await fetch(`${url}/data`, {
+            method: "get",
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
     }
 }

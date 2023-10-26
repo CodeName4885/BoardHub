@@ -3,6 +3,8 @@ package com.ragtag.boardhub.dto.game;
 import com.ragtag.boardhub.domain.game.Games;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class GameForm {
 
@@ -16,6 +18,12 @@ public class GameForm {
     private int maxPlayer;
     private int playingTime;
     private int minAge;
+
+    private List<CategoryDTO> catList;
+    private List<MechanicDTO> mechList;
+    private List<DesignerDTO> desList;
+    private List<ArtistDTO> artiList;
+    private List<PublisherDTO> pubList;
 
     public Games toEntity() {
         Games game = new Games();
@@ -31,6 +39,5 @@ public class GameForm {
         game.setMin_age(this.minAge);
         return game;
     }
-
 
 }

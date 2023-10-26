@@ -3,10 +3,10 @@ package com.ragtag.boardhub.domain.game;
 import lombok.Data;
 
 @Data
-public class Categories {
+public class Mechanics {
 
-    private Long category_id;
-    private String category;
+    private Long mechanic_id;
+    private String mechanic;
     private String translate;
 
 }
