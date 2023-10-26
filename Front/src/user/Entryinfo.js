@@ -113,20 +113,6 @@ function Entryinfo() {
       reader.onload = () => {
         if (reader.readyState === 2) {
           setImage(reader.result);
-          const formData = new FormData();
-          formData.append('profile', e.target.files[0]);
-
-          fetch("http://localhost:8080/profile",{
-            method: "POST",
-            body: formData
-          })
-          .then(response => response.text())
-          .then(response => {
-            console.log("통신성공",response);
-          })
-          .catch(error => {
-            console.log("통신실패",error);
-          })
         }
       };
       reader.readAsDataURL(e.target.files[0]);
@@ -206,6 +192,22 @@ function Entryinfo() {
       })
       return
     }
+
+    const formData = new FormData();
+    formData.append('profile', fileInput.current.files[0]);
+
+    fetch("http://localhost:8080/profile",{
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.text())
+    .then(response => {
+      console.log("통신성공",response);
+    })
+    .catch(error => {
+      console.log("통신실패",error);
+    })
+
 
     fetch("http://localhost:8080/join",{
       method: "POST",
@@ -374,7 +376,7 @@ function Entryinfo() {
             </div>
           </div>
             <div className={joincss['send-btn-box']}>
-              <a href="/completed-joincss">
+              <a href="/completedjoin">
                 <button className={`${joincss['send-btn']} ${!isAllInputFilled ? joincss['disabled'] : ''}`} disabled={!isAllInputFilled} onClick={join}>다음</button>
               </a>
             </div>

@@ -38,7 +38,7 @@ root.render(
         <Route path="join" element={<Join />} />
         <Route path="joinagree" element={<JoinAgree />} />
         <Route path="login" element={<Login />} />
-        <Route path="completed-join" element={<CompleteJoin />} />
+        <Route path="completedjoin" element={<CompleteJoin />} />
         <Route path="entry-info" element={<Entryinfo />} />
         <Route path="auth/kakao/callback" element={<Kakao /> }/>
         <Route path="mypage">
