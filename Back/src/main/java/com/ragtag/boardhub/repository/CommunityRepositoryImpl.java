@@ -1,6 +1,7 @@
 package com.ragtag.boardhub.repository;
 
 import com.ragtag.boardhub.domain.Community;
+import com.ragtag.boardhub.domain.CommunityImg;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -34,6 +35,11 @@ public class CommunityRepositoryImpl implements CommunityRepository {
     @Override
     public List<Community> showReview() {
         return communityMapper.showReview();
+    }
+
+    @Override
+    public void insertImgName(CommunityImg filename) {
+        communityMapper.insertImgName(filename);
     }
 
 

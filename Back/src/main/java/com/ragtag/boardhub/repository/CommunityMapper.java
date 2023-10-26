@@ -1,8 +1,8 @@
 package com.ragtag.boardhub.repository;
 
 import com.ragtag.boardhub.domain.Community;
+import com.ragtag.boardhub.domain.CommunityImg;
 import org.apache.ibatis.annotations.Mapper;
-
 import java.util.List;
 
 
@@ -23,4 +23,6 @@ public interface CommunityMapper {
 
 
     List<Community> showReview();
+
+    void insertImgName(CommunityImg filename);
 }

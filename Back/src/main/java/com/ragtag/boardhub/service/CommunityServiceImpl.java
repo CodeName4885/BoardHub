@@ -1,6 +1,7 @@
 package com.ragtag.boardhub.service;
 
 import com.ragtag.boardhub.domain.Community;
+import com.ragtag.boardhub.domain.CommunityImg;
 import com.ragtag.boardhub.repository.CommunityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,12 @@ public class CommunityServiceImpl implements CommunityService {
             List<Community> reviewList = communityRepository.showReview();
             return reviewList;
         }
+
+    @Override
+    public void SaveImgName(CommunityImg filename) {
+        System.out.println("imageURL : " + filename);
+       communityRepository.insertImgName(filename);
+    }
 
 
 }

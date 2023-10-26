@@ -1,4 +1,3 @@
-// ReviewAddComponent.js
 import React, { useState } from 'react';
 import { Editor } from '../upload/Editor';
 
@@ -10,6 +9,7 @@ export function ReviewAddComponent() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            // 서버에 이미지 경로가 포함된 내용을 전송
             const response = await fetch('http://localhost:8080/add/reviews', {
                 method: 'POST',
                 headers: {
@@ -18,14 +18,11 @@ export function ReviewAddComponent() {
                 body: JSON.stringify({
                     title: title,
                     category: category,
-                    content: editorContent, // 에디터 내용 추가
+                    content: editorContent, // 수정: editorContent로 변경
                 }),
             });
-            if (response.ok) {
-                console.log('Form submitted successfully.');
-            } else {
-                console.error('Form submission failed.');
-            }
+
+            // ...
         } catch (error) {
             console.error('Error:', error);
         }
@@ -50,7 +47,7 @@ export function ReviewAddComponent() {
                 <option value="2">프리뷰</option>
                 <option value="3">모임</option>
             </select>
-            <Editor onChange={setEditorContent} /> {/* 에디터 컴포넌트를 추가하고 변경된 내용을 전달 */}
+            <Editor onChange={setEditorContent} />
             <button type="submit" onClick={handleSubmit} style={{ marginTop: '50px' }}>Submit</button>
         </form>
     );
