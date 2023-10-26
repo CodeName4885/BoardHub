@@ -1,6 +1,4 @@
-import { API_URL } from "../Constants";
-
-const url = API_URL + "game";
+const url = "http://localhost:8080/api/game";
 
 export async function fetchList(sort) {
     const query = `tab=${sort.tab}&cat=${sort.category}`;
