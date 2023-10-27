@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 
+=======
+import joincss from "../static/game-warrior/css/join.module.css";
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
 
 function TermModal({setModalOpen1, setSectionDisplay, setBgc}) {
   const closeModal = () =>{
@@ -8,6 +12,7 @@ function TermModal({setModalOpen1, setSectionDisplay, setBgc}) {
   }
   return (
     <>
+<<<<<<< HEAD
       <div className="body">
         <div className="modal-wrap">
           <div className="modal-title">
@@ -15,6 +20,15 @@ function TermModal({setModalOpen1, setSectionDisplay, setBgc}) {
             <h5 className="modal-title-content">&#91;BoardHub&#93; 서비스 이용약관</h5>
           </div>
           <div className="modal-body">
+=======
+      <div className={joincss['body']}>
+        <div className={joincss['modal-wrap']}>
+          <div className={joincss['modal-title']}>
+            <button className={joincss['modal-closebtn']} onClick={closeModal}>x</button>
+            <h5 className={joincss['modal-title-content']}>&#91;BoardHub&#93; 서비스 이용약관</h5>
+          </div>
+          <div className={joincss['modal-body']}>
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
             <h3>BoardHub 서비스 이용약관</h3><br/>
             <p><strong style={{fontSize: '18px'}}>제1조 목적</strong><br/>
 이 약관은 ㈜더조은홀딩스(이하 “회사”)가 온라인으로 제공하는 BoardHub 및 이에 부수된 제반 서비스(이하 “서비스”)의 이용과 관련하여 “회사”와 “이용자” 간의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
@@ -51,7 +65,11 @@ function TermModal({setModalOpen1, setSectionDisplay, setBgc}) {
 
 2. 본 약관에서 사용하는 용어의 정의는 제1항에서 정하는 것을 제외하고는 관계 법령, 기타 일반적인 상관례 및 개별 서비스 약관에서 정하는 바에 의합니다.</p>
           </div>
+<<<<<<< HEAD
           <button className="checkbtn"onClick={closeModal}>확인</button>
+=======
+          <button className={joincss['checkbtn']}onClick={closeModal}>확인</button>
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
         </div>
       </div>
     </>

@@ -4,6 +4,7 @@ import "../static/game-warrior/css/style.css";
 
 export function Footer() {
 <<<<<<< HEAD
+<<<<<<< HEAD
     return (
         <footer className="footer-section">
             <div className="container">
@@ -38,6 +39,8 @@ export function Footer() {
     );
 =======
 
+=======
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
   return (
     <footer className="footer-section">
         <div className="container">
@@ -54,5 +57,8 @@ export function Footer() {
         </div>
     </footer>
   );
+<<<<<<< HEAD
 >>>>>>> 8e3ded9273ce50f1bb79af160f3c7964349ab9f4
+=======
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
 }

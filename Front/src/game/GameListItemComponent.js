@@ -1,6 +1,17 @@
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 
 export function GameListItemComponent(item) {
+=======
+import "../static/game-warrior/css/animate.css";
+import "../static/game-warrior/css/bootstrap.min.css";
+import "../static/game-warrior/css/style.css";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+export function GameListItemComponent(item) {
+    console.log(item.games);
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
     const navigate = useNavigate();
 
     function onClick(e) {
@@ -31,7 +42,11 @@ export function GameListItemComponent(item) {
                             style={{ cursor: "pointer" }}
                             onClick={onClick}
                         >
+<<<<<<< HEAD
                             {item.games.title}
+=======
+                            {item.games.orgTitle}
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
                         </h5>
                     </div>
                 </div>

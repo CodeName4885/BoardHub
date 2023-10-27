@@ -1,8 +1,13 @@
 package com.ragtag.boardhub.repository;
 
+<<<<<<< HEAD
 import com.ragtag.boardhub.domain.game.*;
 import com.ragtag.boardhub.dto.game.CategoryDTO;
 import com.ragtag.boardhub.dto.game.GameDataDTO;
+=======
+import com.ragtag.boardhub.domain.game.Categories;
+import com.ragtag.boardhub.domain.game.Games;
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
 import com.ragtag.boardhub.dto.game.GameSortDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +24,14 @@ public class GameRepositoryImpl implements GameRepository {
 
     @Override
     public List<Games> getList() {
+<<<<<<< HEAD
         return gameMapper.getList();
+=======
+        List<Games> list = gameMapper.getList();
+        log.info("list : {}", list);
+
+        return list;
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
     }
 
     @Override
@@ -34,7 +46,10 @@ public class GameRepositoryImpl implements GameRepository {
 
     @Override
     public boolean updateGame(Games game) {
+<<<<<<< HEAD
         log.info("game : {}", game);
+=======
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
         return gameMapper.updateGame(game);
     }
 
@@ -46,6 +61,7 @@ public class GameRepositoryImpl implements GameRepository {
         return cateList;
     }
 
+<<<<<<< HEAD
     @Override
     public List<Categories> getCategoryList() {
         return gameMapper.getCategoryList();
@@ -141,4 +157,6 @@ public class GameRepositoryImpl implements GameRepository {
         gameMapper.addPubMapping(gameId, publisherId);
     }
 
+=======
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
 }

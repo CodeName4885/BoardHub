@@ -1,6 +1,13 @@
 package com.ragtag.boardhub.controller;
 
+<<<<<<< HEAD
 import com.ragtag.boardhub.dto.game.*;
+=======
+import com.ragtag.boardhub.dto.game.CategoryResponse;
+import com.ragtag.boardhub.dto.game.GameForm;
+import com.ragtag.boardhub.dto.game.GameResponse;
+import com.ragtag.boardhub.dto.game.GameSortDTO;
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
 import com.ragtag.boardhub.service.GameService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +28,14 @@ public class GameController {
     private final GameService gameService;
 
     @ResponseBody
+<<<<<<< HEAD
     @GetMapping(value = "list", consumes = "application/json")
     public ResponseEntity<List<GameResponse>> getGameList(@RequestParam("tab") int tab, @RequestParam("cat") int category) {
         GameSortDTO sort = new GameSortDTO(tab, category);
+=======
+    @PostMapping(value = "list", consumes = "application/json")
+    public ResponseEntity<List<GameResponse>> gameList(@RequestBody GameSortDTO sort) {
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
         log.info("sort : {}", sort);
         List<GameResponse> list = new ArrayList<>();
         if(sort.getTab() == 3 && sort.getCategory() > 0) {
@@ -37,7 +49,11 @@ public class GameController {
 
     @ResponseBody
     @GetMapping(value = "{id}")
+<<<<<<< HEAD
     public ResponseEntity<GameResponse> getGameDetail(@PathVariable("id") Long gameId) {
+=======
+    public ResponseEntity<GameResponse> gameDetail(@PathVariable("id") Long gameId) {
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
         log.info("gameId : {}", gameId);
         GameResponse game = gameService.findGameById(gameId);
 
@@ -45,6 +61,7 @@ public class GameController {
     }
 
     @ResponseBody
+<<<<<<< HEAD
     @PutMapping(value = "{id}", consumes = "application/json")
     public ResponseEntity<GameResponse> putGame(@PathVariable("id") Long gameId, @RequestBody GameForm form) {
         log.info("gameId : {}", gameId);
@@ -62,10 +79,17 @@ public class GameController {
     public ResponseEntity<GameResponse> createGame(@RequestBody GameForm form) {
         log.info("form : {}", form);
 //        boolean result = gameService.createGame(form);
+=======
+    @PutMapping(value = "{id}")
+    public ResponseEntity<GameResponse> gameUpdate(@PathVariable("id") Long gameId, @RequestBody GameForm form) {
+        log.info("gameId : {}", gameId);
+        boolean result = gameService.updateGame(form);
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
         return null;
     }
 
     @ResponseBody
+<<<<<<< HEAD
     @GetMapping("categories")
     public ResponseEntity<List<CategoryDTO>> getAllCategories() {
         List<CategoryDTO> list = gameService.getCategoryList();
@@ -78,10 +102,16 @@ public class GameController {
     @GetMapping("{id}/category")
     public ResponseEntity<List<CategoryDTO>> getCategories(@PathVariable("id") Long gameId) {
         List<CategoryDTO> cateList = gameService.getCategoriesByGameId(gameId);
+=======
+    @GetMapping("{id}/categories")
+    public ResponseEntity<List<CategoryResponse>> getCategories(@PathVariable("id") Long gameId) {
+        List<CategoryResponse> cateList = gameService.getCategoriesByGameId(gameId);
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
         log.info("Categories : {}", cateList);
         return new ResponseEntity<>(cateList, HttpStatus.OK);
     }
 
+<<<<<<< HEAD
     @ResponseBody
     @GetMapping("{id}/mechanic")
     public ResponseEntity<List<CategoryDTO>> getMechanics(@PathVariable("id") Long gameId) {
@@ -108,4 +138,6 @@ public class GameController {
         return new ResponseEntity<>(allData, HttpStatus.OK);
     }
 
+=======
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
 }

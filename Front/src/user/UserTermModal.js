@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 
+=======
+import joincss from "../static/game-warrior/css/join.module.css";
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
 
 function UserTermModal({setModalOpen2, setSectionDisplay, setBgc}) {
   const closeModal = () =>{
@@ -8,6 +12,7 @@ function UserTermModal({setModalOpen2, setSectionDisplay, setBgc}) {
   }
   return (
     <>
+<<<<<<< HEAD
         <div className="body">
         <div className="modal-wrap">
           <div className="modal-title">
@@ -15,6 +20,15 @@ function UserTermModal({setModalOpen2, setSectionDisplay, setBgc}) {
             <h5 className="modal-title-content">&#91;BoardHub&#93; 개인정보 수집 및 이용동의</h5>
           </div>
           <div className="modal-body">
+=======
+        <div className={joincss['body']}>
+        <div className={joincss['modal-wrap']}>
+          <div className={joincss['modal-title']}>
+            <button className={joincss['modal-closebtn']} onClick={closeModal}>x</button>
+            <h5 className={joincss['modal-title-content']}>&#91;BoardHub&#93; 개인정보 수집 및 이용동의</h5>
+          </div>
+          <div className={joincss['modal-body']}>
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
             <p><strong style={{fontSize: '18px'}}>1. 개인정보의 처리 목적</strong><br/>
             회사는 아래의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 「개인정보 보호법」에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.
 
@@ -43,7 +57,11 @@ function UserTermModal({setModalOpen2, setSectionDisplay, setBgc}) {
             더 자세한 내용은 "개인정보처리방침"을 참고하시기 바랍니다.
             </p>
           </div>
+<<<<<<< HEAD
           <button className="checkbtn"onClick={closeModal}>확인</button>
+=======
+          <button className={joincss['checkbtn']}onClick={closeModal}>확인</button>
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
         </div>
       </div>
     </>

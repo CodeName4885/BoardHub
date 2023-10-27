@@ -1,8 +1,20 @@
+<<<<<<< HEAD
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+=======
+
+@font-face {
+  font-family: "SpoqaHanSansNeo-Medium";
+  font-weight: normal;
+  src: url("./static/game-warrior/fonts/SpoqaHanSansNeo-Medium.ttf");
+}
+body {
+  margin: 0;
+  font-family: "SpoqaHanSansNeo-Medium";
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -1,9 +1,14 @@
 package com.ragtag.boardhub.repository;
 
 
+<<<<<<< HEAD
 import com.ragtag.boardhub.domain.game.*;
 import com.ragtag.boardhub.dto.game.CategoryDTO;
 import com.ragtag.boardhub.dto.game.GameDataDTO;
+=======
+import com.ragtag.boardhub.domain.game.Categories;
+import com.ragtag.boardhub.domain.game.Games;
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
 import com.ragtag.boardhub.dto.game.GameSortDTO;
 
 import java.util.List;
@@ -21,6 +26,7 @@ public interface GameRepository {
 
     List<Categories> getCategoriesByGameId(Long gameId);
 
+<<<<<<< HEAD
     List<Categories> getCategoryList();
 
     List<Mechanics> getMechanicList();
@@ -59,4 +65,6 @@ public interface GameRepository {
 
     void addPubMapping(Long gameId, Long publisherId);
 
+=======
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
 }

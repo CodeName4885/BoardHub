@@ -20,7 +20,11 @@ export function GameDetailItem({ game }) {
                     minHeight: 470,
                 }}
             ></div>
+<<<<<<< HEAD
             <div className="review-cover">
+=======
+            <div className="review-cover col-md-8">
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
                 <h4 style={{ fontWeight: "bold" }}>종합 순위</h4>
                 <div className="row mt-2">
                     <div
@@ -33,7 +37,11 @@ export function GameDetailItem({ game }) {
                         <h4>
                             {game.orgTitle} ({game.releaseDate})
                         </h4>
+<<<<<<< HEAD
                         <h4>{game.title}</h4>
+=======
+                        <h4>{game.orgTitle}</h4>
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
                     </div>
                 </div>
                 <div>
@@ -52,9 +60,13 @@ export function GameDetailItem({ game }) {
                         </div>
                         <div className="mr-4">
                             <span style={gameInfoStyle}>
+<<<<<<< HEAD
                                 {game.minAge > 0
                                     ? `${game.minAge}세 이상`
                                     : "ALL"}
+=======
+                                {game.minAge}세 이상
+>>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
                             </span>
                             <p>사용 연령</p>
                         </div>
