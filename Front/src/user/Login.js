@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Call, login } from "../UserApiConfig/ApiService";
 import joincss from "../static/game-warrior/css/join.module.css";
 import {SiKakaotalk} from "react-icons/si";
-import { KAKAO_AUTH_URL, googleUserinfo } from "./socialAPI/OAuth";
+import { KAKAO_AUTH_URL } from "./socialAPI/OAuth";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
 
@@ -70,7 +70,7 @@ function Login() {
           <div className={joincss['social-list']}>
             <ul>
               <li>
-                <a href="#">
+                <a href="">
                   <GoogleOAuthProvider clientId={clientId}>
                     <GoogleLogin
                       buttonText=""

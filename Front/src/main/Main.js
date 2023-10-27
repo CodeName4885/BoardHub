@@ -7,10 +7,12 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css/autoplay';
-import slideImg from "../static/game-warrior/img/slider-1.jpg"
+import boardgame1 from "../static/game-warrior/img/slider-1.jpg"
+import boardgame2 from "../static/game-warrior/img/slider-2.jpg"
 import main from "../static/game-warrior/css/main.module.css"
 import { getMainitem } from "../UserApiConfig/ApiService";
 import { useEffect, useState } from "react";
+import Side from "./Side";
 function Main() {
 
   const [games, setGames] = useState([]);
@@ -30,6 +32,7 @@ function Main() {
        <Header />
       </div>
         <div className={main['body']}>
+          <Side />
           <section className={main['slide-wrap']}>
             <Swiper
               modules={[Pagination, Scrollbar, A11y, Autoplay]}
@@ -43,22 +46,12 @@ function Main() {
             >
               <SwiperSlide>
                 <div className={main['slideImg-box']}>
-                  <img src={slideImg}/>
+                  <img src={boardgame1}/>
                 </div>
               </SwiperSlide>
               <SwiperSlide>
                 <div className={main['slideImg-box']}>
-                  <img src={slideImg}/>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={main['slideImg-box']}>
-                  <img src={slideImg}/>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={main['slideImg-box']}>
-                  <img src={slideImg}/>
+                  <img src={boardgame2}/>
                 </div>
               </SwiperSlide>
             </Swiper>

@@ -121,7 +121,15 @@ function Mypage() {
                   {socialtoken != null ? (
                     <img src={userData && userData.profileimage ? userData.profileimage : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'} alt="프로필 이미지"/>
                   ) : (
-                    <img src={userData && userData.profile ? userData.profile : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'} alt="프로필 이미지"/>
+                    <img
+                      src={
+                        "C:\\kdh\\project3\\Back\\src\\main\\resources\\static\\img\\" +
+                        (userData && userData.profile
+                          ? userData.profile
+                          : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
+                      }
+                      alt="프로필 이미지"
+                    />
                   )}
                 </div>
                 <div className={mypage['profile-nickname-box']}>
