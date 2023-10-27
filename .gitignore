@@ -39,6 +39,3 @@ node_modules
 
 # Ignore boardHub file
 boardHub
-!Back/src/main/java/com/ragtag/boardhub/DTO/game/GameForm.java
-!Back/src/main/java/com/ragtag/boardhub/DTO/game/GameResponse.java
-!Back/src/main/java/com/ragtag/boardhub/DTO/game/GameSortDTO.java
