@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Space } from 'antd';
 import Swal from "sweetalert2";
+
+
 function Entryinfo() {
   //이메일 작성 이벤트
   const [inputChangeEmail, setInputChangeEmail] = useState("");

@@ -1,9 +1,6 @@
 package com.ragtag.boardhub.controller;
 
-import com.ragtag.boardhub.dto.game.CategoryResponse;
-import com.ragtag.boardhub.dto.game.GameForm;
-import com.ragtag.boardhub.dto.game.GameResponse;
-import com.ragtag.boardhub.dto.game.GameSortDTO;
+import com.ragtag.boardhub.dto.game.*;
 import com.ragtag.boardhub.service.GameService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,8 +21,9 @@ public class GameController {
     private final GameService gameService;
 
     @ResponseBody
-    @PostMapping(value = "list", consumes = "application/json")
-    public ResponseEntity<List<GameResponse>> gameList(@RequestBody GameSortDTO sort) {
+    @GetMapping(value = "list", consumes = "application/json")
+    public ResponseEntity<List<GameResponse>> getGameList(@RequestParam("tab") int tab, @RequestParam("cat") int category) {
+        GameSortDTO sort = new GameSortDTO(tab, category);
         log.info("sort : {}", sort);
         List<GameResponse> list = new ArrayList<>();
         if(sort.getTab() == 3 && sort.getCategory() > 0) {
@@ -39,7 +37,7 @@ public class GameController {
 
     @ResponseBody
     @GetMapping(value = "{id}")
-    public ResponseEntity<GameResponse> gameDetail(@PathVariable("id") Long gameId) {
+    public ResponseEntity<GameResponse> getGameDetail(@PathVariable("id") Long gameId) {
         log.info("gameId : {}", gameId);
         GameResponse game = gameService.findGameById(gameId);
 
@@ -47,19 +45,67 @@ public class GameController {
     }
 
     @ResponseBody
-    @PutMapping(value = "{id}")
-    public ResponseEntity<GameResponse> gameUpdate(@PathVariable("id") Long gameId, @RequestBody GameForm form) {
+    @PutMapping(value = "{id}", consumes = "application/json")
+    public ResponseEntity<GameResponse> putGame(@PathVariable("id") Long gameId, @RequestBody GameForm form) {
         log.info("gameId : {}", gameId);
+        log.info("form : {}", form);
         boolean result = gameService.updateGame(form);
+        if(result) {
+            gameService.mappingData(form);
+        }
+        return null;
+    }
+
+
+    @ResponseBody
+    @PostMapping(value = "create")
+    public ResponseEntity<GameResponse> createGame(@RequestBody GameForm form) {
+        log.info("form : {}", form);
+//        boolean result = gameService.createGame(form);
         return null;
     }
 
     @ResponseBody
-    @GetMapping("{id}/categories")
-    public ResponseEntity<List<CategoryResponse>> getCategories(@PathVariable("id") Long gameId) {
-        List<CategoryResponse> cateList = gameService.getCategoriesByGameId(gameId);
+    @GetMapping("categories")
+    public ResponseEntity<List<CategoryDTO>> getAllCategories() {
+        List<CategoryDTO> list = gameService.getCategoryList();
+        log.info("list: {}", list);
+
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @GetMapping("{id}/category")
+    public ResponseEntity<List<CategoryDTO>> getCategories(@PathVariable("id") Long gameId) {
+        List<CategoryDTO> cateList = gameService.getCategoriesByGameId(gameId);
         log.info("Categories : {}", cateList);
         return new ResponseEntity<>(cateList, HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @GetMapping("{id}/mechanic")
+    public ResponseEntity<List<CategoryDTO>> getMechanics(@PathVariable("id") Long gameId) {
+        List<CategoryDTO> cateList = gameService.getCategoriesByGameId(gameId);
+        log.info("Categories : {}", cateList);
+        return new ResponseEntity<>(cateList, HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @GetMapping("data")
+    public ResponseEntity<GameDataDTO> getAllData() {
+        GameDataDTO allData = gameService.getAllDataList();
+        log.info("allData: {}", allData);
+
+        return new ResponseEntity<>(allData, HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @GetMapping("data/{id}")
+    public ResponseEntity<GameDataDTO> getAllDataByGameId(@PathVariable("id") Long gameId) {
+        GameDataDTO allData = gameService.getAllDataByGameId(gameId);
+        log.info("allData: {}", allData);
+
+        return new ResponseEntity<>(allData, HttpStatus.OK);
     }
 
 }

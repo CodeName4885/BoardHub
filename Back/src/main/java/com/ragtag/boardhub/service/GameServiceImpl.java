@@ -1,11 +1,7 @@
 package com.ragtag.boardhub.service;
 
-import com.ragtag.boardhub.domain.game.Categories;
-import com.ragtag.boardhub.domain.game.Games;
-import com.ragtag.boardhub.dto.game.CategoryResponse;
-import com.ragtag.boardhub.dto.game.GameForm;
-import com.ragtag.boardhub.dto.game.GameResponse;
-import com.ragtag.boardhub.dto.game.GameSortDTO;
+import com.ragtag.boardhub.domain.game.*;
+import com.ragtag.boardhub.dto.game.*;
 import com.ragtag.boardhub.repository.GameRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,15 +44,103 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public boolean updateGame(GameForm form) {
-        return gameRepository.updateGame(form.toEntity());
+        boolean result = gameRepository.updateGame(form.toEntity());
+
+        return result;
     }
 
     @Override
-    public List<CategoryResponse> getCategoriesByGameId(Long gameId) {
+    public List<CategoryDTO> getCategoriesByGameId(Long gameId) {
         return gameRepository.getCategoriesByGameId(gameId)
                 .stream()
-                .map(cate -> new CategoryResponse(cate))
+                .map(cat -> new CategoryDTO(cat))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<CategoryDTO> getCategoryList() {
+        List<Categories> findList = gameRepository.getCategoryList();
+        return findList.stream()
+                .map(cat -> new CategoryDTO(cat))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public GameDataDTO getAllDataList() {
+        List<Categories> catList = gameRepository.getCategoryList();
+        List<Mechanics> mechList = gameRepository.getMechanicList();
+        List<Designers> desList = gameRepository.getDesignerList();
+        List<Artists> artiList = gameRepository.getArtistList();
+        List<Publishers> pubList = gameRepository.getPublisherList();
+        return new GameDataDTO(catList, mechList, desList, artiList, pubList);
+    }
+
+    @Override
+    public GameDataDTO getAllDataByGameId(Long gameId) {
+        List<Categories> catList = gameRepository.getCategoriesByGameId(gameId);
+        List<Mechanics> mechList = gameRepository.getMechanicsByGameId(gameId);
+        log.info("mechList: {}" , mechList);
+        List<Designers> desList = gameRepository.getDesignersByGameId(gameId);
+        log.info("desList: {}" , desList);
+        List<Artists> artiList = gameRepository.getArtistsByGameId(gameId);
+        log.info("artiList: {}" , artiList);
+        List<Publishers> pubList = gameRepository.getPublishersByGameId(gameId);
+        log.info("pubList: {}" , pubList);
+        return new GameDataDTO(catList, mechList, desList, artiList, pubList);
+    }
+
+    @Override
+    public void mappingData(GameForm form) {
+        // 카테고리 추가
+        List<Long> categories = form.getCategories();
+        for (Long categoryId: categories) {
+            int count = gameRepository.checkCatMapping(form.getGameId(), categoryId);
+            if(count == 1) {
+                gameRepository.addCatMapping(form.getGameId(), categoryId);
+            }
+        }
+
+        // 게임 방식 추가
+        List<Long> mechanics = form.getMechanics();
+        for (Long mechanicId: mechanics) {
+            int count = gameRepository.checkMechMapping(form.getGameId(), mechanicId);
+            if(count == 1) {
+                gameRepository.addMechMapping(form.getGameId(), mechanicId);
+            }
+        }
+
+        // 룰 디자이너 추가
+        List<Long> designers = form.getDesigners();
+        for (Long designerId: designers) {
+            int count = gameRepository.checkDesMapping(form.getGameId(), designerId);
+            if(count == 1) {
+                gameRepository.addDesMapping(form.getGameId(), designerId);
+            }
+        }
+
+        // 게임 악세사리 아티스트 추가
+        List<Long> artists = form.getArtists();
+        for (Long artistId: artists) {
+            int count = gameRepository.checkArtiMapping(form.getGameId(), artistId);
+            if(count == 1) {
+                gameRepository.addArtiMapping(form.getGameId(), artistId);
+            }
+        }
+
+        // 게임 출판사 추가
+        List<Long> publishers = form.getPublishers();
+        for (Long publisherId: publishers) {
+            int count = gameRepository.checkPubMapping(form.getGameId(), publisherId);
+            if(count == 1) {
+                gameRepository.addPubMapping(form.getGameId(), publisherId);
+            }
+        }
+
+
+
+
+
+    }
+
 
 }

@@ -84,46 +84,41 @@ class TranslateThread extends Thread {
     }
 
     public void run() {
+        int index = 1;
         while (running) {
-            try {
-                System.out.println("일하는 중...");
-                updateTranslate();
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            System.out.println("일하는 중...");
+            updateTranslate(index);
         }
     }
 
-    public void updateTranslate() {
+    public void updateTranslate(int index) {
         try {
             Connection dbConnection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:ORCL", "DUQUAN", "DUQUAN1234");
-            String sqlSelectAll = "SELECT * FROM categorys";
-            String sqlUpdate = "UPDATE INTO categorys SET translate = ? WHERE category_id = ?";
+            String sqlSelectAll = "SELECT * FROM publishers WHERE translate is null";
+            String sqlUpdate = "UPDATE publishers SET translate = ? WHERE publisher_id = ?";
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlSelectAll);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
             List<BggLinkDTO> bggLinkList = new ArrayList<>();
             while (resultSet.next()) {
-                Long id = resultSet.getLong("category_id");
-                String name = resultSet.getString("category");
+                Long id = resultSet.getLong("publisher_id");
+                String name = resultSet.getString("publisher");
 
                 BggLinkDTO type = new BggLinkDTO(id, name);
                 bggLinkList.add(type);
             }
 
             for (BggLinkDTO type : bggLinkList) {
-
                 System.out.println("ID: " + type.getId() + ", Name: " + type.getName());
-                String translated = translateEngOnly(type.getName());
-                System.out.println("translated = " + translated);
+                String translated = translateTxt(type.getName());
                 PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate);
                 if(translated != null) {
                     statement.setString(1, translated);
                     statement.setLong(2, type.getId());
                     statement.executeUpdate();
                 }
+                Thread.sleep(5000);
             }
 
             preparedStatement.close();
@@ -132,17 +127,51 @@ class TranslateThread extends Thread {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("끝");
+        stopRunning();
     }
 
-    public String translateEngOnly(String text) throws Exception {
-        System.out.println("Translate Text");
+
+    public static String translateTxt(String txt) {
+        String translatedTitle = detectAndTranslate(txt);
+        System.out.println("원제: " + txt);
+        System.out.println("번역된 제목: " + translatedTitle);
+        return translatedTitle;
+    }
+
+    public static String detectAndTranslate(String text) {
         String clientId = "1WDpV9oqcnZraYitmJHE"; // 애플리케이션 클라이언트 아이디값
         String clientSecret = "Ur8D51_adw"; // 애플리케이션 클라이언트 시크릿값
+
+        String detectApiURL = "https://openapi.naver.com/v1/papago/detectLangs";
         String translateApiURL = "https://openapi.naver.com/v1/papago/n2mt";
+
+        try {
+            String detectedLang = detectLanguage(text, clientId, clientSecret, detectApiURL);
+            String translatedText = translateText(text, detectedLang, clientId, clientSecret, translateApiURL);
+            return translatedText;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "번역 실패";
+        }
+    }
+
+    public static String detectLanguage(String text, String clientId, String clientSecret, String detectApiURL) throws Exception {
         String encodedText = URLEncoder.encode(text, "UTF-8");
         Map<String, String> requestHeaders = setHeaders(clientId, clientSecret);
 
-        String postParams = "source=en&target=ko&text=" + encodedText;
+        String responseBody = post(detectApiURL, requestHeaders, "query=" + encodedText);
+        JSONObject responseJson = new JSONObject(responseBody);
+        String langCode = responseJson.getString("langCode");
+        System.out.println("langCode = " + langCode);
+        return langCode;
+    }
+
+    public static String translateText(String text, String sourceLang, String clientId, String clientSecret, String translateApiURL) throws Exception {
+        String encodedText = URLEncoder.encode(text, "UTF-8");
+        Map<String, String> requestHeaders = setHeaders(clientId, clientSecret);
+
+        String postParams = "source=" + sourceLang + "&target=ko&text=" + encodedText;
         String responseBody = post(translateApiURL, requestHeaders,  postParams);
         JSONObject responseJson = new JSONObject(responseBody);
         String translatedText = "";
@@ -150,7 +179,7 @@ class TranslateThread extends Thread {
             translatedText = responseJson.getJSONObject("message").getJSONObject("result").getString("translatedText");
         }catch (Exception e) {
             System.out.println("responseJson = " + responseJson);
-            stopRunning();
+            return null;
         }
         return translatedText;
     }
@@ -162,10 +191,7 @@ class TranslateThread extends Thread {
         return requestHeaders;
     }
 
-
-
     private static String post(String apiUrl, Map<String, String> requestHeaders, String text) {
-        System.out.println("Post");
         HttpURLConnection con = connect(apiUrl);
         String postParams =  text;
         try {

@@ -1,8 +1,4 @@
-import "../static/game-warrior/css/animate.css";
-import "../static/game-warrior/css/bootstrap.min.css";
-import "../static/game-warrior/css/style.css";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 export function GameListItemComponent(item) {
     const navigate = useNavigate();
@@ -35,7 +31,7 @@ export function GameListItemComponent(item) {
                             style={{ cursor: "pointer" }}
                             onClick={onClick}
                         >
-                            {item.games.orgTitle}
+                            {item.games.title}
                         </h5>
                     </div>
                 </div>

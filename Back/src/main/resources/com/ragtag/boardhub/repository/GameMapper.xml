@@ -17,15 +17,19 @@
     </select>
 
     <update id="updateGame">
-        update games set
-            title = #{title}, 
-            thumbnail = #{thumbnail},
-            image = #{image},
-            release_date = #{release_date},
-            min_player = #{min_player},
-            max_player = #{max_player},
-            playing_time = #{playing_time},
-            min_age = #{min_age}
+        update games
+        <trim prefix="set" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="org_title != null">org_title = #{org_title},</if>
+            <if test="thumbnail != null">thumbnail = #{thumbnail},</if>
+            <if test="image != null">image = #{image},</if>
+            <if test="release_date > 0">release_date = #{release_date},</if>
+            <if test="min_player > 0">min_player = #{min_player},</if>
+            <if test="max_player > 0">max_player = #{max_player},</if>
+            <if test="playing_time > 0">playing_time = #{playing_time},</if>
+            <if test="min_age > 0">min_age = #{min_age}</if>
+        </trim>
+        where game_id = #{game_id}
     </update>
 
     <insert id="insertGame">
@@ -36,8 +40,97 @@
         values(#{game_id}, #{title}, #{org_title}, #{thumbnail}, #{image}, #{release_date}, #{min_player}, #{max_player}, #{playing_time}, #{min_age})
     </insert>
 
-    <select id="getCategoriesByGameId" resultType="com.ragtag.boardhub.domain.game.Categories">
+    <select id="getCategoryList" resultType="Categories">
+        select * from categories
+    </select>
+
+    <select id="getMechanicList" resultType="Mechanics">
+        select * from mechanics
+    </select>
+
+    <select id="getDesignerList" resultType="Designers">
+        select * from designers
+    </select>
+
+    <select id="getArtistList" resultType="Artists">
+        select * from artists
+    </select>
+
+    <select id="getPublisherList" resultType="Publishers">
+        select * from publishers
+    </select>
+
+    <select id="getCategoriesByGameId" resultType="Categories">
         select * from categories c join cate_mapping m on c.category_id = m.category_id where m.game_id = #{game_id}
     </select>
+
+    <select id="getMechanicsByGameId" resultType="Mechanics">
+        select * from mechanics c join mech_mapping m on c.mechanic_id = m.mechanic_id where m.game_id = #{game_id}
+    </select>
+
+    <select id="getArtistsByGameId" resultType="Artists">
+        select * from artists a join arti_mapping m on a.artist_id = m.artist_id where m.game_id = #{game_id}
+    </select>
+
+    <select id="getDesignersByGameId" resultType="Designers">
+        select * from designers d join designer_mapping m on d.designer_id = m.designer_id where m.game_id = #{game_id}
+    </select>
+
+    <select id="getPublishersByGameId" resultType="Publishers">
+        select * from publishers p join publish_mapping m on p.publisher_id = m.publisher_id where m.game_id = #{game_id}
+    </select>
+
+    <select id="checkCatMapping">
+        select count(*) from cate_mapping
+        where category_id = #{categoryId} and game_id = #{gameId}
+    </select>
+
+    <insert id="addCatMapping">
+        insert into cate_mapping(category_id, game_id)
+        values(#{categoryId}, #{gameId})
+    </insert>
+
+    <select id="checkMechMapping">
+        select count(*) from mech_mapping
+        where mechanic_id = #{mechanicId} and game_id = #{gameId}
+    </select>
+
+    <insert id="addMechMapping">
+        insert into mech_mapping(mechanic_id, game_id)
+        values(#{mechanicId}, #{gameId})
+    </insert>
+
+    <select id="checkDesMapping">
+        select count(*) from designer_mapping
+        where designer_id = #{designerId} and game_id = #{gameId}
+    </select>
+
+    <insert id="addDesMapping">
+        insert into designer_mapping(designer_id, game_id)
+        values(#{designerId}, #{gameId})
+    </insert>
+
+    <select id="checkArtiMapping">
+        select count(*) from arti_mapping
+        where artist_id = #{artistId} and game_id = #{gameId}
+    </select>
+
+    <insert id="addArtiMapping">
+        insert into arti_mapping(artist_id, game_id)
+        values(#{artistId}, #{gameId})
+    </insert>
+
+    <select id="checkPubMapping">
+        select count(*) from publish_mapping
+        where publisher_id = #{publisherId} and game_id = #{gameId}
+    </select>
+
+    <insert id="addPubMapping">
+        insert into publish_mapping(publisher_id, game_id)
+        values(#{publisherId}, #{gameId})
+    </insert>
+
+
+
 
 </mapper>
