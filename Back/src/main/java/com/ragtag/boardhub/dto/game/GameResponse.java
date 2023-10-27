@@ -1,5 +1,7 @@
 package com.ragtag.boardhub.DTO.game;
 
+import java.util.List;
+
 import com.ragtag.boardhub.domain.game.Games;
 import lombok.Data;
 
@@ -16,6 +18,12 @@ public class GameResponse {
     private int maxPlayer;
     private int playingTime;
     private int minAge;
+
+    private List<Long> categories;
+    private List<Long> mechanics;
+    private List<Long> designers;
+    private List<Long> artists;
+    private List<Long> publishers;
 
     public GameResponse(Games game) {
         this.gameId = game.getGame_id();
