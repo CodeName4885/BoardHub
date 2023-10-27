@@ -1,4 +1,6 @@
-package com.ragtag.boardhub.dto.game;
+package com.ragtag.boardhub.DTO.game;
+
+import java.util.List;
 
 import com.ragtag.boardhub.domain.game.Games;
 import lombok.Data;
@@ -16,6 +18,12 @@ public class GameForm {
     private int maxPlayer;
     private int playingTime;
     private int minAge;
+
+    private List<Long> categories;
+    private List<Long> mechanics;
+    private List<Long> designers;
+    private List<Long> artists;
+    private List<Long> publihsers;
 
     public Games toEntity() {
         Games game = new Games();
