@@ -17,7 +17,6 @@
     </select>
 
     <update id="updateGame">
-<<<<<<< HEAD
         update games
         <trim prefix="set" suffixOverrides=",">
             <if test="title != null">title = #{title},</if>
@@ -31,17 +30,6 @@
             <if test="min_age > 0">min_age = #{min_age}</if>
         </trim>
         where game_id = #{game_id}
-=======
-        update games set
-            title = #{title}, 
-            thumbnail = #{thumbnail},
-            image = #{image},
-            release_date = #{release_date},
-            min_player = #{min_player},
-            max_player = #{max_player},
-            playing_time = #{playing_time},
-            min_age = #{min_age}
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
     </update>
 
     <insert id="insertGame">
@@ -52,7 +40,6 @@
         values(#{game_id}, #{title}, #{org_title}, #{thumbnail}, #{image}, #{release_date}, #{min_player}, #{max_player}, #{playing_time}, #{min_age})
     </insert>
 
-<<<<<<< HEAD
     <select id="getCategoryList" resultType="Categories">
         select * from categories
     </select>
@@ -146,10 +133,4 @@
 
 
 
-=======
-    <select id="getCategoriesByGameId" resultType="com.ragtag.boardhub.domain.game.Categories">
-        select * from categories c join cate_mapping m on c.category_id = m.category_id where m.game_id = #{game_id}
-    </select>
-
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
 </mapper>
