@@ -7,7 +7,7 @@ import {
     fetchAllData,
     fetchAllDataByGameId,
     fetchByGameId,
-} from "../repositories/GameRepository";
+} from "./repositories/GameRepository";
 
 export function GameFormComponent() {
     const params = useParams();
@@ -34,15 +34,12 @@ export function GameFormComponent() {
     useEffect(() => {
         getAllData();
         if (gameId) {
-            getGame()
-                .then((data) => {
-                    setValues(data);
-                })
-                .then(() => {
-                    getAllDataById().then(() => {
-                        setLoading(false);
-                    });
-                });
+            getGame().then((data) => {
+                setValues(data);
+            });
+            getAllDataById().then(() => {
+                setLoading(false);
+            });
         } else {
             setLoading(false);
         }
@@ -78,6 +75,7 @@ export function GameFormComponent() {
     async function getAllDataById() {
         await fetchAllDataByGameId(gameId).then((data) => {
             if (data) {
+                console.log(data);
                 const initCategories = [];
                 const initCatButtons = data.catList.map((cat) => {
                     initCategories.push(cat.categoryId);
@@ -156,6 +154,8 @@ export function GameFormComponent() {
         const id = e.target.value;
         const text = e.target.options[e.target.selectedIndex].text;
         if (text === "---") return;
+        const redundant = categories.find((cat) => cat.id == id);
+        if (redundant) return;
         setCategories([...categories, id]);
         setCatButtons([...catButtons, { id, text }]);
         setValues({
@@ -181,6 +181,8 @@ export function GameFormComponent() {
         const id = e.target.value;
         const text = e.target.options[e.target.selectedIndex].text;
         if (text === "---") return;
+        const redundant = mechanics.find((mech) => mech.id == id);
+        if (redundant) return;
         setMechanics([...mechanics, id]);
         setMechButtons([...mechButtons, { id, text }]);
         setValues({
@@ -205,6 +207,8 @@ export function GameFormComponent() {
         const id = e.target.value;
         const text = e.target.options[e.target.selectedIndex].text;
         if (text === "---") return;
+        const redundant = designers.find((des) => des.id == id);
+        if (redundant) return;
         setDesigners([...designers, id]);
         setDesButtons([...desButtons, { id, text }]);
         setValues({
@@ -229,6 +233,8 @@ export function GameFormComponent() {
         const id = e.target.value;
         const text = e.target.options[e.target.selectedIndex].text;
         if (text === "---") return;
+        const redundant = artists.find((arti) => arti.id == id);
+        if (redundant) return;
         setArtists([...artists, id]);
         setArtiButtons([...artiButtons, { id, text }]);
         setValues({
@@ -253,6 +259,8 @@ export function GameFormComponent() {
         const id = e.target.value;
         const text = e.target.options[e.target.selectedIndex].text;
         if (text === "---") return;
+        const redundant = publishers.find((pub) => pub.id == id);
+        if (redundant) return;
         setPublishers([...publishers, id]);
         setPubButtons([...pubButtons, { id, text }]);
         setValues({

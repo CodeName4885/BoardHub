@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Form, Tab, Tabs } from "react-bootstrap";
-import { fetchAllCategories, fetchList } from "../repositories/GameRepository";
+import { fetchAllCategories, fetchList } from "./repositories/GameRepository";
 import { GameListItemComponent } from "./GameListItemComponent";
 
 export function GameListComponent() {

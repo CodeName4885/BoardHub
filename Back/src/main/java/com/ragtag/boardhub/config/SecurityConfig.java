@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorizeRequests) ->{
-                    authorizeRequests.requestMatchers("/join","/login","/profile","/mailconfirm","/usernamecheck","/activateuser","/api/game/list","/api/game/{id}","/api/game/{id}/categories","/getmainitem", "/kakaouserinfoadd", "/googleuserinfoadd", "/socialmypage").permitAll();
+                    authorizeRequests.requestMatchers("/join","/login","/profile","/mailconfirm","/usernamecheck","/activateuser","/api/game/list","/api/game/{id}","/api/game/{id}/categories", "/api/game/data/{id}","/getmainitem", "/kakaouserinfoadd", "/googleuserinfoadd", "/socialmypage").permitAll();
                     authorizeRequests.requestMatchers("/mypage","/refresh","/modifynickname","/modifyphone","/drawuser","/usernamechk","/emailchk","/getusername","/modifypassword").authenticated();
                     authorizeRequests.requestMatchers("/admin/**")
                             .hasRole("ADMIN");

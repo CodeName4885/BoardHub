@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import { GameDetailCategory } from "./GameDetailCategory";
+import { GameDetailItem } from "./GameDetailItem";
 import {
     fetchByGameId,
     fetchCategoriesByGameId,
-} from "../repositories/GameRepository";
-import { GameDetailCategory } from "./GameDetailCategory";
-import { GameDetailCompare } from "./GameDetailCompare";
-import { GameDetailItem } from "./GameDetailItem";
-import { Button } from "react-bootstrap";
+} from "./repositories/GameRepository";
 
 export function GameDetailComponent() {
     const params = useParams();
@@ -21,22 +20,27 @@ export function GameDetailComponent() {
     console.log(game);
 
     useEffect(() => {
-        getGame();
+        getGame()
+            .then((game) => {
+                setGame(game);
+            })
+            .then(() => {
+                getCategories().then((cate) => {
+                    setCategories(cate);
+                    setLoading(false);
+                });
+            });
     }, [gameId]);
 
     async function getGame() {
-        await fetchByGameId(gameId).then((data) => {
-            setGame(data);
-        });
-        await getCategories().then((cat) => {
-            setCategories(cat);
-            setLoading(false);
+        return await fetchByGameId(gameId).then((data) => {
+            return data;
         });
     }
 
     async function getCategories() {
-        return await fetchCategoriesByGameId(gameId).then((cat) => {
-            return cat;
+        return await fetchCategoriesByGameId(gameId).then((data) => {
+            return data;
         });
     }
 

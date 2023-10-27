@@ -35,10 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
-<<<<<<< HEAD
 node_modules
-=======
 
 # Ignore boardHub file
 boardHub
->>>>>>> 8e3ded9273ce50f1bb79af160f3c7964349ab9f4
