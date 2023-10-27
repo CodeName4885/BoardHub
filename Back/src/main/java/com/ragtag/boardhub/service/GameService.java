@@ -23,8 +23,8 @@ public interface GameService {
 
     GameDataDTO getAllDataList();
 
-    void updateCategoryByGameId(Long gameId, List<CategoryDTO> list);
-
     GameDataDTO getAllDataByGameId(Long gameId);
+
+    void mappingData(GameForm form);
 
 }

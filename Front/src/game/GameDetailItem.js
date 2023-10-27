@@ -20,7 +20,7 @@ export function GameDetailItem({ game }) {
                     minHeight: 470,
                 }}
             ></div>
-            <div className="review-cover col-md-8">
+            <div className="review-cover">
                 <h4 style={{ fontWeight: "bold" }}>종합 순위</h4>
                 <div className="row mt-2">
                     <div
@@ -52,7 +52,9 @@ export function GameDetailItem({ game }) {
                         </div>
                         <div className="mr-4">
                             <span style={gameInfoStyle}>
-                                {game.minAge}세 이상
+                                {game.minAge > 0
+                                    ? `${game.minAge}세 이상`
+                                    : "ALL"}
                             </span>
                             <p>사용 연령</p>
                         </div>

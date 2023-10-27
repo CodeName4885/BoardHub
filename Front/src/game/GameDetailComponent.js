@@ -52,7 +52,14 @@ export function GameDetailComponent() {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        <div className="d-flex justify-content-end">
+                        <div className="d-flex justify-content-end align-items-center">
+                            <a
+                                className="mr-2"
+                                href="/game/list"
+                                style={{ fontSize: 20 }}
+                            >
+                                목록
+                            </a>
                             <Button
                                 onClick={() => navigate(`/game/edit/${gameId}`)}
                             >
@@ -65,9 +72,9 @@ export function GameDetailComponent() {
                         <div className="col-md-12 row">
                             <GameDetailCategory categories={categories} />
 
-                            <div className="col-md-12">
+                            {/* <div className="col-md-12">
                                 <GameDetailCompare game={game} />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

@@ -34,12 +34,15 @@ export function GameFormComponent() {
     useEffect(() => {
         getAllData();
         if (gameId) {
-            getGame().then(() => {
-                getAllDataById().then(() => {
-                    console.log(values);
-                    setLoading(false);
+            getGame()
+                .then((data) => {
+                    setValues(data);
+                })
+                .then(() => {
+                    getAllDataById().then(() => {
+                        setLoading(false);
+                    });
                 });
-            });
         } else {
             setLoading(false);
         }
@@ -48,7 +51,7 @@ export function GameFormComponent() {
     function applyEdit(e) {
         e.preventDefault();
         console.log(values);
-        // applyChange();
+        applyChange();
     }
 
     async function applyChange() {
@@ -68,7 +71,6 @@ export function GameFormComponent() {
 
     async function getGame() {
         return await fetchByGameId(gameId).then((data) => {
-            setValues(data);
             return data;
         });
     }
@@ -109,15 +111,15 @@ export function GameFormComponent() {
                 setArtists(initArtists);
                 setArtiButtons(initArtiButtons);
 
-                const initPublisher = [];
+                const initPublishers = [];
                 const initPubButtons = data.pubList.map((pub) => {
-                    initPublisher.push(pub.publisherId);
+                    initPublishers.push(pub.publisherId);
                     return {
                         id: pub.publisherId,
                         text: `${pub.publisher} (${pub.translate})`,
                     };
                 });
-                setPublishers(initPublisher);
+                setPublishers(initPublishers);
                 setPubButtons(initPubButtons);
 
                 const initDesigners = [];
@@ -137,7 +139,7 @@ export function GameFormComponent() {
                     mechanics: initMechanics,
                     designers: initDesigners,
                     artists: initArtists,
-                    publisher: initPublisher,
+                    publishers: initPublishers,
                 });
             }
         });

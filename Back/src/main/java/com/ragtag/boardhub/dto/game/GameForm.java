@@ -1,7 +1,9 @@
 package com.ragtag.boardhub.dto.game;
 
 import com.ragtag.boardhub.domain.game.Games;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -19,11 +21,11 @@ public class GameForm {
     private int playingTime;
     private int minAge;
 
-    private List<CategoryDTO> catList;
-    private List<MechanicDTO> mechList;
-    private List<DesignerDTO> desList;
-    private List<ArtistDTO> artiList;
-    private List<PublisherDTO> pubList;
+    private List<Long> categories;
+    private List<Long> mechanics;
+    private List<Long> designers;
+    private List<Long> artists;
+    private List<Long> publishers;
 
     public Games toEntity() {
         Games game = new Games();

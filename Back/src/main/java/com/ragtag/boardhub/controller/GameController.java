@@ -45,21 +45,17 @@ public class GameController {
     }
 
     @ResponseBody
-    @PutMapping(value = "{id}")
+    @PutMapping(value = "{id}", consumes = "application/json")
     public ResponseEntity<GameResponse> putGame(@PathVariable("id") Long gameId, @RequestBody GameForm form) {
         log.info("gameId : {}", gameId);
         log.info("form : {}", form);
-//        boolean result = gameService.updateGame(form);
-            List<CategoryDTO> catList = form.getCatList();
-            gameService.updateCategoryByGameId(gameId, catList);
-//        if(result) {
-//            List<MechanicDTO> mechList = form.getMechList();
-//            List<DesignerDTO> desList = form.getDesList();
-//            List<ArtistDTO> artiList = form.getArtiList();
-//            List<PublisherDTO> pubList = form.getPubList();
-//        }
+        boolean result = gameService.updateGame(form);
+        if(result) {
+            gameService.mappingData(form);
+        }
         return null;
     }
+
 
     @ResponseBody
     @PostMapping(value = "create")

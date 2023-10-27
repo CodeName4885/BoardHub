@@ -1,7 +1,8 @@
 const url = "http://localhost:8080/api/game";
 
 export async function fetchList(sort) {
-    const query = `tab=${sort.tab}&cat=${sort.category}`;
+    const { tab, category } = sort;
+    const query = `tab=${tab}&cat=${category}`;
     try {
         const response = await fetch(`${url}/list?${query}`, {
             method: "get",
@@ -29,9 +30,10 @@ export async function fetchByGameId(gameId) {
 }
 
 export async function editGame(form) {
+    const { gameId } = form;
     console.log(form);
     try {
-        const response = await fetch(`${url}/${form.gameId}`, {
+        const response = await fetch(`${url}/${gameId}`, {
             method: "put",
             headers: {
                 "Content-Type": "application/json",
