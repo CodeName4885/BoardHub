@@ -1,4 +1,4 @@
-import { MdOutlineArrowBackIosNew } from "react-icons/md";
+// import { MdOutlineArrowBackIosNew } from "react-icons/md";
 
 export function GameDetailCompare({ game }) {
     // 현재 게임에 이미지로 되어있는데 나중에 난이도별로 3개 받아서 뿌려야함
@@ -23,9 +23,9 @@ export function GameDetailCompare({ game }) {
             </div>
             <div className="row align-items-center">
                 {levelItems}{" "}
-                <MdOutlineArrowBackIosNew style={{ fontSize: 50 }} />
+                {/* <MdOutlineArrowBackIosNew style={{ fontSize: 50 }} /> */}
                 {levelItems}
-                <MdOutlineArrowBackIosNew style={{ fontSize: 50 }} />
+                {/* <MdOutlineArrowBackIosNew style={{ fontSize: 50 }} /> */}
                 {levelItems}
             </div>
         </>

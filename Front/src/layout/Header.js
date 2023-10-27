@@ -47,16 +47,16 @@ export function Header() {
                             <a href="/game/list">게임 정보</a>
                         </li>
                         <li>
-                            <a href="">게임 후기</a>
+                            <a href="/review/list">게임 후기</a>
                         </li>
                         <li>
-                            <a href="">중고 거래</a>
+                            <a href="/trade/list">중고 거래</a>
                         </li>
                         <li>
-                            <a href="">메이트</a>
+                            <a href="/mate/list">메이트</a>
                         </li>
                         <li>
-                            <a href="">영상/공략</a>
+                            <a href="/solution/list">영상/공략</a>
                         </li>
                     </ul>
                 </nav>

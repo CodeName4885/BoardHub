@@ -7,6 +7,7 @@ import {
     fetchByGameId,
     fetchCategoriesByGameId,
 } from "./repositories/GameRepository";
+import { GameDetailCompare } from "./GameDetailCompare";
 
 export function GameDetailComponent() {
     const params = useParams();

@@ -9,7 +9,7 @@ export function GameListItemComponent(item) {
 
     return (
         <>
-            <div className="col-lg-3 col-md-6 mt-5">
+            <div className="col-lg-3 col-md-6 mt-4">
                 <div className="review-item">
                     <div
                         className="review-cover"
@@ -23,7 +23,7 @@ export function GameListItemComponent(item) {
                         id={`${item.games.gameId}`}
                         onClick={onClick}
                     >
-                        <div className="score yellow">9.3</div>
+                        {/* <div className="score yellow">9.3</div> */}
                     </div>
                     <div className="review-text">
                         <h5

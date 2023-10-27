@@ -23,13 +23,13 @@ export function GameDetailItem({ game }) {
             <div className="review-cover">
                 <h4 style={{ fontWeight: "bold" }}>종합 순위</h4>
                 <div className="row mt-2">
-                    <div
+                    {/* <div
                         className="score yellow m-2"
                         style={{ position: "initial" }}
                     >
                         9.3
-                    </div>
-                    <div className="mt-1">
+                    </div> */}
+                    <div className="mt-1 ml-3">
                         <h4>
                             {game.orgTitle} ({game.releaseDate})
                         </h4>
@@ -58,16 +58,14 @@ export function GameDetailItem({ game }) {
                             </span>
                             <p>사용 연령</p>
                         </div>
-                        <div className="mr-4">
+                        {/* <div className="mr-4">
                             <span style={gameInfoStyle}>3 / 5</span>
                             <p>난이도</p>
-                        </div>
+                        </div> */}
                     </div>
-                    <div className="row ml-2 mt-3">
-                        <p>
-                            <h4>좋아요 : 43개</h4>
-                            <h4>찜 : 53개</h4>
-                        </p>
+                    <div className="ml-2 mt-3">
+                        <h4>좋아요 : 43개</h4>
+                        <h4>찜 : 53개</h4>
                     </div>
                     <div className="row ml-2 mt-2">
                         <h4>내 점수</h4>

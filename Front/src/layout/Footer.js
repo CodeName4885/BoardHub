@@ -8,22 +8,22 @@ export function Footer() {
             <div className="container">
                 <ul className="footer-menu">
                     <li>
-                        <a href="#">Home</a>
+                        <a href="/game/list">게임 정보</a>
                     </li>
                     <li>
-                        <a href="#">Games</a>
+                        <a href="/review/list">게임 후기</a>
                     </li>
                     <li>
-                        <a href="#">Blog</a>
+                        <a href="/trade/list">중고 거래</a>
                     </li>
                     <li>
-                        <a href="#">Forums</a>
+                        <a href="/mate/list">메이트</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="/solution/list">영상/공략</a>
                     </li>
                 </ul>
-                <p className="copyright">
+                {/* <p className="copyright">
                     Copyright &copy;All rights reserved | This template is made
                     with
                     <i className="fa fa-heart-o" aria-hidden="true"></i>
@@ -31,7 +31,7 @@ export function Footer() {
                     <a href="https://colorlib.com" target="_blank">
                         Colorlib
                     </a>
-                </p>
+                </p> */}
             </div>
         </footer>
     );

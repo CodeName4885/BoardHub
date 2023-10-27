@@ -76,8 +76,11 @@ export function GameListComponent() {
 
                     <div className="row">
                         {games ? (
-                            games.map((item, key) => (
-                                <GameListItemComponent key={key} games={item} />
+                            games.map((item) => (
+                                <GameListItemComponent
+                                    key={item.gameId}
+                                    games={item}
+                                />
                             ))
                         ) : (
                             <></>

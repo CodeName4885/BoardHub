@@ -10,6 +10,8 @@ import { modifynickname } from "../../UserApiConfig/ApiService";
 import { modifyphone } from "../../UserApiConfig/ApiService";
 import { drawUser } from "../../UserApiConfig/ApiService";
 import Swal from "sweetalert2";
+
+
 function Mypage() {
   const token = localStorage.getItem("ACCESS_TOKEN");
   const socialtoken = sessionStorage.getItem("TOKEN");
