@@ -1,13 +1,9 @@
 package com.ragtag.boardhub.controller;
 
-<<<<<<< HEAD
-import com.ragtag.boardhub.dto.game.*;
-=======
-import com.ragtag.boardhub.dto.game.CategoryResponse;
-import com.ragtag.boardhub.dto.game.GameForm;
-import com.ragtag.boardhub.dto.game.GameResponse;
-import com.ragtag.boardhub.dto.game.GameSortDTO;
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
+import com.ragtag.boardhub.DTO.game.*;
+import com.ragtag.boardhub.DTO.game.GameForm;
+import com.ragtag.boardhub.DTO.game.GameResponse;
+import com.ragtag.boardhub.DTO.game.GameSortDTO;
 import com.ragtag.boardhub.service.GameService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -84,6 +80,7 @@ public class GameController {
     @ResponseBody
     @GetMapping("{id}/category")
     public ResponseEntity<List<CategoryDTO>> getCategories(@PathVariable("id") Long gameId) {
+        log.info("getCategories");
         List<CategoryDTO> cateList = gameService.getCategoriesByGameId(gameId);
         log.info("Categories : {}", cateList);
         return new ResponseEntity<>(cateList, HttpStatus.OK);

@@ -1,18 +1,11 @@
 import Logo from "../static/game-warrior/img/BoardHub-Logo-Tp.png";
-<<<<<<< HEAD
-import "../static/game-warrior/css/join.css";
-=======
 import joincss from "../static/game-warrior/css/join.module.css";
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
 import { useState, useEffect, useRef } from "react";
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Space } from 'antd';
 import Swal from "sweetalert2";
-<<<<<<< HEAD
 
 
-=======
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
 function Entryinfo() {
   //이메일 작성 이벤트
   const [inputChangeEmail, setInputChangeEmail] = useState("");
@@ -122,7 +115,6 @@ function Entryinfo() {
       reader.onload = () => {
         if (reader.readyState === 2) {
           setImage(reader.result);
-<<<<<<< HEAD
           const formData = new FormData();
           formData.append('profile', e.target.files[0]);
 
@@ -138,8 +130,6 @@ function Entryinfo() {
           .catch(error => {
             console.log("통신실패",error);
           })
-=======
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
         }
       };
       reader.readAsDataURL(e.target.files[0]);
@@ -150,12 +140,9 @@ function Entryinfo() {
 
   //아이디 중복 체크
   const [usernameCheckMsg, setUsernameCheckMsg] = useState("");
-<<<<<<< HEAD
   const [isDuplicate, setIsDuplicate] = useState(false);
-=======
   const [usernameCheckStatus, setUsernameCheckStatus ] = useState(0);
   const usernameInput = useRef(null);
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
   const usernameCheck = ()=>{
     const usernameVal = joinData.username;
     console.log("username = ", usernameVal);
@@ -168,10 +155,8 @@ function Entryinfo() {
     .then(response => response.text())
     .then(response => {
       console.log("통신성공",response);
-<<<<<<< HEAD
       setUsernameCheckMsg(response);
       setIsDuplicate(response === "중복된 아이디입니다.");
-=======
       if(response === "true"){
         setUsernameCheckMsg("사용 가능한 아이디 입니다.");
         setUsernameCheckStatus(1);
@@ -179,14 +164,11 @@ function Entryinfo() {
         setUsernameCheckMsg("중복된 아이디 입니다.");
         setUsernameCheckStatus(0);
       }
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
     })
     .catch(error => {
       console.log("통신실패", error);
     })
   }
-<<<<<<< HEAD
-=======
   
   // 비밀번호 재입력 일치 호가인
   const [password, setPassword] = useState("");
@@ -209,7 +191,6 @@ function Entryinfo() {
   };
   // 랜덤 닉네임 생성
   
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
 
   // 서버로 데이터 보내기
     const [joinData, setJoinData] = useState({
@@ -222,8 +203,6 @@ function Entryinfo() {
     })
   const join = () => {
     console.log("joinData = ", joinData);
-<<<<<<< HEAD
-=======
     if(usernameCheckStatus === 0){
       Swal.fire({
         icon: "error",
@@ -250,7 +229,6 @@ function Entryinfo() {
     })
 
 
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
     fetch("http://localhost:8080/join",{
       method: "POST",
       headers: {"Content-Type":"application/json"},
@@ -259,8 +237,6 @@ function Entryinfo() {
     .then(response => response.text())
     .then(data => {
       console.log("통신성공",data);
-<<<<<<< HEAD
-=======
       if(data === "아이디 중복 체크를 부탁드립니다."){
         Swal.fire({
           icon: "error",
@@ -269,7 +245,6 @@ function Entryinfo() {
           confirmButtonColor: "#0B1761"
         })
       }
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
     })
     .catch(error => {
       console.log("통신실패",error);
@@ -277,12 +252,9 @@ function Entryinfo() {
   }
   const handleonChange = (e) =>{
     const {name , value} = e.target;
-<<<<<<< HEAD
-=======
     if (name === "password") {
       setPassword(value);
     }
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
     setJoinData((prevData) => ({
       ...prevData,
       [name] : value,
@@ -294,80 +266,30 @@ function Entryinfo() {
   useEffect(() => {
     // 이메일, 인증번호, 아이디, 비밀번호, 이름, 닉네임, 전화번호가 모두 입력되었는지 확인
     if (
-<<<<<<< HEAD
       inputChangeEmail &&
-=======
-      inputChangeEmail && 
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
       recievedData &&
       joinData.username &&
       joinData.password &&
       joinData.name &&
-<<<<<<< HEAD
       joinData.nickname &&
-      joinData.phone
-=======
       joinData.phone &&
       password === confirmPassword // 비밀번호가 일치하는지 확인
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
     ) {
       setIsAllInputFilled(true);
     } else {
       setIsAllInputFilled(false);
     }
-<<<<<<< HEAD
-  }, [inputChangeEmail, recievedData, joinData.username, joinData.password, joinData.name, joinData.nickname, joinData.phone]);
-
-  return (
-    <div className="body">
-      <section className="wrap">
-        <div className="logo" style={{
-=======
   }, [inputChangeEmail, recievedData, joinData.username, joinData.password, joinData.name, joinData.phone, password, confirmPassword]);
 
   return (
     <div className={joincss['body']}>
       <section className={joincss['wrap']}>
         <div className={joincss['logo']} style={{
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
           backgroundImage: `url(${Logo})`,
           width: '200px',
           height: '170px',
           backgroundSize: 'cover'
         }}></div>
-<<<<<<< HEAD
-        <div className="entry-wrap">
-          <p className="label-box">
-            <label>이메일</label>
-          </p>
-          <div className="email-box">
-            <div className="email-input-box">
-              <input type="email" name="user_email" readOnly={!sendBtn} onChange={onChangeEmail} />
-            </div>
-            <div className="send-email-box">
-              <button className={`send-email-btn ${inputChangeEmail === "" || !sendBtn ? 'disabled' : ''}`} disabled={inputChangeEmail === "" || !sendBtn} onClick={mailConfirm}>인증메일 발송</button>
-            </div>
-          </div>
-          <p className="label-box">
-            <label>인증번호</label>
-          </p>
-          <div className="email-box">
-            <div className={`email-input-box ${isMailConfirm === false ? 'disabled' : ''}`}>
-              <input className={`mailconfirm-input ${!isMailConfirm ? 'disabled' : ''}`} disabled={!isMailConfirm} type="text" name="verification" onChange={inputDataChange} />
-              {isMailConfirm ? (
-                <div className="timer">{String(minute).padStart(2, "0")}:{String(second).padStart(2, "0")}</div>
-              ) : null}
-            </div>
-            <div className="send-email-box">
-              <button className={`mailconfirm-btn ${!isMailConfirm ? 'disabled' : ''}`} display={!isMailConfirm} onClick={mailConfirmCheck}>인증번호 확인</button>
-            </div>
-          </div>
-          <p className="label-box"> 
-            <label>프로필 사진</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <span>&#187; 프로필 사진을 등록하시려면 아래 사진을 클릭해주세요</span>
-          </p>
-          <div className="profile-box">
-=======
         <div className={joincss['entry-wrap']}>
           <p className={joincss['label-box']}>
             <label>이메일</label>
@@ -399,7 +321,6 @@ function Entryinfo() {
             <span>&#187; 프로필 사진을 등록하시려면 아래 사진을 클릭해주세요.</span>
           </p>
           <div className={joincss['profile-box']}>
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
             <label for="upload-profile">
               <Space wrap size={200}>
                 <Avatar shape="square" size={200} src={Image} icon={<UserOutlined />} />
@@ -414,68 +335,6 @@ function Entryinfo() {
               onChange={onChange}
               ref={fileInput} />
           </div>
-<<<<<<< HEAD
-          <p className="label-box">
-            <label>아이디</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <span>{usernameCheckMsg}</span>
-          </p>
-          <div className="email-box">
-            <div className={`email-input-box ${!isUsernameDisabled ? 'disabled' : ''}`}>
-              <input 
-              className={`username-input ${!isUsernameDisabled ? 'disabled' : ''}`}  
-              type="text" name="username" 
-              disabled={!isUsernameDisabled} 
-              onChange={handleonChange}
-              style={{ borderColor: isDuplicate ? 'red' : 'initial' }} />
-            </div>
-            <div className="send-email-box">
-              <button className={`send-username-btn ${!isUsernameDisabled ? 'disabled' : ''}`} disabled={!isUsernameDisabled} onClick={usernameCheck}>아이디 중복 체크</button>
-            </div>
-          </div>
-          <p className="label-box">
-            <label>비밀번호</label>
-          </p>
-          <div className="email-box">
-            <div className="same-input-box">
-              <input type="password" name="password" onChange={handleonChange} />
-            </div>
-          </div>
-          <p className="label-box">
-            <label>비밀번호 재입력</label>
-          </p>
-          <div className="email-box">
-            <div className="same-input-box">
-              <input type="password"  />
-            </div>
-          </div>
-          <p className="label-box">
-            <label>이름</label>
-          </p>
-          <div className="email-box">
-            <div className="same-input-box">
-              <input type="text" name="name" onChange={handleonChange} />
-            </div>
-          </div>
-          <p className="label-box">
-            <label>닉네임</label>
-          </p>
-          <div className="email-box">
-            <div className="same-input-box">
-              <input type="text" name="nickname"  onChange={handleonChange} />
-            </div>
-          </div>
-          <p className="label-box">
-            <label>전화번호</label>
-          </p>
-          <div className="email-box">
-            <div className="same-input-box">
-              <input type="text" name="phone" onChange={handleonChange} />
-            </div>
-          </div>
-          <div className="send-btn-box">
-            <button className={`send-btn ${!isAllInputFilled ? 'disabled' : ''}`} disabled={!isAllInputFilled} onClick={join}>다음</button>
-          </div>
-=======
           <p className={joincss['label-box']}>
             <label>아이디</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <span className={`${joincss['usernameCheck']} ${usernameCheckMsg === "중복된 아이디 입니다." ? joincss['red'] : ''}`}>{usernameCheckMsg}</span>
@@ -542,7 +401,6 @@ function Entryinfo() {
                 <button className={`${joincss['send-btn']} ${!isAllInputFilled ? joincss['disabled'] : ''}`} disabled={!isAllInputFilled} onClick={join}>다음</button>
               </a>
             </div>
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
         </div>
       </section>
     </div>

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const url = "http://localhost:8080/api/game";
 
 export async function fetchList(sort) {
@@ -10,52 +9,17 @@ export async function fetchList(sort) {
             headers: {
                 "Content-Type": "application/json",
             },
-=======
-import { API_URL } from "../Constants";
-
-export async function fetchList(sort) {
-    try {
-        const response = await fetch(`${API_URL}game/list`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(sort),
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
         });
         const data = await response.json();
         return data;
     } catch (error) {
         console.error(error);
-<<<<<<< HEAD
-=======
-        return [];
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
     }
 }
 
 export async function fetchByGameId(gameId) {
     try {
-<<<<<<< HEAD
         const response = await fetch(`${url}/${gameId}`, {
-=======
-        const response = await fetch(`${API_URL}game/${gameId}`, {
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
-            method: "get",
-        });
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error(error);
-<<<<<<< HEAD
-=======
-        return [];
-    }
-}
-
-export async function getCategoriesById(gameId) {
-    try {
-        const response = await fetch(`${API_URL}game/${gameId}/categories`, {
             method: "get",
         });
         const data = await response.json();
@@ -63,20 +27,14 @@ export async function getCategoriesById(gameId) {
     } catch (error) {
         console.error(error);
         return [];
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
     }
 }
 
 export async function editGame(form) {
-<<<<<<< HEAD
     const { gameId } = form;
     console.log(form);
     try {
         const response = await fetch(`${url}/${gameId}`, {
-=======
-    try {
-        const response = await fetch(`${API_URL}game/${form.gameId}`, {
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
             method: "put",
             headers: {
                 "Content-Type": "application/json",
@@ -87,7 +45,6 @@ export async function editGame(form) {
         return data;
     } catch (error) {
         console.error(error);
-<<<<<<< HEAD
     }
 }
 
@@ -120,11 +77,13 @@ export async function fetchAllCategories() {
 }
 
 export async function fetchCategoriesByGameId(gameId) {
+    console.log("fetchcategory");
     try {
         const response = await fetch(`${url}/${gameId}/category`, {
             method: "get",
         });
         const data = await response.json();
+        console.log(data);
         return data;
     } catch (error) {
         console.error(error);
@@ -248,8 +207,5 @@ export async function fetchAllData() {
         return data;
     } catch (error) {
         console.error(error);
-=======
-        return [];
->>>>>>> c78795c565dca992dd7c51979aa55b10585ea39d
     }
 }

@@ -155,6 +155,7 @@ export function GameFormComponent() {
     function onCatSelectChange(e) {
         const id = e.target.value;
         const text = e.target.options[e.target.selectedIndex].text;
+        if (text === "---") return;
         setCategories([...categories, id]);
         setCatButtons([...catButtons, { id, text }]);
         setValues({
@@ -179,6 +180,7 @@ export function GameFormComponent() {
     function onMechSelectChange(e) {
         const id = e.target.value;
         const text = e.target.options[e.target.selectedIndex].text;
+        if (text === "---") return;
         setMechanics([...mechanics, id]);
         setMechButtons([...mechButtons, { id, text }]);
         setValues({
@@ -202,6 +204,7 @@ export function GameFormComponent() {
     function onDesSelectChange(e) {
         const id = e.target.value;
         const text = e.target.options[e.target.selectedIndex].text;
+        if (text === "---") return;
         setDesigners([...designers, id]);
         setDesButtons([...desButtons, { id, text }]);
         setValues({
@@ -225,6 +228,7 @@ export function GameFormComponent() {
     function onArtiSelectChange(e) {
         const id = e.target.value;
         const text = e.target.options[e.target.selectedIndex].text;
+        if (text === "---") return;
         setArtists([...artists, id]);
         setArtiButtons([...artiButtons, { id, text }]);
         setValues({
@@ -248,6 +252,7 @@ export function GameFormComponent() {
     function onPubSelectChange(e) {
         const id = e.target.value;
         const text = e.target.options[e.target.selectedIndex].text;
+        if (text === "---") return;
         setPublishers([...publishers, id]);
         setPubButtons([...pubButtons, { id, text }]);
         setValues({

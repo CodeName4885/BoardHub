@@ -1,169 +1,176 @@
 @charset "utf-8";
-a {color: #fff; text-decoration: none; outline: none}
-
-a:hover, a:active {text-decoration: none; color:#ffc107;}
-
-.header-fixed{
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
+a {
+    color: #fff;
+    text-decoration: none;
+    outline: none;
 }
 
-.slideImg-box{
-  width: 100%;
-  height: 1000px;
-}
-.slideImg-box img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.categori-wrap{
-  width: 100%;
-  padding-top: 97px;
-  padding-bottom: 97px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.card-wrap{
-  width: 350px;
-  height: 450px;
-  background-color: red;
-  border: 1px solid #fff;
-  position: relative;
-}
-.title-icon{
-  width: 100%;
-}
-.new{
-  display: block;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  text-align: center;
-  width: 100px;
-  height: 50px;
-  background-color: #FF205F;
-  color: #ffffff;
-  font: bold 20px/50px "";
-}
-.game-info-box{
-  position: absolute;
-  top: 50%;
-  padding: 0 20px;
-}
-.game-title{
-  display: block;
-  font: bold 30px "";
-  margin-bottom: 30px;
-}
-.game-coment{
-  display: block;
-  font: bold 20px "";
-  color: #ffffff;
-  margin-bottom: 30px;
-}
-.hot-game-wrap{
-  width: 100%;
-  background-color: #EEF2F6;
-  padding-top: 97px;
-  padding-bottom: 97px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-.hot-game-title{
-  width: 100%;
-  text-align: center;
-  margin-bottom: 40px;
-}
-.hot-game-card-box{
-  display: flex;
-  justify-content: center;
-}
-.hot-game-card-wrap{
-  width: 450px;
-  height: 500px;
-  background-color: blue;;
-  border: 1px solid #fff;
-  margin-right: 25px;
-}
-.hot-game-card-wrap:last-child{
-  margin-right: 0;
-}
-.hot-game-img-box{
-  width: 100%;
-  height: 250px;
-  background-color: #f59000;
-}
-.hot-game-info-box{
-  top: 50%;
-  padding: 0 20px;
-}
-.hot-game-title{
-  display: block;
-  font: bold 30px "";
-  margin-bottom: 30px;
-}
-.hot-game-coment{
-  display: block;
-  font: bold 20px "";
-  color: #ffffff;
-  margin-bottom: 30px;
-}
-.recent-review-wrap{
-  width: 100%;
-  padding-top: 97px;
-  padding-bottom: 97px;
-  margin-bottom: 97px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-.recent-review-title{
-  width: 100%;
-  text-align: center;
-  margin-bottom: 40px;
-}
-.recent-review-card-box{
-  display: flex;
-  justify-content: center;
-}
-.recent-review-card-wrap{
-  width: 350px;
-  height: 550px;
-}
-.recent-review-card{
-  width: 350px;
-  height: 500px;
-  background-color: green;;
-  border: 1px solid #fff;
+a:hover,
+a:active {
+    text-decoration: none;
+    color: #ffc107;
 }
 
+.header-fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
 
-.recent-review-game-title{
-  width: 100%;
-  margin-top: 20px;
-  text-align: center;
-  color: #111111;
-  font: bold 30px "";
+.slideImg-box {
+    width: 100%;
+    height: 1000px;
 }
-.recent-review-coment{
-  display: block;
-  width: 100%;
-  text-align: center;
-  color: #111111;
-  font: bold 20px "";
+.slideImg-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
-.loading-wrap{
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.categori-wrap {
+    width: 100%;
+    padding-top: 97px;
+    padding-bottom: 97px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
-.loading-box{
-  width: 700px;
-  height: 300px;
+.card-wrap {
+    width: 350px;
+    height: 450px;
+    background-color: red;
+    border: 1px solid #fff;
+    position: relative;
+}
+.title-icon {
+    width: 100%;
+}
+.new {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100px;
+    height: 50px;
+    background-color: #ff205f;
+    color: #ffffff;
+    font: bold 20px/50px "";
+}
+.game-info-box {
+    position: absolute;
+    top: 50%;
+    padding: 0 20px;
+}
+.game-title {
+    display: block;
+    font: bold 30px "";
+    margin-bottom: 30px;
+}
+.game-coment {
+    display: block;
+    font: bold 20px "";
+    color: #ffffff;
+    margin-bottom: 30px;
+}
+.hot-game-wrap {
+    width: 100%;
+    background-color: #eef2f6;
+    padding-top: 97px;
+    padding-bottom: 97px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.hot-game-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+}
+.hot-game-card-box {
+    display: flex;
+    justify-content: center;
+}
+.hot-game-card-wrap {
+    width: 450px;
+    height: 500px;
+    background-color: blue;
+    border: 1px solid #fff;
+    margin-right: 25px;
+}
+.hot-game-card-wrap:last-child {
+    margin-right: 0;
+}
+.hot-game-img-box {
+    width: 100%;
+    height: 250px;
+    background-color: #f59000;
+}
+.hot-game-info-box {
+    top: 50%;
+    padding: 0 20px;
+}
+.hot-game-title {
+    display: block;
+    font: bold 30px "";
+    margin-bottom: 30px;
+}
+.hot-game-coment {
+    display: block;
+    font: bold 20px "";
+    color: #ffffff;
+    margin-bottom: 30px;
+}
+.recent-review-wrap {
+    width: 100%;
+    padding-top: 97px;
+    padding-bottom: 97px;
+    margin-bottom: 97px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.recent-review-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+}
+.recent-review-card-box {
+    display: flex;
+    justify-content: center;
+}
+.recent-review-card-wrap {
+    width: 350px;
+    height: 550px;
+}
+.recent-review-card {
+    width: 350px;
+    height: 500px;
+    background-color: green;
+    border: 1px solid #fff;
+}
+
+.recent-review-game-title {
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+    color: #111111;
+    font: bold 30px "";
+}
+.recent-review-coment {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #111111;
+    font: bold 20px "";
+}
+.loading-wrap {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loading-box {
+    width: 700px;
+    height: 300px;
 }

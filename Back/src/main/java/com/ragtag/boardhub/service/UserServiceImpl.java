@@ -17,7 +17,7 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final ImgUpload imgUpload;
     private final UserRepository userRepository;
     private final KoreanNickNameGenerator koranNickNameGenerator;

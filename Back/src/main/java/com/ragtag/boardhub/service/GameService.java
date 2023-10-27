@@ -1,6 +1,6 @@
 package com.ragtag.boardhub.service;
 
-import com.ragtag.boardhub.dto.game.*;
+import com.ragtag.boardhub.DTO.game.*;
 
 import java.util.List;
 

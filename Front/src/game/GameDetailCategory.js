@@ -9,7 +9,7 @@ export function GameDetailCategory({ categories }) {
                     width: 170,
                 }}
             >
-                <h4 style={{ fontWeight: "bold" }}>{c.category}</h4>
+                <h4 style={{ fontWeight: "bold" }}>{c.translate}</h4>
             </div>
         );
     });

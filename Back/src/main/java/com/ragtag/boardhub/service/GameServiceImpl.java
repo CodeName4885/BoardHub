@@ -1,7 +1,7 @@
 package com.ragtag.boardhub.service;
 
 import com.ragtag.boardhub.domain.game.*;
-import com.ragtag.boardhub.dto.game.*;
+import com.ragtag.boardhub.DTO.game.*;
 import com.ragtag.boardhub.repository.GameRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +45,6 @@ public class GameServiceImpl implements GameService {
     @Override
     public boolean updateGame(GameForm form) {
         boolean result = gameRepository.updateGame(form.toEntity());
-
         return result;
     }
 
@@ -93,46 +92,56 @@ public class GameServiceImpl implements GameService {
     public void mappingData(GameForm form) {
         // 카테고리 추가
         List<Long> categories = form.getCategories();
-        for (Long categoryId: categories) {
-            int count = gameRepository.checkCatMapping(form.getGameId(), categoryId);
-            if(count == 1) {
-                gameRepository.addCatMapping(form.getGameId(), categoryId);
+        if(categories != null){
+            for (Long categoryId: categories) {
+                int count = gameRepository.checkCatMapping(form.getGameId(), categoryId);
+                if(count == 1) {
+                    gameRepository.addCatMapping(form.getGameId(), categoryId);
+                }
             }
         }
 
         // 게임 방식 추가
         List<Long> mechanics = form.getMechanics();
-        for (Long mechanicId: mechanics) {
-            int count = gameRepository.checkMechMapping(form.getGameId(), mechanicId);
-            if(count == 1) {
-                gameRepository.addMechMapping(form.getGameId(), mechanicId);
+        if(mechanics != null) {
+            for (Long mechanicId : mechanics) {
+                int count = gameRepository.checkMechMapping(form.getGameId(), mechanicId);
+                if (count == 1) {
+                    gameRepository.addMechMapping(form.getGameId(), mechanicId);
+                }
             }
         }
 
         // 룰 디자이너 추가
         List<Long> designers = form.getDesigners();
-        for (Long designerId: designers) {
-            int count = gameRepository.checkDesMapping(form.getGameId(), designerId);
-            if(count == 1) {
-                gameRepository.addDesMapping(form.getGameId(), designerId);
+        if(designers != null) {
+            for (Long designerId: designers) {
+                int count = gameRepository.checkDesMapping(form.getGameId(), designerId);
+                if(count == 1) {
+                    gameRepository.addDesMapping(form.getGameId(), designerId);
+                }
             }
         }
 
         // 게임 악세사리 아티스트 추가
         List<Long> artists = form.getArtists();
-        for (Long artistId: artists) {
-            int count = gameRepository.checkArtiMapping(form.getGameId(), artistId);
-            if(count == 1) {
-                gameRepository.addArtiMapping(form.getGameId(), artistId);
+        if(artists != null) {
+            for (Long artistId : artists) {
+                int count = gameRepository.checkArtiMapping(form.getGameId(), artistId);
+                if (count == 1) {
+                    gameRepository.addArtiMapping(form.getGameId(), artistId);
+                }
             }
         }
 
         // 게임 출판사 추가
         List<Long> publishers = form.getPublishers();
-        for (Long publisherId: publishers) {
-            int count = gameRepository.checkPubMapping(form.getGameId(), publisherId);
-            if(count == 1) {
-                gameRepository.addPubMapping(form.getGameId(), publisherId);
+        if(publishers != null) {
+            for (Long publisherId : publishers) {
+                int count = gameRepository.checkPubMapping(form.getGameId(), publisherId);
+                if (count == 1) {
+                    gameRepository.addPubMapping(form.getGameId(), publisherId);
+                }
             }
         }
 
