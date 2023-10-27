@@ -1,6 +1,6 @@
 package com.ragtag.boardhub.controller;
 
-import com.ragtag.boardhub.dto.game.*;
+import com.ragtag.boardhub.DTO.game.*;
 import com.ragtag.boardhub.service.GameService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

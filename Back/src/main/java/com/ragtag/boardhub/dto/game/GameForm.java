@@ -1,9 +1,7 @@
-package com.ragtag.boardhub.dto.game;
+package com.ragtag.boardhub.DTO.game;
 
 import com.ragtag.boardhub.domain.game.Games;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 

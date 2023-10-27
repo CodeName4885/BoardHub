@@ -1,9 +1,7 @@
 package com.ragtag.boardhub.repository;
 
 import com.ragtag.boardhub.domain.game.*;
-import com.ragtag.boardhub.dto.game.CategoryDTO;
-import com.ragtag.boardhub.dto.game.GameDataDTO;
-import com.ragtag.boardhub.dto.game.GameSortDTO;
+import com.ragtag.boardhub.DTO.game.GameSortDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
