@@ -38,8 +38,13 @@ public class CommunityRepositoryImpl implements CommunityRepository {
     }
 
     @Override
-    public void insertImgName(CommunityImg filename) {
-        communityMapper.insertImgName(filename);
+    public void SaveImgNameWithReview(CommunityImg filename) {
+        communityMapper.InsertImgNameWithReview(filename);
+    }
+
+    @Override
+    public void RequestImageUrl(CommunityImg filename) {
+        communityMapper.RequestImageUrl(filename);
     }
 
 

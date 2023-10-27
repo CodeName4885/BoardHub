@@ -39,9 +39,14 @@ public class CommunityServiceImpl implements CommunityService {
         }
 
     @Override
-    public void SaveImgName(CommunityImg filename) {
+    public void SaveImgNameWithReview(CommunityImg filename) {
         System.out.println("imageURL : " + filename);
-       communityRepository.insertImgName(filename);
+       communityRepository.SaveImgNameWithReview(filename);
+    }
+
+    @Override
+    public void RequestImageUrl(CommunityImg filename) {
+       communityRepository.RequestImageUrl(filename);
     }
 
 

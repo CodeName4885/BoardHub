@@ -45,8 +45,8 @@
             SELECT comm_id_seq.NEXTVAL FROM dual
         </selectKey>
         <![CDATA[
-        INSERT INTO community (comm_id, title, content, count, type, regdate, user_id, category)
-        VALUES (#{comm_id}, #{title}, #{content, jdbcType=VARCHAR}, 1, 3, sysdate, 1, #{category})
+        INSERT INTO community (comm_id, title, content, count, type, regdate, user_id, category, imageurl)
+        VALUES (#{comm_id}, #{title}, #{content, jdbcType=VARCHAR}, 1, 3, sysdate, 1, #{category}, #{imageurl})
         ]]>
     </insert>
 
@@ -60,11 +60,15 @@
         SELECT * FROM community WHERE type = 1
     </select>
 
-    <insert id="insertImgName" parameterType="com.ragtag.boardhub.domain.CommunityImg">
+    <insert id="InsertImgNameWithReview" parameterType="com.ragtag.boardhub.domain.CommunityImg">
         <selectKey keyProperty="img_id" resultType="java.lang.Long" order="BEFORE">
             SELECT img_id_seq.NEXTVAL FROM dual
         </selectKey>
         INSERT INTO img_url (img_id, filename)
         VALUES (#{img_id}, #{filename})
     </insert>
+
+    <select id="RequestImageUrl" resultType="com.ragtag.boardhub.domain.CommunityImg">
+        SELECT filename FROM img_url ORDER BY filename DESC
+    </select>
 </mapper>

@@ -16,6 +16,8 @@ public interface CommunityService {
 
     List<Community> showReview();
 
-    void SaveImgName(CommunityImg filename);
+    void SaveImgNameWithReview(CommunityImg filename);
+
+    void RequestImageUrl(CommunityImg filename);
 }
 

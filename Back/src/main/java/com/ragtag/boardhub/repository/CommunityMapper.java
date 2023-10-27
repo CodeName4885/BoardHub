@@ -24,5 +24,7 @@ public interface CommunityMapper {
 
     List<Community> showReview();
 
-    void insertImgName(CommunityImg filename);
+    void InsertImgNameWithReview(CommunityImg filename);
+
+    void RequestImageUrl(CommunityImg filename);
 }

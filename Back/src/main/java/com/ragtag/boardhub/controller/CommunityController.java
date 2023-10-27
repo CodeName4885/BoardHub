@@ -1,5 +1,4 @@
 package com.ragtag.boardhub.controller;
-import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -10,7 +9,6 @@ import com.ragtag.boardhub.domain.CommunityImg;
 import com.ragtag.boardhub.service.CommunityService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 public class CommunityController {
     private final CommunityService communityService;
-
 
 
     @PostMapping("/uploadFile")
@@ -38,7 +35,7 @@ public class CommunityController {
             // CommunityImg 객체를 생성하여 파일 이름 설정
             CommunityImg img = new CommunityImg();
             img.setFilename(uniqueFileName);
-            communityService.SaveImgName(img); // 이미지 파일 정보 전달
+            communityService.SaveImgNameWithReview(img); // 이미지 파일 정보 전달
 
             return ResponseEntity.ok(imageURL);
         } catch (IOException e) {
@@ -46,7 +43,11 @@ public class CommunityController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("File upload failed.");
         }
     }
-
+    @GetMapping("RequestImageUrl")
+    public ResponseEntity<String> RequestImageUrl(@RequestParam String filename) {
+        String imageUrl = "C:\\ktw/image" + filename;
+        return ResponseEntity.ok(imageUrl);
+    }
 
     // Review 테이블 추가하는 메서드
             @PostMapping("/add/reviews")

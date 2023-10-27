@@ -16,7 +16,4 @@ public class Community {
     private Long category;
     private String imageurl;
 
-    public void setImageUrl(String imageurl) {
-    }
-
 }
