@@ -1,7 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import side from "../static/game-warrior/css/side.module.css";
-import { AiOutlineCaretRight } from "react-icons/ai";
+import { AiOutlineCaretRight, AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 function Side() {
+
+    const [rankingData, setRankingData] = useState([]);
+
+    useEffect(() => {
+        const eventSource = new EventSource('http://localhost:5000/sse');
+
+        eventSource.onmessage = (event) => {
+            const eventData = JSON.parse(event.data);
+            setRankingData(eventData.rankingData);
+        };
+
+        return () => {
+            eventSource.close();
+        };
+    }, []);
+
+
     const [isSideOpen, setIsSideOpen] = useState(false);
 
     const handleSideTogle = () => {
@@ -26,9 +43,37 @@ function Side() {
                     color="#FFE649"
                 />
             </div>
-            <div className={side["side-header"]}></div>
-            <div className={side["side-body"]}></div>
-            <div className={side["side-footer"]}></div>
+            <table className={side['hot-table']}>
+                <thead className={side['hot-thead']}>
+                    <th>순위</th>
+                    <th>이름</th>
+                    <th>평점</th>
+                </thead>
+                <tbody className={side['hot-tbody']}>
+                    {rankingData.map((item, index) => (
+                        <tr key={index}>
+                            <th>{item.rank}<br/>
+                            {item.delta !== 0 ? (
+                            <div>
+                                {item.delta > 0 ? (
+                                <AiOutlineCaretUp className={side['arrow-icon-class-name']} />
+                                ) : (
+                                <AiOutlineCaretDown className={side['arrow-icon-class-name']} />
+                                )}
+                                <span className={side['delta-value']}>
+                                    {item.delta < 0 ? -item.delta : item.delta}
+                                </span>
+                            </div>
+                            ) : (
+                            '-'
+                            )}
+                            </th>
+                            <td>{item.name}</td>
+                            <td>{item.score.toFixed(2)}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </section>
     );
 }
