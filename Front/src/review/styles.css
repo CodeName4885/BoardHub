@@ -1,0 +1,228 @@
+.board-detail-container {
+    max-width: 80%;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    height: 700px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    overflow: auto;
+}
+
+.board-title {
+    font-size: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #333;
+    margin-left: 50px; /* 왼쪽 여백을 조절하여 간격을 설정 */
+}
+
+.board-divider {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 5px 0;
+}
+
+.board-content p{
+    font-size: 24px; /* 내용 크기를 더 크게 조절 */
+    line-height: 1.5;
+    color: #555;
+}
+.board-title-container {
+    display: flex;
+    align-items: center;
+}
+
+.solution-content {
+    margin-left: 250px;
+    margin-top: 30px;
+}
+.add-button {
+    display: inline-block;
+    background-color: #353434; /* 배경색상 설정 */
+    color: #fff; /* 글꼴 색상 설정 */
+    padding: 10px 20px; /* 내부 여백 설정 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 버튼 테두리를 둥글게 만듭니다 */
+    cursor: pointer; /* 커서 스타일 변경 */
+    font-size: 16px; /* 글꼴 크기 설정 */
+    margin-left: 1300px;
+    margin-bottom: 30px;
+    margin-top: -40px;
+}
+.add-Title {
+    width: 80%;
+    border-radius: 5px;
+    height: 50px;
+    margin-bottom: 30px;
+}
+.add-select {
+    margin-top: 100px;
+    width: 30%;
+    padding: 10px;
+    borderRadius: 5px;
+    border: 1px solid #ccc;
+    backgroundColor: #f5f5f5;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 8px;
+}
+.cancle-button {
+    background-color: #353434; /* 배경색상 설정 */
+    color: #fff; /* 글꼴 색상 설정 */
+    padding: 10px 20px; /* 내부 여백 설정 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 버튼 테두리를 둥글게 만듭니다 */
+    cursor: pointer; /* 커서 스타일 변경 */
+    font-size: 16px; /* 글꼴 크기 설정 */
+    margin-left: 50px;
+}
+.return-list {
+    background-color: #353434; /* 배경색상 설정 */
+    margin-bottom: 30px;
+    color: #fff; /* 글꼴 색상 설정 */
+    padding: 10px 20px; /* 내부 여백 설정 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 버튼 테두리를 둥글게 만듭니다 */
+    cursor: pointer; /* 커서 스타일 변경 */
+    font-size: 16px; /* 글꼴 크기 설정 */
+    margin-left: 1700px;
+}
+.date-reg {
+    margin-top: 30px;
+}
+.title-name {
+    font-size: 40px; /* 원하는 크기로 조절 */
+    color: #333; /* 글씨 색상 변경 */
+    font-weight: bold; /* 글씨 두껍게 표시 */
+    text-transform: capitalize; /* 글씨 대문자로 변환 (선택 사항) */
+}
+.category-box {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    color: #333;
+}
+.row-tr{
+    margin-bottom: 10px; /* 원하는 간격 크기 설정 */
+}
+.comment {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.reply-user-id {
+    margin-right: 10px;
+}
+
+.reply-content {
+    flex-grow: 1;
+}
+
+.reply-reg-date {
+    margin-left: 80px;
+}
+.comment-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0; /* 위아래 간격 조정 */
+}
+
+.reply-user-id {
+    margin-right: 10px; /* 사용자 ID와 내용 사이의 간격 조정 */
+}
+
+.reply-content {
+    flex-grow: 1; /* 내용이 남은 공간을 모두 채우도록 함 */
+}
+
+.reply-reg-date {
+    margin-left: 10px; /* 내용과 날짜 사이의 간격 조정 */
+}
+.board-detail-reply-container {
+    max-width: 60%;
+    height: 150px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-left: 450px;
+    margin-bottom: 400px;
+}
+.board-detail-reply-data {
+
+    max-width: 60%;
+    height: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-left: 250px;
+    margin-bottom: 300px;
+    margin-top: 50px;
+}
+
+.reply-add{
+    width: 80%;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 50px;
+}
+.add-reply-button {
+    position: relative;
+    top: -40px;
+    display: inline-block;
+    background-color: #353434; /* 배경색상 설정 */
+    color: #fff; /* 글꼴 색상 설정 */
+    padding: 10px 20px; /* 내부 여백 설정 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 버튼 테두리를 둥글게 만듭니다 */
+    cursor: pointer; /* 커서 스타일 변경 */
+    font-size: 16px; /* 글꼴 크기 설정 */
+    margin-left: 1200px;
+}
+.Footer-detailpage-bottom {
+    position: fixed;
+    margin-top: 400px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #333; /* 원하는 배경색으로 변경하세요 */
+    color: white; /* 원하는 글자색으로 변경하세요 */
+    text-align: center;
+    padding: 10px; /* 원하는 패딩값으로 변경하세요 */
+}
+.like-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px; /* 버튼을 둥글게 만듭니다. */
+    background-color: #3498db; /* 배경색상 설정 */
+    color: #fff; /* 글꼴 색상 설정 */
+    font-size: 16px; /* 글꼴 크기 설정 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    transition: background-color 0.3s, transform 0.1s; /* 호버 효과 설정 */
+    cursor: pointer;
+}
+
+.like-button:hover {
+    background-color: #0074a9; /* 호버 시 배경색 변경 */
+    transform: scale(1.05); /* 호버 시 약간 확대됨 */
+}
+.button-heart {
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    margin-top: 400px;
+    margin-left: 1350px;
+}

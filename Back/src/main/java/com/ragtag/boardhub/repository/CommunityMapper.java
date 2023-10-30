@@ -23,6 +23,28 @@ public interface CommunityMapper {
 
 
     List<Community> showReview();
+    List<Community> showTrade();
 
-    void insertImgName(CommunityImg filename);
+    List<Community> showSolution();
+
+    List<Community> showMate();
+
+    void InsertImgNameWithReview(CommunityImg filename);
+
+    void RequestImageUrl(CommunityImg filename);
+
+
+    Community showReviewDetail(Long commId);
+
+    Community showTradeDetail(Long commId);
+
+    Community showSolutionDetail(Long commId);
+
+    Community showMateDetail(Long commId);
+    void likeReview(Long commId);
+
+    void addCommunityWithMate(Community community);
+
+    void addMate(Community community);
+
 }

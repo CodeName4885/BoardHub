@@ -14,8 +14,8 @@ public class CommunityRepositoryImpl implements CommunityRepository {
     @Override
     public void addCommunityWithReview(Community community) {
 
-     communityMapper.addCommunityWithReview(community);
-     communityMapper.addReview(community);
+        communityMapper.addCommunityWithReview(community);
+        communityMapper.addReview(community);
     }
 
     @Override
@@ -33,13 +33,64 @@ public class CommunityRepositoryImpl implements CommunityRepository {
     }
 
     @Override
+    public void addCommunityWithMate(Community community) {
+        communityMapper.addCommunityWithMate(community);
+        communityMapper.addMate(community);
+    }
+
+    @Override
     public List<Community> showReview() {
         return communityMapper.showReview();
     }
 
     @Override
-    public void insertImgName(CommunityImg filename) {
-        communityMapper.insertImgName(filename);
+    public List<Community> showTrade() {
+        return communityMapper.showTrade();
+    }
+
+    @Override
+    public List<Community> showSolution() {
+        return communityMapper.showSolution();
+    }
+
+    @Override
+    public List<Community> showMate() {
+        return communityMapper.showMate();
+    }
+
+    @Override
+    public void SaveImgNameWithReview(CommunityImg filename) {
+        communityMapper.InsertImgNameWithReview(filename);
+    }
+
+    @Override
+    public void RequestImageUrl(CommunityImg filename) {
+        communityMapper.RequestImageUrl(filename);
+    }
+
+    @Override
+    public Community showReviewDetail(Long comm_id) {
+        return communityMapper.showReviewDetail(comm_id);
+    }
+
+    @Override
+    public Community showTradeDetail(Long comm_id) {
+        return communityMapper.showTradeDetail(comm_id);
+    }
+
+    @Override
+    public Community showSolutionDetail(Long comm_id) {
+        return communityMapper.showSolutionDetail(comm_id);
+    }
+
+    @Override
+    public Community showMateDetail(Long comm_id) {
+        return communityMapper.showMateDetail(comm_id);
+    }
+
+    @Override
+    public void likeReview(Long comm_id) {
+        communityMapper.likeReview(comm_id);
     }
 
 

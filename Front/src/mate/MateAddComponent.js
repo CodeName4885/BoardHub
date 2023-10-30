@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Editor } from '../upload/Editor';
 import { useNavigate } from "react-router-dom";
-import "./styles.css"
-export function ReviewAddComponent() {
+import "../review/styles.css"
+export function MateAddComponent() {
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('1');
     const [editorContent, setEditorContent] = useState(''); // 에디터 내용을 저장할 상태
@@ -10,7 +10,7 @@ export function ReviewAddComponent() {
 
 
     const cancleButton = () => {
-        navigate("/review/list");
+        navigate("/mate/list");
     }
 
     // 에디터 내용 변경 핸들러
@@ -28,7 +28,7 @@ export function ReviewAddComponent() {
 
         try {
             // 서버에 이미지 경로가 포함된 내용을 전송
-            const response = await fetch('http://localhost:8080/add/reviews', {
+            const response = await fetch('http://localhost:8080/add/mate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ export function ReviewAddComponent() {
 
             // 서버 응답 처리 코드 추가
             if (response.ok) {
-                navigate("/review/list");
+                navigate("/mate/list");
                 console.log('Review data added successfully');
             } else {
                 console.error('Error:', response.status, response.statusText);
@@ -56,11 +56,11 @@ export function ReviewAddComponent() {
         <form >
             <p className="solution-content">제목</p>
             <input className="add-Title"
-                type="text"
-                placeholder="제목"
-                name="title"
-                value={title}
-                onChange={(event) => setTitle(event.target.value)}
+                   type="text"
+                   placeholder="제목"
+                   name="title"
+                   value={title}
+                   onChange={(event) => setTitle(event.target.value)}
             />
             <Editor
                 value={editorContent} // 에디터 내용을 상태로 전달
@@ -71,9 +71,22 @@ export function ReviewAddComponent() {
                     value={category}
                     onChange={(event) => setCategory(event.target.value)}
             >
-                <option value="1">리뷰</option>
-                <option value="2">프리뷰</option>
-                <option value="3">모임</option>
+                <option value="1">서울</option>
+                <option value="2">경기</option>
+                <option value="3">부산</option>
+                <option value="4">대구</option>
+                <option value="5">인천</option>
+                <option value="6">대전</option>
+                <option value="7">광주</option>
+                <option value="8">울산</option>
+                <option value="9">세종</option>
+                <option value="10">충청북도</option>
+                <option value="11">충청남도</option>
+                <option value="12">전라북도</option>
+                <option value="13">전라남도</option>
+                <option value="14">경상북도</option>
+                <option value="15">경상남도</option>
+                <option value="16">제주</option>
             </select>
             <button className="add-button" type="submit" onClick={handleSubmit} style={{ marginTop: '50px' }}>Submit</button>
             <button className="cancle-button" type="button" onClick={cancleButton}>cancle</button>

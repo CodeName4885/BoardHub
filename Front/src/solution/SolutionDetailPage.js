@@ -7,7 +7,7 @@ import "../static/game-warrior/css/animate.css";
 import "../static/game-warrior/css/bootstrap.min.css";
 import "../static/game-warrior/css/style.css";
 import { useNavigate } from "react-router-dom";
-import "./styles.css";
+import "../review/styles.css";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 function formatDate(rawDate) {
@@ -18,7 +18,7 @@ function formatDate(rawDate) {
     return `${year}.${month}.${day}`;
 }
 
-export function ReviewDetailPage() {
+export function SolutionDetailPage() {
     const [comment, setComment] = useState('');
     const { comm_id } = useParams();
     const [user_id, setUser_id] = useState('1');
@@ -47,7 +47,7 @@ export function ReviewDetailPage() {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/show/reviewDetail/${comm_id}`)
+        axios.get(`http://localhost:8080/show/solutionDetail/${comm_id}`)
             .then((res) => {
                 console.log("Response: ", res);
                 setReview(res.data);
@@ -69,7 +69,7 @@ export function ReviewDetailPage() {
     }, [comm_id]);
 
     const ReviewList = () => {
-        navigate("/review/list");
+        navigate("/solution/list");
     };
 
     const handleCommentChange = (e) => {
@@ -152,7 +152,7 @@ export function ReviewDetailPage() {
                     <button type="submit" className="add-reply-button">작성</button>
                 </form>
                 <div className="board-detail-reply-data">
-                                <p className="reply-ex">댓글 목록</p>
+                    <p className="reply-ex">댓글 목록</p>
                     {comments.map((comment, index) => (
                         <div key={index} className="comment">
                             <div className="comment-info">
@@ -162,14 +162,14 @@ export function ReviewDetailPage() {
                             </div>
                             <hr className="board-divider" />
                         </div>
-                      ))}
+                    ))}
                 </div>
             </div>
-                <button className="return-list" onClick={ReviewList}>
-                    돌아가기
-                </button>
+            <button className="return-list" onClick={ReviewList}>
+                돌아가기
+            </button>
             <Footer
-            className="Footer-detailpage-bottom"
+                className="Footer-detailpage-bottom"
             />
         </>
     );
