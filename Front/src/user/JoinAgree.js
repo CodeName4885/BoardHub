@@ -3,11 +3,13 @@ import { useState } from "react";
 import TermModal from "./TermModal";
 import UserTermModal from "./UserTermModal";
 import joincss from "../static/game-warrior/css/join.module.css";
+import { useNavigate } from "react-router-dom";
 
 function JoinAgree() {
     const [modalOpen1, setModalOpen1] = useState(false);
     const [sectionDisplay, setSectionDisplay] = useState("block");
     const [bgc, setBgc] = useState("#ffffff");
+    const navigate = useNavigate();
 
     const showModal1 = () => {
         setModalOpen1(true);
@@ -33,7 +35,7 @@ function JoinAgree() {
 
     const isButtonDisabled = !(serviceChecked && userinfoChecked);
     const entry = () => {
-        window.location.href = "http://localhost:3000/entry-info";
+        navigate("/entry-info");
     };
     return (
         <>

@@ -7,7 +7,8 @@ import {
     fetchByGameId,
     fetchCategoriesByGameId,
 } from "./repositories/GameRepository";
-import { GameDetailCompare } from "./GameDetailCompare";
+import { GameCommentComponent } from "./GameCommentComponent";
+import { Button as Btn } from "antd";
 
 export function GameDetailComponent() {
     const params = useParams();
@@ -16,9 +17,6 @@ export function GameDetailComponent() {
     const [loading, setLoading] = useState(true);
     const [categories, setCategories] = useState();
     const navigate = useNavigate();
-
-    console.log(params);
-    console.log(game);
 
     useEffect(() => {
         getGame()
@@ -59,28 +57,28 @@ export function GameDetailComponent() {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="d-flex justify-content-end align-items-center">
-                            <Button
+                            <Btn
                                 className="mr-2"
                                 onClick={() => navigate("/game/list")}
+                                type="link"
                             >
                                 목록
-                            </Button>
-                            <Button
+                            </Btn>
+                            <Btn
                                 onClick={() => navigate(`/game/edit/${gameId}`)}
+                                type="primary"
                             >
                                 수정요청
-                            </Button>
+                            </Btn>
                         </div>
-                        <div className="review-item row">
+                        <div className="review-item row mb-1">
                             <GameDetailItem game={game} />
                         </div>
                         <div className="col-md-12 row">
                             <GameDetailCategory categories={categories} />
-
-                            {/* 게임 난이도 비교
-                            <div className="col-md-12">
-                                <GameDetailCompare game={game} />
-                            </div> */}
+                        </div>
+                        <div>
+                            <GameCommentComponent />
                         </div>
                     </div>
                 </div>

@@ -130,6 +130,13 @@
         values(#{publisherId}, #{gameId})
     </insert>
 
+    <insert id="saveGameComment">
+        <selectKey order="BEFORE" resultType="long" keyProperty="comment_id"> 
+            select comments_seq.nextval from dual
+        </selectKey>
+        insert into comments(comment_id, game_id, user_id, content)
+        values(#{comment_id}, #{game_id}, #{user_id}, #{content})
+    </insert>
 
 
 

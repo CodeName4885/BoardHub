@@ -68,4 +68,6 @@ public interface GameMapper {
     void addPubMapping(@Param("gameId") Long gameId,
                        @Param("publisherId") Long publisherId);
 
+    void saveGameComment(Comments comment);
+
 }

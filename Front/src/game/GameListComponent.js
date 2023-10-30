@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Form, Tab, Tabs } from "react-bootstrap";
 import { fetchAllCategories, fetchList } from "./repositories/GameRepository";
 import { GameListItemComponent } from "./GameListItemComponent";
+import { List, Pagination, Select } from "antd";
 
 export function GameListComponent() {
     const [games, setGames] = useState([]);
@@ -41,9 +42,9 @@ export function GameListComponent() {
     }
 
     function selectChange(v) {
-        const value = v.target.value;
-        setCategory(value);
-        setSort({ tab: tab, category: value });
+        if (v === 0) return;
+        setCategory(v);
+        setSort({ tab: tab, category: v });
     }
 
     if (loading) {
@@ -62,30 +63,50 @@ export function GameListComponent() {
                         <Tab eventKey="1" title="베스트 50"></Tab>
                         <Tab eventKey="2" title="최신순"></Tab>
                         <Tab eventKey="3" title="카테고리">
-                            <Form.Select onChange={selectChange}>
-                                {cateList.map((cat) => {
-                                    return (
-                                        <option value={cat.categoryId}>
-                                            {cat.category} ({cat.translate})
-                                        </option>
-                                    );
+                            <Select
+                                placeholder="카테고리 선택"
+                                style={{ width: "100%", maxWidth: 500 }}
+                                onChange={selectChange}
+                                options={cateList.map((cat) => {
+                                    return {
+                                        value: cat.categoryId,
+                                        label: `${cat.category} (${cat.translate})`,
+                                    };
                                 })}
-                            </Form.Select>
+                            />
                         </Tab>
                     </Tabs>
 
                     <div className="row">
-                        {games ? (
-                            games.map((item) => (
+                        {/* {games.map((item) => (
+                            
+                        ))} */}
+                    </div>
+                    <List
+                        itemLayout="horizontal"
+                        grid={{
+                            column: 4,
+                        }}
+                        style={{ marginTop: 10 }}
+                        size="large"
+                        pagination={{
+                            pageSize: 12,
+                        }}
+                        dataSource={games}
+                        renderItem={(item) => (
+                            <List.Item
+                                key={item.gameId}
+                                style={{
+                                    padding: 10,
+                                }}
+                            >
                                 <GameListItemComponent
                                     key={item.gameId}
                                     games={item}
                                 />
-                            ))
-                        ) : (
-                            <></>
+                            </List.Item>
                         )}
-                    </div>
+                    />
                 </div>
             </section>
         </>

@@ -57,4 +57,6 @@ public interface GameRepository {
 
     void addPubMapping(Long gameId, Long publisherId);
 
+    void saveGameComment(Comments comment);
+
 }

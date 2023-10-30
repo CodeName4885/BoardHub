@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Badge, Button, Form } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
     createGame,
     editGame,
@@ -15,6 +15,7 @@ export function GameFormComponent() {
     const [values, setValues] = useState({
         gameId: gameId,
     });
+    const navigate = useNavigate();
 
     const [dataOptions, setDataOptions] = useState();
     const [catButtons, setCatButtons] = useState([]);
@@ -292,6 +293,11 @@ export function GameFormComponent() {
     return (
         <section className="spad">
             <div className="container">
+                <div className="d-flex justify-content-end">
+                    <Button onClick={() => navigate(`/game/detail/${gameId}`)}>
+                        취소
+                    </Button>
+                </div>
                 <form onSubmit={applyEdit}>
                     <div className="row">
                         <div className="row col-md-12 m-4">
@@ -439,8 +445,11 @@ export function GameFormComponent() {
                             <div className="col-md-2 row align-items-center">
                                 <h5>게임 카테고리</h5>
                             </div>
-                            <div className="col-md-5">
-                                <Form.Select onChange={onCatSelectChange}>
+                            <div className="col-md-6">
+                                <Form.Select
+                                    onChange={onCatSelectChange}
+                                    style={{ maxWidth: 550, width: "100%" }}
+                                >
                                     <option>---</option>
                                     {dataOptions && dataOptions.catList ? (
                                         dataOptions.catList.map((cat) => {
@@ -494,8 +503,11 @@ export function GameFormComponent() {
                             <div className="col-md-2 row align-items-center">
                                 <h5>게임 진행방식</h5>
                             </div>
-                            <div className="col-md-5">
-                                <Form.Select onChange={onMechSelectChange}>
+                            <div className="col-md-6">
+                                <Form.Select
+                                    onChange={onMechSelectChange}
+                                    style={{ maxWidth: 550, width: "100%" }}
+                                >
                                     <option>---</option>
                                     {dataOptions && dataOptions.mechList ? (
                                         dataOptions.mechList.map((mech) => {
@@ -549,8 +561,11 @@ export function GameFormComponent() {
                             <div className="col-md-2 row align-items-center">
                                 <h5>룰 디자이너</h5>
                             </div>
-                            <div className="col-md-5">
-                                <Form.Select onChange={onDesSelectChange}>
+                            <div className="col-md-6">
+                                <Form.Select
+                                    onChange={onDesSelectChange}
+                                    style={{ maxWidth: 550, width: "100%" }}
+                                >
                                     <option>---</option>
                                     {dataOptions && dataOptions.desList ? (
                                         dataOptions.desList.map((des) => {
@@ -604,8 +619,11 @@ export function GameFormComponent() {
                             <div className="col-md-2 row align-items-center">
                                 <h5>게임 아티스트</h5>
                             </div>
-                            <div className="col-md-5">
-                                <Form.Select onChange={onArtiSelectChange}>
+                            <div className="col-md-6">
+                                <Form.Select
+                                    onChange={onArtiSelectChange}
+                                    style={{ maxWidth: 550, width: "100%" }}
+                                >
                                     <option>---</option>
                                     {dataOptions && dataOptions.artiList ? (
                                         dataOptions.artiList.map((arti) => {
@@ -659,8 +677,11 @@ export function GameFormComponent() {
                             <div className="col-md-2 row align-items-center">
                                 <h5>출판사</h5>
                             </div>
-                            <div className="col-md-5">
-                                <Form.Select onChange={onPubSelectChange}>
+                            <div className="col-md-6">
+                                <Form.Select
+                                    onChange={onPubSelectChange}
+                                    style={{ maxWidth: 550, width: "100%" }}
+                                >
                                     <option>---</option>
                                     {dataOptions && dataOptions.pubList ? (
                                         dataOptions.pubList.map((pub) => {
