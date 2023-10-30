@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ragtag.boardhub.repository.CommunityMapper">
+    <!-- COMMUNITY 테이블에 데이터 추가 -->
+    <insert id="addCommunityWithReview" parameterType="com.ragtag.boardhub.domain.Community">
+        <selectKey keyProperty="comm_id" resultType="java.lang.Long" order="BEFORE">
+            SELECT comm_id_seq.NEXTVAL FROM dual
+        </selectKey>
+
+        <![CDATA[
+        INSERT INTO community (comm_id, title, content, count, type, regdate, user_id, category)
+        VALUES (#{comm_id}, #{title}, #{content, jdbcType=VARCHAR}, 1, 1, sysdate, 1, #{category})
+        ]]>
+    </insert>
+
+    <!-- 리뷰 테이블에 카테고리 추가 -->
+    <insert id="addReview" parameterType="com.ragtag.boardhub.domain.Review">
+        INSERT INTO review (comm_id, category)
+        VALUES (#{comm_id}, #{category})
+    </insert>
+
+        <!-- COMMUNITY 테이블에 데이터 추가 -->
+    <insert id="addCommunityWithTrade" parameterType="com.ragtag.boardhub.domain.Community">
+        <selectKey keyProperty="comm_id" resultType="java.lang.Long" order="BEFORE">
+            SELECT comm_id_seq.NEXTVAL FROM dual
+        </selectKey>
+        <![CDATA[
+        INSERT INTO community (comm_id, title, content, count, type, regdate, user_id, category)
+        VALUES (#{comm_id}, #{title}, #{content, jdbcType=VARCHAR}, 1, 2, sysdate, 1, #{category})
+        ]]>
+    </insert>
+
+
+    <!-- 중고거래 테이블에 카테고리 추가 -->
+   <insert id="addTrade" parameterType="com.ragtag.boardhub.domain.Trade">
+    INSERT INTO trade (comm_id, category)
+    VALUES (#{comm_id}, #{category})
+   </insert>
+
+            <!-- COMMUNITY 테이블에 데이터 추가 -->
+        <insert id="addCommunityWithSolution" parameterType="com.ragtag.boardhub.domain.Community">
+        <selectKey keyProperty="comm_id" resultType="java.lang.Long" order="BEFORE">
+            SELECT comm_id_seq.NEXTVAL FROM dual
+        </selectKey>
+        <![CDATA[
+        INSERT INTO community (comm_id, title, content, count, type, regdate, user_id, category)
+        VALUES (#{comm_id}, #{title}, #{content, jdbcType=VARCHAR}, 1, 3, sysdate, 1, #{category})
+        ]]>
+    </insert>
+
+    <!-- 공략 테이블에 카테고리 추가 -->
+   <insert id="addSolution" parameterType="com.ragtag.boardhub.domain.Solution">
+    INSERT INTO solution (comm_id, category)
+    VALUES (#{comm_id}, #{category})
+   </insert>
+
+    <select id="showReview" resultType="com.ragtag.boardhub.domain.Community">
+        SELECT * FROM community WHERE type = 1
+    </select>
+
+    <insert id="insertImgName" parameterType="com.ragtag.boardhub.domain.CommunityImg">
+        <selectKey keyProperty="img_id" resultType="java.lang.Long" order="BEFORE">
+            SELECT img_id_seq.NEXTVAL FROM dual
+        </selectKey>
+        INSERT INTO img_url (img_id, filename)
+        VALUES (#{img_id}, #{filename})
+    </insert>
+</mapper>

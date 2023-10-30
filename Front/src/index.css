@@ -1,0 +1,16 @@
+@font-face {
+    font-family: "SpoqaHanSansNeo-Medium";
+    font-weight: normal;
+    src: url("./static/game-warrior/fonts/SpoqaHanSansNeo-Medium.ttf");
+}
+body {
+    margin: 0;
+    font-family: "SpoqaHanSansNeo-Medium";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}

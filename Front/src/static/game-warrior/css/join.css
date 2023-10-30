@@ -1,0 +1,348 @@
+@charset "UTF-8";
+
+li{
+  list-style: none;
+}
+
+.body{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: first baseline;
+}
+.wrap{
+  width: 500px;
+  height: auto; 
+}
+.logo{
+  margin-left: 150px;
+}
+.title, .coment{
+  text-align: center;
+}
+.join-email, .agree-after-btn{
+  width: 500px;
+  height: 50px;
+  margin: 40px 0 40px 0;
+  background-color: #0B1761;
+  font: bold 18px "";
+  color: #FFE649;
+  border:none; 
+  box-shadow:none; 
+  border-radius:5px; 
+  padding:0; 
+  overflow:visible; 
+  cursor:pointer
+}
+
+.middle-line::after{
+  content: " ";
+  display: inline-block;
+  border-bottom: 1px solid #878787;
+  width: 216px;
+  margin: 0 0 4px 20px;
+}
+.middle-line::before{
+  content: " ";
+  display: inline-block;
+  border-bottom: 1px solid #878787;
+  width: 216px;
+  margin: 0 20px 4px 0;
+}
+.social-list{
+  width: 500px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+.social-list ul{
+  
+}
+.social-list ul li{
+  float: left;
+  margin: 20px;
+}
+
+.all-ck{
+  width: 500px;
+  height: auto;
+  border-bottom: 2px solid #878787;
+  display: flex;
+  justify-content: start;
+}
+.service-agree, .userinfo-collect-agree{
+  width: 500px;
+  height: auto;
+  border-bottom: 2px solid #EAEAEA;
+  display: flex;
+  justify-content: start;
+  position: relative;
+}
+.agree-ckbox{
+  accent-color: #0B1761;
+  zoom: 2;
+}
+
+.cktext-box{
+  height: 70px;
+  margin-left: 20px;
+  display: inline-block;
+}
+.cktext{
+  font: bold 18px/70px "";
+}
+.view-terms{
+  width: 30px;
+  display: inline-block;
+}
+.termsbtn{
+  background: inherit ; 
+  border:none; 
+  box-shadow:none; 
+  border-radius:0; 
+  padding:0; 
+  overflow:visible; 
+  cursor:pointer;
+  position: absolute;
+  right: 10px;
+  top: 0;
+  font: bold 25px/70px "";
+}
+
+.agree-after-btn{
+  width: 500px;
+  height: 50px;
+  margin: 40px 0 40px 0;
+  background-color: #0B1761;
+  font: bold 18px "";
+  color: #FFE649;
+  border:none; 
+  box-shadow:none; 
+  border-radius:5px; 
+  padding:0; 
+  overflow:visible; 
+  cursor:pointer
+}
+.agree-after-btn.disabled{
+  width: 500px;
+  height: 50px;
+  margin: 40px 0 40px 0;
+  background-color: #878787;
+  font: bold 18px "";
+  color: #EAEAEA;
+  border:none; 
+  box-shadow:none; 
+  border-radius:5px; 
+  padding:0; 
+  overflow:visible; 
+  cursor: default;
+}
+
+.modal-wrap{
+  width: 700px;
+  height: 800px;
+  border: 1px solid #EAEAEA;
+  background-color: #ffffff;
+  border-radius: 10px;
+  z-index: 100;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.modal-closebtn{
+  background: inherit ; 
+  border:none; 
+  box-shadow:none; 
+  border-radius:0; 
+  padding:0; 
+  overflow:visible; 
+  cursor:pointer;
+  font: bold 25px/70px "";
+  position: absolute;
+  top: 0;
+  right: 30px;
+}
+
+.modal-title-content{
+  height: 50px;
+  margin: 20px 0px 0px 20px;
+}
+.modal-body{
+  width: 650px;
+  height: 650px;
+  margin-left: 20px;
+  overflow: auto;
+}
+.checkbtn{
+  width: 500px;
+  height: 50px;
+  margin-left: 75px;
+  margin-top: 20px;
+  background-color: #0B1761;
+  font: bold 18px "";
+  color: #FFE649;
+  border:none; 
+  box-shadow:none; 
+  border-radius:5px; 
+  padding:0; 
+  overflow:visible; 
+  cursor:pointer
+}
+.entry-wrap{
+  width: 500px;
+  height: auto;
+}
+.label-box{
+  width: 500px;
+  margin: 40px 0 0 0;
+}
+.email-box{
+  width: 500px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.email-input-box{
+  width: 370px;
+  height: 54px;
+  border: 1px solid #EAEAEA;
+  background-color: #EAEAEA;
+  border-radius: 5px;
+  padding-left: 20px;
+  padding-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.email-input-box:focus-within{
+  border: 2px solid #878787;
+}
+.email-input-box input{
+  width: 90%;
+  height: 90%;
+  border: none;
+  background-color: #EAEAEA;
+}
+.send-email-box{
+  width: 150px;
+  height: 54px;
+  margin-left: 10px;
+}
+.send-email-box button{
+  width: 100%;
+  height: 100%;
+  background-color: #0B1761;
+  font: bold 18px "";
+  color: #FFE649;
+  border:none; 
+  box-shadow:none; 
+  border-radius:5px; 
+  padding:0; 
+  overflow:visible; 
+  cursor:pointer
+}
+.send-email-btn.disabled{
+  width: 100%;
+  height: 100%;
+  background-color: #878787;
+  font: bold 18px "";
+  color: #EAEAEA;
+  border:none; 
+  box-shadow:none; 
+  border-radius:5px; 
+  padding:0; 
+  overflow:visible; 
+  cursor: default;
+}
+.profile-box{
+  width: 500px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.profile-coment{
+  display: inline-block;
+}
+.same-input-box{
+  width: 600px;
+  height: 54px;
+  border: 1px solid #EAEAEA;
+  background-color: #EAEAEA;
+  border-radius: 5px;
+  padding-left: 20px;
+  padding-top: 5px;
+}
+.same-input-box:focus-within{
+  border: 2px solid #878787;
+}
+.same-input-box input{
+  width: 90%;
+  height: 90%;
+  border: none;
+  background-color: #EAEAEA;
+}
+.send-btn-box{
+  width: 500px;
+  height: 54px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.send-btn-box button, .mailconfirm-btn{
+  width: 100%;
+  height: 100%;
+  background-color: #0B1761;
+  font: bold 18px "";
+  color: #FFE649;
+  border:none; 
+  box-shadow:none; 
+  border-radius:5px; 
+  padding:0; 
+  overflow:visible; 
+  cursor:pointer
+}
+button{
+  transition:all 0.3s ease-in-out;
+}
+button:hover{
+  background-color: #20329B;
+}
+.send-btn.disabled, .mailconfirm-btn.disabled{
+  width: 100%;
+  height: 100%;
+  background-color: #878787;
+  font: bold 18px "";
+  color: #EAEAEA;
+  border:none; 
+  box-shadow:none; 
+  border-radius:5px; 
+  padding:0; 
+  overflow:visible; 
+  cursor: default;
+}
+.username-input.disabled{
+  background-color: #878787;
+}
+.send-username-btn.disabled{
+  background-color: #878787;
+  color: #EAEAEA;
+}
+.email-input-box.disabled{
+  background-color: #878787;
+}
+.mailconfirm-input.disabled{
+  background-color: #878787;
+}
+.timer{
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+.error{
+  border: 2px solid red;
+}
