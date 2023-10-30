@@ -28,5 +28,5 @@ public interface UserRepository {
 
     int getSocailUser(String email);
 
-    void addSocailUser(SocailDTO kakaouserinfo);
+    int addSocailUser(SocailDTO kakaouserinfo);
 }

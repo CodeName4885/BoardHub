@@ -38,6 +38,7 @@ const Kakao = () => {
                         Call("/kakaouserinfoadd", "POST", data)
                             .then((result) => {
                                 console.log("kakao user info add = ", result);
+                                sessionStorage.setItem("USER_ID", result);
                                 window.location.href = "/";
                             })
                             .catch((error) => {

@@ -62,6 +62,7 @@ export function login(users){
         const expiratedTime = response.expiratedTime;
         localStorage.setItem("ACCESS_TOKEN", token);
         localStorage.setItem("EXPIRATEDTIME", expiratedTime);
+        sessionStorage.setItem("USER_ID", response.user_id);
         //token이 존재하면 main으로 이동
         window.location.href="/";
       }
@@ -116,6 +117,8 @@ export function logout(){
   localStorage.removeItem("ACCESS_TOKEN", null);
   sessionStorage.removeItem("TOKEN", null);
   localStorage.removeItem("EXPIRATEDTIME", null);
+  sessionStorage.removeItem("USER_ID", null);
+  sessionStorage.removeItem("USER_EMAIL", null);
   window.location.href="/login";
 }
 

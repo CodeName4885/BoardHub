@@ -33,5 +33,5 @@ public interface UserService {
 
     Boolean getSocailUser(String email);
 
-    void addSocailUser(SocailDTO kakaouserinfo);
+    int addSocailUser(SocailDTO kakaouserinfo);
 }

@@ -107,6 +107,7 @@ public class GameController {
 
     @PostMapping("comment/{id}")
     public ResponseEntity<Review> postGameComment(@PathVariable("id") Long gameId, @RequestBody GameComment form) {
+        log.info("formdata = {}", form);
         gameService.saveGameComment(form);
         return null;
     }

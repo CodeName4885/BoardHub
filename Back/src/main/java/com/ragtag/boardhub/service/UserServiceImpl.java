@@ -141,7 +141,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addSocailUser(SocailDTO kakaouserinfo) {
-        userRepository.addSocailUser(kakaouserinfo);
+    public int addSocailUser(SocailDTO kakaouserinfo) {
+        return userRepository.addSocailUser(kakaouserinfo);
     }
 }
