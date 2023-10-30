@@ -27,4 +27,6 @@ public interface GameService {
 
     void mappingData(GameForm form);
 
+    void saveGameComment(GameComment comment)
+
 }

@@ -35,7 +35,7 @@ export function Header() {
                 ) : (
                     <div className="user-panel">
                         <a href="/Login">로그인</a> /{" "}
-                        <a href="join">회원가입</a>
+                        <a href="/join">회원가입</a>
                     </div>
                 )}
                 <div className="nav-switch">

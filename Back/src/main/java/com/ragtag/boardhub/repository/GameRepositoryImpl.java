@@ -139,4 +139,10 @@ public class GameRepositoryImpl implements GameRepository {
         gameMapper.addPubMapping(gameId, publisherId);
     }
 
+
+    @Override
+    public void saveGameComment(Comments comment) {
+        gameMapper.saveGameComment(comment);
+    }
+
 }

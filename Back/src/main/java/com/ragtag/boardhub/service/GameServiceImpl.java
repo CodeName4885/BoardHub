@@ -147,5 +147,10 @@ public class GameServiceImpl implements GameService {
 
     }
 
+    @Override
+    public void saveGameComment(GameComment comment) {
+        gameRepository(comment.toEntity());
+    }
+
 
 }

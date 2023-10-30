@@ -9,7 +9,7 @@ export function GameListItemComponent(item) {
 
     return (
         <>
-            <div className="col-lg-3 col-md-6 mt-4">
+            <div>
                 <div className="review-item">
                     <div
                         className="review-cover"

@@ -1,4 +1,9 @@
 import { Button } from "react-bootstrap";
+import { Button as Btn, Modal, message, Popover, Flex } from "antd";
+import { useState } from "react";
+import TextArea from "antd/es/input/TextArea";
+import { saveGameComment } from "./repositories/GameRepository";
+import { Link, useNavigate } from "react-router-dom";
 
 export function GameDetailItem({ game }) {
     const gameInfoStyle = {
@@ -20,15 +25,9 @@ export function GameDetailItem({ game }) {
                     minHeight: 470,
                 }}
             ></div>
-            <div className="review-cover">
+            <div className="review-cover mt-2">
                 <h4 style={{ fontWeight: "bold" }}>종합 순위</h4>
                 <div className="row mt-2">
-                    {/* <div
-                        className="score yellow m-2"
-                        style={{ position: "initial" }}
-                    >
-                        9.3
-                    </div> */}
                     <div className="mt-1 ml-3">
                         <h4>
                             {game.orgTitle} ({game.releaseDate})
@@ -40,7 +39,9 @@ export function GameDetailItem({ game }) {
                     <div className="row text-center ml-2 mt-5">
                         <div className="mr-4">
                             <span style={gameInfoStyle}>
-                                {game.minPlayer}~{game.maxPlayer}명
+                                {game.minPlayer == game.maxPlayer
+                                    ? `${game.maxPlayer} 명`
+                                    : `${game.minPlayer}~${game.maxPlayer}명`}
                             </span>
                             <p>인원</p>
                         </div>
@@ -58,27 +59,16 @@ export function GameDetailItem({ game }) {
                             </span>
                             <p>사용 연령</p>
                         </div>
-                        {/* <div className="mr-4">
-                            <span style={gameInfoStyle}>3 / 5</span>
-                            <p>난이도</p>
-                        </div> */}
                     </div>
                     <div className="ml-2 mt-3">
                         <h4>좋아요 : 43개</h4>
-                        <h4>찜 : 53개</h4>
-                    </div>
-                    <div className="row ml-2 mt-2">
-                        <h4>내 점수</h4>
-                        <div className="rating">
-                            <i className="fa fa-star"></i>
-                            <i className="fa fa-star"></i>
-                            <i className="fa fa-star"></i>
-                            <i className="fa fa-star"></i>
-                        </div>
+                        <h4 className="mt-2">찜 : 53개</h4>
                     </div>
                     <div className="row ml-2 mt-4">
-                        <Button className="mr-3">좋아요</Button>
-                        <Button>찜</Button>
+                        <Btn type="primary" className="mr-3">
+                            좋아요
+                        </Btn>
+                        <Btn type="primary">찜</Btn>
                     </div>
                 </div>
             </div>
