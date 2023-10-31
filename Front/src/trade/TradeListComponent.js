@@ -17,37 +17,12 @@ export function TradeListComponent() {
     function getCategoryText(category) {
         switch (category) {
             case 1:
-                return '서울';
+                return '판매';
             case 2:
-                return '경기';
+                return '구매';
             case 3:
-                return '부산';
-            case 4:
-                return '대구';
-            case 5:
-                return '인천';
-            case 6:
-                return '대전';
-            case 7:
-                return '광주';
-            case 8:
-                return '울산';
-            case 9:
-                return '세종';
-            case 10:
-                return '충청북도';
-            case 11:
-                return '충청남도';
-            case 12:
-                return '전라북도';
-            case 13:
-                return '전라남도';
-            case 14:
-                return '경상북도';
-            case 15:
-                return '경상남도';
-            case 16:
-                return '제주';
+                return '완료';
+
 
         }
     }

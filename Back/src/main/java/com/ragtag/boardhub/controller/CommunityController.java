@@ -92,19 +92,19 @@ public class CommunityController {
         return ResponseEntity.ok(reviews);
     }
 
-    @GetMapping("/show/TradeList")
+    @GetMapping("/show/tradeList")
     public ResponseEntity<List<Community>> showTradeList() {
         List<Community> reviews = communityService.showTrade();
         System.out.println(communityService.showTrade());
         return ResponseEntity.ok(reviews);
     }
-    @GetMapping("/show/SolutionList")
+    @GetMapping("/show/solutionList")
     public ResponseEntity<List<Community>> showSolutionList() {
         List<Community> reviews = communityService.showSolution();
         System.out.println(communityService.showSolution());
         return ResponseEntity.ok(reviews);
     }
-    @GetMapping("/show/MateList")
+    @GetMapping("/show/mateList")
     public ResponseEntity<List<Community>> showMateList() {
         List<Community> reviews = communityService.showMate();
         System.out.println(communityService.showMate());

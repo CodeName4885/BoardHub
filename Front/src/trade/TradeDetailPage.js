@@ -22,12 +22,12 @@ export function TradeDetailPage() {
     const [comment, setComment] = useState('');
     const { comm_id } = useParams();
     const [user_id, setUser_id] = useState('1');
-    const [review, setReview] = useState({ title: '', content: '' });
+    const [trade, setTrade] = useState({ title: '', content: '' });
     const [comments, setComments] = useState([]); // comments로 수정
     const navigate = useNavigate();
     const [isLiked, setIsLiked] = useState(false);
 
-    function handleLikeClick(reviewId) {
+    function handleLikeClick(tradeId) {
         axios.post(`http://localhost:8080/reviews/like/${comm_id}`)
             .then((response) => {
                 if (response.status === 200) {
@@ -50,7 +50,7 @@ export function TradeDetailPage() {
         axios.get(`http://localhost:8080/show/tradeDetail/${comm_id}`)
             .then((res) => {
                 console.log("Response: ", res);
-                setReview(res.data);
+                setTrade(res.data);
             })
             .catch((error) => {
                 console.error("Error: ", error);
@@ -68,7 +68,7 @@ export function TradeDetailPage() {
             });
     }, [comm_id]);
 
-    const ReviewList = () => {
+    const tradeList = () => {
         navigate("/trade/list");
     };
 
@@ -124,14 +124,14 @@ export function TradeDetailPage() {
                 <div className="board-detail">
                     <div className="board-title-container">
                         <h2 className="title-name">제목</h2>
-                        <h1 className="board-title">{review.title}</h1>
+                        <h1 className="board-title">{trade.title}</h1>
                     </div>
 
-                    <h4 className="date-reg">{formatDate(review.regdate)}</h4>
+                    <h4 className="date-reg">{formatDate(trade.regdate)}</h4>
                     <hr className="board-divider" /> {/* 제목과 내용을 구분하는 선 */}
                     <div
                         className="board-content"
-                        dangerouslySetInnerHTML={{ __html: review.content }}
+                        dangerouslySetInnerHTML={{ __html: trade.content }}
                     />
                     <button className="button-heart" onClick={handleLikeClick}>
                         {isLiked ? <AiFillHeart size="30" /> : <AiOutlineHeart size="30" />}
@@ -165,7 +165,7 @@ export function TradeDetailPage() {
                     ))}
                 </div>
             </div>
-            <button className="return-list" onClick={ReviewList}>
+            <button className="return-list" onClick={tradeList}>
                 돌아가기
             </button>
             <Footer

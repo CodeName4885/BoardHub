@@ -14,6 +14,44 @@ export function MateListComponent() {
     const [mateList, setMateList] = useState([]);
     const navigate = useNavigate();
 
+    function getCategoryText(category) {
+        switch (category) {
+            case 1:
+                return '서울';
+            case 2:
+                return '경기';
+            case 3:
+                return '부산';
+            case 4:
+                return '대구';
+            case 5:
+                return '인천';
+            case 6:
+                return '대전';
+            case 7:
+                return '광주';
+            case 8:
+                return '울산';
+            case 9:
+                return '세종';
+            case 10:
+                return '충청북도';
+            case 11:
+                return '충청남도';
+            case 12:
+                return '전라북도';
+            case 13:
+                return '전라남도';
+            case 14:
+                return '경상북도';
+            case 15:
+                return '경상남도';
+            case 16:
+                return '제주';
+
+        }
+    }
+
     const addMateButton = () => {
         navigate("/mate/add");
     }
@@ -37,7 +75,7 @@ export function MateListComponent() {
             <div className="center-table">
                 <table className="table table-dark table-striped">
                     <thead>
-                    <tr>
+                    <tr className="row-tr">
                         <th>#</th>
                         <th>Title</th>
                         <th>조회수</th>
@@ -48,10 +86,10 @@ export function MateListComponent() {
                     <tbody>
                     {mateList.map((mate, index) => (
                         <tr key={index}>
-                            <th scope="row">{mate.comm_id}</th>
+                            <th scope="row" className="category-box">{getCategoryText(mate.category)}</th>
                             <td onClick={(event) => {
                                 if (event.target.tagName == "TD") {
-                                    navigate(`/mate/detail/${mate.comm_id}`);
+                                    navigate(`/trade/detail/${mate.comm_id}`);
                                 }
                             }} style={{ cursor: 'pointer' }}>{mate.title} (20)</td>
                             <td>3</td>
