@@ -97,5 +97,14 @@ public class CommunityServiceImpl implements CommunityService {
         communityRepository.likeReview(comm_id);
     }
 
+    @Override
+    public Community upViews(Long comm_id) {
+      return communityRepository.upViews(comm_id);
+    }
+
+
 
 }
+
+
+

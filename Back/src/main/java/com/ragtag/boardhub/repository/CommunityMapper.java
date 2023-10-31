@@ -47,4 +47,8 @@ public interface CommunityMapper {
 
     void addMate(Community community);
 
+
+    Community upViews(Long commId);
+
+
 }

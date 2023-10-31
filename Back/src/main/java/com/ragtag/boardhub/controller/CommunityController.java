@@ -7,6 +7,7 @@ import java.util.UUID;
 import com.ragtag.boardhub.domain.Community;
 import com.ragtag.boardhub.domain.CommunityImg;
 import com.ragtag.boardhub.domain.Reply;
+import com.ragtag.boardhub.domain.Reply_Comment;
 import com.ragtag.boardhub.service.CommunityService;
 import com.ragtag.boardhub.service.ReplyService;
 import lombok.RequiredArgsConstructor;
@@ -88,6 +89,7 @@ public class CommunityController {
     @GetMapping("/show/reviewsList")
     public ResponseEntity<List<Community>> showReviewList() {
         List<Community> reviews = communityService.showReview();
+
         System.out.println(communityService.showReview());
         return ResponseEntity.ok(reviews);
     }
@@ -95,18 +97,21 @@ public class CommunityController {
     @GetMapping("/show/tradeList")
     public ResponseEntity<List<Community>> showTradeList() {
         List<Community> reviews = communityService.showTrade();
+
         System.out.println(communityService.showTrade());
         return ResponseEntity.ok(reviews);
     }
     @GetMapping("/show/solutionList")
     public ResponseEntity<List<Community>> showSolutionList() {
         List<Community> reviews = communityService.showSolution();
+
         System.out.println(communityService.showSolution());
         return ResponseEntity.ok(reviews);
     }
     @GetMapping("/show/mateList")
     public ResponseEntity<List<Community>> showMateList() {
         List<Community> reviews = communityService.showMate();
+
         System.out.println(communityService.showMate());
         return ResponseEntity.ok(reviews);
     }
@@ -148,7 +153,7 @@ public class CommunityController {
     }
 
 
-    @PostMapping("/add/reply/review/{comm_id}")
+    @PostMapping("/add/reply/{comm_id}")
     public ResponseEntity<Reply> addReplyWithReview(@PathVariable Long comm_id, @RequestBody Reply requestBody) {
         // 클라이언트에서 전송한 JSON 데이터가 `requestBody` 객체로 매핑됩니다.
         System.out.println("comm_id Data: " + comm_id);
@@ -164,7 +169,7 @@ public class CommunityController {
     }
 
 
-    @GetMapping("/show/reviewDetail/reply/{comm_id}")
+    @GetMapping("/show/Detail/reply/{comm_id}")
     public ResponseEntity<List<Reply>> showReplyWithReview(@PathVariable Long comm_id) {
         List<Reply> replyList = replyService.getRepliesByCommId(comm_id);
         if (replyList.isEmpty()) {
@@ -173,7 +178,7 @@ public class CommunityController {
         return ResponseEntity.ok(replyList);
     }
 
-    @PostMapping("/reviews/like/{comm_id}")
+    @PostMapping("/detail/like/{comm_id}")
     public ResponseEntity<String> likeReview(@PathVariable Long comm_id) {
         try {
             // reviewId에 해당하는 리뷰를 찾거나 좋아요 수를 증가시키는 등의 로직을 수행합니다.
@@ -185,4 +190,33 @@ public class CommunityController {
         }
 
     }
+    @PostMapping ("/add/reply/comment/{reply_id}")
+    public ResponseEntity<Reply> addCommentWithReply(@PathVariable Long reply_id, @RequestBody Reply_Comment replyCommentData ) {
+        System.out.println("reply_id Data : " + reply_id);
+        Reply addComment = replyService.addCommentWithReply(replyCommentData );
+        System.out.println("replyComment Data : " + replyCommentData );
+        if (addComment != null) {
+            return new ResponseEntity<>(addComment, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/show/reply/comment/{reply_id}")
+    public ResponseEntity<List<Reply_Comment>> showCommentWithReply(@PathVariable Long reply_id) {
+        List<Reply_Comment> CommentList = replyService.getCommentWithReply(reply_id);
+        if (CommentList.isEmpty()) {
+            return ResponseEntity.notFound().build(); // Return 404 Not Found if the list is empty
+        }
+        return ResponseEntity.ok(CommentList);
+    }
+
+    @PostMapping("/up/views/{comm_id}")
+    public ResponseEntity<String> upViews(@PathVariable Long comm_id) {
+        Community community = communityService.upViews(comm_id);
+        System.out.println("Community Data: " + community);
+          return ResponseEntity.ok("Views incremented successfully");
+
+    }
+
+
 }

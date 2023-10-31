@@ -30,7 +30,7 @@ function SolutionListComponent() {
     }
     const getSolutionList = async () => {
         try {
-            const resp = await axios.get('http://localhost:8080/show/SolutionList');
+            const resp = await axios.get('http://localhost:8080/show/solutionList');
             setSolutionList(resp.data); // 서버에서 받은 데이터를 상태로 설정
         } catch (error) {
             console.error("데이터 못불러왕~! : ", error);
@@ -85,7 +85,7 @@ function SolutionListComponent() {
                 </div>
             </div>
 
-            {/* 아래에 추가적인 div 태그 */}
+
             <div className="additional-div">
                 <p className="solution-content">공략 글</p>
                 <div className="center-table">
@@ -107,9 +107,9 @@ function SolutionListComponent() {
                                     if (event.target.tagName == "TD") {
                                         navigate(`/solution/detail/${solution.comm_id}`);
                                     }
-                                }} style={{ cursor: 'pointer' }}>{solution.title} (20)</td>
-                                <td>3</td>
-                                <td>3</td>
+                                }} style={{ cursor: 'pointer' }}>{solution.title}</td>
+                                <td>{solution.count}</td>
+                                <td>{solution.likes}</td>
                                 <td>{formatDate(solution.regdate)}</td>
                             </tr>
                         ))}

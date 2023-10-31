@@ -25,6 +25,13 @@
     border-top: 1px solid #ccc;
     margin: 5px 0;
 }
+.reply_divider{
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 5px 0;
+    width: 90%;
+    margin-left: 100px;
+}
 
 .board-content p{
     font-size: 24px; /* 내용 크기를 더 크게 조절 */
@@ -112,21 +119,33 @@
     margin-bottom: 10px; /* 원하는 간격 크기 설정 */
 }
 .comment {
-    display: flex;
     justify-content: space-between;
     margin: 10px 0;
 }
 
 .reply-user-id {
-    margin-right: 10px;
+   margin-left: 10px;
 }
 
 .reply-content {
     flex-grow: 1;
+    margin-left: 60px;
 }
 
 .reply-reg-date {
-    margin-left: 80px;
+    margin-left: 40px;
+}
+.reply-comment-user-id {
+    margin-left: 10px;
+}
+
+.reply-comment-content {
+    flex-grow: 1;
+    margin-left: 60px;
+}
+
+.reply-comment-reg-date {
+    margin-left: 40px;
 }
 .comment-info {
     display: flex;
@@ -158,14 +177,14 @@
 }
 .board-detail-reply-data {
 
-    max-width: 60%;
+    width: 80%;
     height: auto;
     padding: 20px;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    margin-left: 250px;
+    margin-left: 110px;
     margin-bottom: 300px;
     margin-top: 50px;
 }
@@ -175,7 +194,8 @@
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-left: 50px;
+    margin-left: 150px;
+
 }
 .add-reply-button {
     position: relative;
@@ -189,6 +209,10 @@
     cursor: pointer; /* 커서 스타일 변경 */
     font-size: 16px; /* 글꼴 크기 설정 */
     margin-left: 1200px;
+}
+.add-reply-button:hover {
+    background-color: #413b3b; /* 마우스를 올렸을 때 배경 색상 변경 */
+    color: #555; /* 마우스를 올렸을 때 텍스트 색상 변경 */
 }
 .Footer-detailpage-bottom {
     position: fixed;
@@ -225,4 +249,60 @@
     outline: none;
     margin-top: 400px;
     margin-left: 1350px;
+}
+.small-button {
+    font-size: 14px; /* 원하는 폰트 크기 설정 */
+    padding: 5px 10px; /* 원하는 여백 설정 */
+    border: 1px solid #ccc; /* 원하는 테두리 스타일 및 색상 설정 */
+    border-radius: 4px; /* 둥근 모서리를 만들 수 있습니다. */
+    background-color: #353434; /* 배경색상 설정 */
+    color: #fff; /* 텍스트 색상 설정 */
+    cursor: pointer; /* 커서를 포인터로 변경하여 버튼으로 보이게 합니다. */
+    transition: background-color 0.3s, color 0.3s; /* 부드러운 전환을 추가합니다. */
+    position: relative;
+    top: -5px;
+    margin-left: 10px;
+
+}
+
+.small-button:hover {
+    background-color: #ddd; /* 마우스를 올렸을 때 배경 색상 변경 */
+    color: #555; /* 마우스를 올렸을 때 텍스트 색상 변경 */
+}
+.reply-reply-button {
+    font-size: 12px; /* 원하는 폰트 크기 설정 */
+    padding: 5px 10px; /* 원하는 여백 설정 */
+    border: 1px solid #ccc;
+    border: none;
+    border-radius: 6px; /* 둥근 모서리를 만들 수 있습니다. */
+    background-color: #353434; /* 배경색상 설정 */
+    color: #fff; /* 텍스트 색상 설정 */
+    cursor: pointer; /* 커서를 포인터로 변경하여 버튼으로 보이게 합니다. */
+    transition: background-color 0.3s, color 0.3s; /* 부드러운 전환을 추가합니다. */
+    position: relative;
+    margin-left: 10px;
+}
+.reply-reply-button:hover {
+    background-color: #ddd; /* 마우스를 올렸을 때 배경 색상 변경 */
+    color: #555; /* 마우스를 올렸을 때 텍스트 색상 변경 */
+}
+.reply-reply-add-container {
+    margin-top: 15px;
+    width: 100%;
+    height: 50px;
+}
+.reply-add {
+    border: none;
+}
+.reply-comment-divider{
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 5px 0;
+    width: 70%;
+    margin-left: 100px;
+}
+.reply-comment-add-container {
+    position: relative;
+    top: 5px;
+    margin-left: 40px;
 }

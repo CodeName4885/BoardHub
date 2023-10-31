@@ -89,11 +89,11 @@ export function MateListComponent() {
                             <th scope="row" className="category-box">{getCategoryText(mate.category)}</th>
                             <td onClick={(event) => {
                                 if (event.target.tagName == "TD") {
-                                    navigate(`/trade/detail/${mate.comm_id}`);
+                                    navigate(`/mate/detail/${mate.comm_id}`);
                                 }
-                            }} style={{ cursor: 'pointer' }}>{mate.title} (20)</td>
-                            <td>3</td>
-                            <td>3</td>
+                            }} style={{ cursor: 'pointer' }}>{mate.title}</td>
+                            <td>{mate.count}</td>
+                            <td>{mate.likes}</td>
                             <td>{formatDate(mate.regdate)}</td>
                         </tr>
                     ))}

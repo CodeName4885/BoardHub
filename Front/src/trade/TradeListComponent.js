@@ -66,9 +66,9 @@ export function TradeListComponent() {
                                 if (event.target.tagName == "TD") {
                                     navigate(`/trade/detail/${trade.comm_id}`);
                                 }
-                            }} style={{ cursor: 'pointer' }}>{trade.title} (20)</td>
-                            <td>3</td>
-                            <td>3</td>
+                            }} style={{ cursor: 'pointer' }}>{trade.title}</td>
+                            <td>{trade.count}</td>
+                            <td>{trade.likes}</td>
                             <td>{formatDate(trade.regdate)}</td>
                         </tr>
                     ))}

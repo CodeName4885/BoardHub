@@ -93,5 +93,11 @@ public class CommunityRepositoryImpl implements CommunityRepository {
         communityMapper.likeReview(comm_id);
     }
 
+    @Override
+    public Community upViews(Long comm_id) {
+        return communityMapper.upViews(comm_id);
+    }
+
+
 
 }

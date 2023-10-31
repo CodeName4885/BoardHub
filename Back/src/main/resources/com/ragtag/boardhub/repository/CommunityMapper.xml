@@ -125,6 +125,12 @@
         WHERE comm_id = #{comm_id}
     </update>
 
+    <update id="upViews">
+        UPDATE community
+        SET count = count + 1
+        WHERE comm_id = #{comm_id}
+    </update>
+
 
 
 

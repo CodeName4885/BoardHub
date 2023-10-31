@@ -8,12 +8,28 @@
         <selectKey keyProperty="reply_id" resultType="java.lang.Long" order="BEFORE">
             SELECT reply_id_seq.NEXTVAL FROM dual
         </selectKey>
-        INSERT INTO reply (reply_id, r_group, r_step, r_level, content, user_id, comm_id, regdate)
-        VALUES (#{reply_id}, #{r_group}, #{r_step}, #{r_level}, #{content}, #{user_id}, #{comm_id}, sysdate)
+        INSERT INTO reply (reply_id, content, user_id, comm_id, regdate)
+        VALUES (#{reply_id}, #{content}, #{user_id}, #{comm_id}, sysdate)
     </insert>
 
     <select id="getRepliesByCommId" resultType="com.ragtag.boardhub.domain.Reply">
         SELECT * FROM reply WHERE comm_id = #{comm_id}
+    </select>
+
+    <insert id="addCommentWithReply" parameterType="com.ragtag.boardhub.domain.Reply_Comment">
+        <selectKey keyProperty="reply_comment_id" resultType="java.lang.Long" order="BEFORE">
+            SELECT reply_comment_id_seq.NEXTVAL FROM dual
+        </selectKey>
+        INSERT INTO reply_comment (reply_comment_id, reply_id, content, comm_id, user_id, regdate)
+        VALUES (#{reply_comment_id}, #{reply_id}, #{content}, #{comm_id},#{user_id}, sysdate)
+    </insert>
+
+    <select id="getCommentWithReply" resultType="com.ragtag.boardhub.domain.Reply_Comment">
+        SELECT * FROM reply_comment WHERE reply_id = #{reply_id} ORDER BY regdate DESC
+    </select>
+
+    <select id="">
+        select likes from community where comm_id = #{comm_id};
     </select>
 
 </mapper>

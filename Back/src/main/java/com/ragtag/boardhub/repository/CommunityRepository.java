@@ -37,4 +37,8 @@ public interface CommunityRepository {
     Community showMateDetail(Long commId);
     void likeReview(Long commId);
 
+
+    Community upViews(Long commId);
+
+
 }

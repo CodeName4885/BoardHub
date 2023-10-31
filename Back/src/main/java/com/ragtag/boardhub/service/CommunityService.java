@@ -37,5 +37,9 @@ public interface CommunityService {
 
     void likeReview(Long comm_id);
 
+
+    Community upViews(Long commId);
+
+
 }
 

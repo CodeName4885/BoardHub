@@ -63,9 +63,9 @@ export function ReviewListComponent() {
                                if (event.target.tagName == "TD") {
                                     navigate(`/review/detail/${review.comm_id}`);
                                 }
-                            }} style={{ cursor: 'pointer' }}>{review.title} (20)</td>
-                            <td>3</td>
-                            <td>3</td>
+                            }} style={{ cursor: 'pointer' }}>{review.title}</td>
+                            <td>{review.count}</td>
+                            <td>{review.likes}</td>
                             <td>{formatDate(review.regdate)}</td>
                         </tr>
                     ))}
