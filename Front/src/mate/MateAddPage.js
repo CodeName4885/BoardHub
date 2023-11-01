@@ -3,18 +3,17 @@ import { Header } from "../layout/Header";
 import "../static/game-warrior/css/animate.css";
 import "../static/game-warrior/css/bootstrap.min.css";
 import "../static/game-warrior/css/style.css";
-import { TradeAddComponent } from "./TradeAddComponent";
+import { MateAddComponent } from "./MateAddComponent";
 
-
-export function TradeAddPage() {
+export function MateAddPage() {
     return (
         <>
-            <Header/>
+            <Header />
             <div className="App">
-                <div className="solution-container"></div>
+                <div className="review-container"></div>
                 <br />
-                <TradeAddComponent />
-                <Footer/>
+                <MateAddComponent />
+                <Footer />
             </div>
         </>
     );

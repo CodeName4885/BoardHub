@@ -13,7 +13,6 @@ export function SolutionAddPage() {
           <div className="App">
               <div className="solution-container"></div>
               <br />
-              <h2>제목</h2>
               <SolutionAddComponent />
               <Footer/>
           </div>

@@ -7,7 +7,7 @@ import "../static/game-warrior/css/animate.css";
 import "../static/game-warrior/css/bootstrap.min.css";
 import "../static/game-warrior/css/style.css";
 import { useNavigate } from "react-router-dom";
-import "./styles.css";
+import "../review/styles.css";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 function formatDate(rawDate) {
@@ -18,12 +18,12 @@ function formatDate(rawDate) {
     return `${year}.${month}.${day}`;
 }
 
-export function ReviewDetailPage() {
+export function SolutionDetailPage() {
     const [comment, setComment] = useState('');
     const { comm_id } = useParams();
     const [user_id, setUser_id] = useState('1');
     const [review, setReview] = useState({ title: '', content: '' });
-    const [comments, setComments] = useState([]);
+    const [comments, setComments] = useState([]); // comments로 수정
     const navigate = useNavigate();
     const [isLiked, setIsLiked] = useState(false);
     const [isReplyVisible, setIsReplyVisible] = useState({});
@@ -64,10 +64,10 @@ export function ReviewDetailPage() {
                 console.error("Error:", error);
             });
     }, [comm_id]);
-
     // 디테일 페이지 뿌리기
+
     useEffect(() => {
-        axios.get(`http://localhost:8080/show/reviewDetail/${comm_id}`)
+        axios.get(`http://localhost:8080/show/solutionDetail/${comm_id}`)
             .then((res) => {
                 console.log("Response: ", res);
                 setReview(res.data);
@@ -81,21 +81,20 @@ export function ReviewDetailPage() {
         axios.get(`http://localhost:8080/show/Detail/reply/${comm_id}`)
             .then((res) => {
                 console.log("Response: ", res);
-                setComments(res.data);
+                setComments(res.data); // comments로 수정
             })
             .catch((error) => {
                 console.error("Error: ", error);
             });
     }, [comm_id]);
 
-    const ReviewList = () => {
-        navigate("/review/list");
+    const SolutionList = () => {
+        navigate("/solution/list");
     };
-    // 대댓글 입력시 데이터 들어가게 만드는 메서드
+
     const handleCommentChange = (e) => {
         setComment(e.target.value);
     };
-    // 답글 작성 --> 작성 취소
     const toggleReply = (replyId) => {
         if (reply_id === replyId) {
             // Clicking the same reply button again to cancel
@@ -111,7 +110,6 @@ export function ReviewDetailPage() {
             [replyId]: !prevState[replyId],
         }));
     };
-    // 시간 몇분 전 , 방금 전
     function getTimeAgo(commentDate) {
         const currentDate = new Date();
         const commentDateObj = new Date(commentDate);
@@ -215,18 +213,24 @@ export function ReviewDetailPage() {
     return (
         <>
             <Header />
+
             <div className="board-detail-container">
                 <div className="board-detail">
                     <div className="board-title-container">
                         <h2 className="title-name">제목</h2>
                         <h1 className="board-title">{review.title}</h1>
                     </div>
+
                     <h4 className="date-reg">{formatDate(review.regdate)}</h4>
-                    <hr className="board-divider" />
-                    <div className="board-content" dangerouslySetInnerHTML={{ __html: review.content }} />
+                    <hr className="board-divider" /> {/* 제목과 내용을 구분하는 선 */}
+                    <div
+                        className="board-content"
+                        dangerouslySetInnerHTML={{ __html: review.content }}
+                    />
                     <button className="button-heart" onClick={handleLikeClick}>
                         {isLiked ? <AiFillHeart size="30" /> : <AiOutlineHeart size="30" />}
                     </button>
+
                 </div>
             </div>
             <div className="board-detail-reply-container">
@@ -282,10 +286,10 @@ export function ReviewDetailPage() {
                                         </div>
                                     ))}
                             </div>
-                            ))}
+                        ))}
                 </div>
             </div>
-            <button className="return-list" onClick={ReviewList}>
+            <button className="return-list" onClick={SolutionList}>
                 돌아가기
             </button>
             <Footer className="Footer-detailpage-bottom" />

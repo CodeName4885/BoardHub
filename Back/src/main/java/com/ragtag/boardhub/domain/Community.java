@@ -14,9 +14,4 @@ public class Community {
     private LocalDateTime regdate;
     private Long user_id;
     private Long category;
-    private String imageurl;
-
-    public void setImageUrl(String imageurl) {
-    }
-
 }

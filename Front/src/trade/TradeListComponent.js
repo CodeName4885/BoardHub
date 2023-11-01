@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./styles.css"
+import "../review/styles.css"
 
 function formatDate(rawDate) {
     const date = new Date(rawDate);
@@ -10,40 +10,43 @@ function formatDate(rawDate) {
     const day = date.getDate().toString().padStart(2, '0');
     return `${year}.${month}.${day}`;
 }
-function getCategoryText(category) {
-    switch (category) {
-        case 1:
-            return '리뷰';
-        case 2:
-            return '프리뷰';
-        case 3:
-            return '모임';
-    }
-}
-export function ReviewListComponent() {
-    const [reviewList, setReviewList] = useState([]);
+export function TradeListComponent() {
+    const [tradeList, setTradeList] = useState([]);
     const navigate = useNavigate();
 
-    const addReviewButton = () => {
-        navigate("/review/add");
+    function getCategoryText(category) {
+        switch (category) {
+            case 1:
+                return '판매';
+            case 2:
+                return '구매';
+            case 3:
+                return '완료';
+
+
+        }
     }
-    const getReviewList = async () => {
+
+    const addTradeButton = () => {
+        navigate("/trade/add");
+    }
+    const getTradeList = async () => {
         try {
-            const resp = await axios.get('http://localhost:8080/show/reviewsList');
-            setReviewList(resp.data); // 서버에서 받은 데이터를 상태로 설정
+            const resp = await axios.get('http://localhost:8080/show/tradeList');
+            setTradeList(resp.data); // 서버에서 받은 데이터를 상태로 설정
         } catch (error) {
             console.error("데이터 못불러왕~! : ", error);
         }
     }
 
     useEffect(() => {
-        getReviewList(); // 컴포넌트가 마운트될 때 데이터를 가져오도록 설정
+        getTradeList(); // 컴포넌트가 마운트될 때 데이터를 가져오도록 설정
     }, []); // 빈 배열을 전달하여 한 번만 실행되도록 설정
 
     return (
         <div className="App">
             <p className="solution-content">공략 글</p>
-            <button className="add-button" onClick={addReviewButton}>글 작성하기</button>
+            <button className="add-button" onClick={addTradeButton}>글 작성하기</button>
             <div className="center-table">
                 <table className="table table-dark table-striped">
                     <thead>
@@ -56,17 +59,17 @@ export function ReviewListComponent() {
                     </tr>
                     </thead>
                     <tbody>
-                    {reviewList.map((review, index) => (
+                    {tradeList.map((trade, index) => (
                         <tr key={index}>
-                            <th scope="row" className="category-box">{getCategoryText(review.category)}</th>
+                            <th scope="row" className="category-box">{getCategoryText(trade.category)}</th>
                             <td onClick={(event) => {
-                               if (event.target.tagName == "TD") {
-                                    navigate(`/review/detail/${review.comm_id}`);
+                                if (event.target.tagName == "TD") {
+                                    navigate(`/trade/detail/${trade.comm_id}`);
                                 }
-                            }} style={{ cursor: 'pointer' }}>{review.title}</td>
-                            <td>{review.count}</td>
-                            <td>{review.likes}</td>
-                            <td>{formatDate(review.regdate)}</td>
+                            }} style={{ cursor: 'pointer' }}>{trade.title}</td>
+                            <td>{trade.count}</td>
+                            <td>{trade.likes}</td>
+                            <td>{formatDate(trade.regdate)}</td>
                         </tr>
                     ))}
                     </tbody>

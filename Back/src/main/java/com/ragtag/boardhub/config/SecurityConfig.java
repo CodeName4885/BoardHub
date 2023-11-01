@@ -32,7 +32,11 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorizeRequests) ->{
+<<<<<<< HEAD
                     authorizeRequests.requestMatchers("/join","/login","/profile","/mailconfirm","/usernamecheck","/activateuser","/api/game/list","/api/game/{id}","/api/game/{id}/category", "/api/game/data/{id}","/getmainitem", "/kakaouserinfoadd", "/googleuserinfoadd", "/socialmypage","/api/game/comment/{id}", "/gethotmainitem").permitAll();
+=======
+                    authorizeRequests.requestMatchers("/join","/login","/profile","/mailconfirm","/usernamecheck","/activateuser","/api/game/list","/api/game/{id}","/api/game/{id}/category", "/api/game/data/{id}","/getmainitem", "/kakaouserinfoadd", "/googleuserinfoadd", "/socialmypage","/api/game/comment/{id}","/add/**","/show/**","/show/Detail/**","/show/Detail/reply/**","/detail/like/**","/show/mateDetail/**", "/show/solutionDetail/**", "/show/tradeDetail/**","/add/reply/comment/**", "/show/reply/comment/**", "/up/views/**").permitAll();
+>>>>>>> 604e4a815078f13a166df27838197671f4701461
                     authorizeRequests.requestMatchers("/mypage","/refresh","/modifynickname","/modifyphone","/drawuser","/usernamechk","/emailchk","/getusername","/modifypassword").authenticated();
                     authorizeRequests.requestMatchers("/admin/**")
                             .hasRole("ADMIN");

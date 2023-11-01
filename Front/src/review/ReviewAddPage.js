@@ -12,7 +12,6 @@ export function ReviewAddPage() {
             <div className="App">
                 <div className="review-container"></div>
                 <br />
-                <h2>제목</h2>
                 <ReviewAddComponent />
                 <Footer />
             </div>
