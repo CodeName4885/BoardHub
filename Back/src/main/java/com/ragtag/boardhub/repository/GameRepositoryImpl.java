@@ -146,6 +146,7 @@ public class GameRepositoryImpl implements GameRepository {
     }
 
     @Override
+<<<<<<< HEAD
     public Long getComentCountByGameId(Long gameId) {
         return gameMapper.getComentCountByGameId(gameId);
     }
@@ -158,6 +159,10 @@ public class GameRepositoryImpl implements GameRepository {
         }else {
             return comentByGameId.get(0);
         }
+=======
+    public List<Comments> getAllCommentByGameId(Long gameId) {
+        return gameMapper.getAllCommentByGameId(gameId);
+>>>>>>> hjy
     }
 
 }

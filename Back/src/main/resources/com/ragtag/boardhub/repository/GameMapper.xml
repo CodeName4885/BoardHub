@@ -138,6 +138,7 @@
         values(#{comment_id}, #{game_id}, #{user_id}, #{content})
     </insert>
 
+<<<<<<< HEAD
     <select id="getComentByGameId" resultType="String">
         <![CDATA[
             select * from (
@@ -150,5 +151,11 @@
         select count(*) from comments where game_id = #{gameId}
     </select>
 
+=======
+    <select id="getAllCommentByGameId">
+        select c.*, u.nickname from comments c
+        join users u on u.user_id = c.user_id where game_id = #{gameId}
+    </select>
+>>>>>>> hjy
 
 </mapper>

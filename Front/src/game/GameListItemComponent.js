@@ -1,4 +1,7 @@
+import { Typography } from "antd";
 import { useNavigate } from "react-router-dom";
+
+const { Title } = Typography;
 
 export function GameListItemComponent(item) {
     const navigate = useNavigate();
@@ -19,20 +22,21 @@ export function GameListItemComponent(item) {
                             backgroundRepeat: "no-repeat",
                             backgroundPosition: "center",
                             cursor: "pointer",
+                            marginBottom: 7,
                         }}
                         id={`${item.games.gameId}`}
                         onClick={onClick}
-                    >
-                        {/* <div className="score yellow">9.3</div> */}
-                    </div>
+                    ></div>
                     <div className="review-text">
-                        <h5
-                            id={`${item.games.gameId}`}
-                            style={{ cursor: "pointer" }}
-                            onClick={onClick}
-                        >
-                            {item.games.title}
-                        </h5>
+                        <a>
+                            <Title
+                                level={4}
+                                id={`${item.games.gameId}`}
+                                onClick={onClick}
+                            >
+                                {item.games.title}
+                            </Title>
+                        </a>
                     </div>
                 </div>
             </div>

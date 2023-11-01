@@ -70,7 +70,12 @@ public interface GameMapper {
 
     void saveGameComment(Comments comment);
 
+<<<<<<< HEAD
     Long getComentCountByGameId(Long gameId);
 
     List<String> getComentByGameId(Long gameId);
+=======
+    List<Comments> getAllCommentByGameId(Long gameId);
+
+>>>>>>> hjy
 }

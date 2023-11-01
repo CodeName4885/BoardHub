@@ -1,8 +1,13 @@
 package com.ragtag.boardhub.service;
 
-import com.ragtag.boardhub.DTO.game.*;
-
 import java.util.List;
+
+import com.ragtag.boardhub.DTO.game.CategoryDTO;
+import com.ragtag.boardhub.DTO.game.GameComment;
+import com.ragtag.boardhub.DTO.game.GameDataDTO;
+import com.ragtag.boardhub.DTO.game.GameForm;
+import com.ragtag.boardhub.DTO.game.GameResponse;
+import com.ragtag.boardhub.DTO.game.GameSortDTO;
 
 public interface GameService {
 
@@ -29,7 +34,12 @@ public interface GameService {
 
     void saveGameComment(GameComment comment);
 
+<<<<<<< HEAD
     Long getComentCountByGameId(Long gameId);
 
     String getComentByGameId(Long gameId);
+=======
+    List<GameComment> getAllCommentByGameId(Long gameId);
+
+>>>>>>> hjy
 }
