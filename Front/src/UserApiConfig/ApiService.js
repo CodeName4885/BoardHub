@@ -245,3 +245,10 @@ export function getMainitem(){
     return response;
   })
 }
+
+export function getHotMainItem(){
+  return Call("/gethotmainitem", "GET", null).then((response) => {
+    console.log(response);
+    return response;
+  })
+}

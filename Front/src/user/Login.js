@@ -28,6 +28,13 @@ function Login() {
         }));
     };
 
+    const handleKeyDown = (e) => {
+        if(e.key === 'Enter'){
+            console.log("keyDown, Enter");
+            submit();
+        }
+    }
+
     return (
         <div className={joincss["body"]}>
             <section className={joincss["wrap"]}>
@@ -51,6 +58,7 @@ function Login() {
                             name="username"
                             placeholder="아이디"
                             onChange={handleonChange}
+                            onKeyDown={handleKeyDown}
                         />
                     </div>
                 </div>
@@ -62,6 +70,7 @@ function Login() {
                             name="password"
                             placeholder="비밀번호"
                             onChange={handleonChange}
+                            onKeyDown={handleKeyDown}
                         />
                     </div>
                 </div>

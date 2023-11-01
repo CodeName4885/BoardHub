@@ -29,4 +29,7 @@ public interface GameService {
 
     void saveGameComment(GameComment comment);
 
+    Long getComentCountByGameId(Long gameId);
+
+    String getComentByGameId(Long gameId);
 }

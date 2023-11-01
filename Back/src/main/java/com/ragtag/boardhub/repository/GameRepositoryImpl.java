@@ -145,4 +145,19 @@ public class GameRepositoryImpl implements GameRepository {
         gameMapper.saveGameComment(comment);
     }
 
+    @Override
+    public Long getComentCountByGameId(Long gameId) {
+        return gameMapper.getComentCountByGameId(gameId);
+    }
+
+    @Override
+    public String getComentByGameId(Long gameId) {
+        List<String> comentByGameId = gameMapper.getComentByGameId(gameId);
+        if(comentByGameId.isEmpty()){
+            return "최고의 게임!!";
+        }else {
+            return comentByGameId.get(0);
+        }
+    }
+
 }
