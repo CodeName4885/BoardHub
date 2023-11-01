@@ -4,8 +4,7 @@ import lombok.Data;
 
 @Data
 public class CommunityImg {
-
-    private Long imgId;
+    private Long img_id;
     private String filename;
 
 }

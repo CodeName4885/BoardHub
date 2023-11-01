@@ -8,12 +8,24 @@ import { GameListComponent } from "./game/GameListComponent";
 import { GamePage } from "./game/GamePage";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+
 import { ReviewAddPage } from "./review/ReviewAddPage";
 import { ReviewDetailPage } from "./review/ReviewDetailPage";
+
 import { ReviewListPage } from "./review/ReviewListPage";
+
 import { SolutionAddPage } from "./solution/SolutionAddPage";
 import { SolutionListPage } from "./solution/SolutionListPage";
+import { SolutionDetailPage } from "./solution/SolutionDetailPage";
+
 import { TradeAddPage } from "./trade/TradeAddPage";
+import { TradeListPage } from "./trade/TradeListPage";
+import { TradeDetailPage } from "./trade/TradeDetailPage";
+
+import { MateAddPage } from "./mate/MateAddPage";
+import { MateListPage } from "./mate/MateListPage";
+import { MateDetailPage } from "./mate/MateDetailPage";
+
 import Entryinfo from "./user/Entryinfo";
 import Join from "./user/Join";
 import JoinAgree from "./user/JoinAgree";
@@ -65,18 +77,30 @@ root.render(
 
                 <Route path="review">
                     <Route path="add" element={<ReviewAddPage />} />
-                    <Route path="detail" element={<ReviewDetailPage />} />
+                    <Route path="detail/:comm_id" element={<ReviewDetailPage />} />
                     <Route path="list" element={<ReviewListPage />} />
                 </Route>
 
                 <Route path="trade">
                     <Route path="add" element={<TradeAddPage />} />
+                    <Route path="detail/:comm_id" element={<TradeDetailPage />} />
+                    <Route path="list" element={<TradeListPage />} />
                 </Route>
 
                 <Route path="solution">
                     <Route path="add" element={<SolutionAddPage />} />
+                    <Route path="detail/:comm_id" element={<SolutionDetailPage />} />
                     <Route path="list" element={<SolutionListPage />} />
+
                 </Route>
+
+                <Route path="mate">
+                    <Route path="add" element={<MateAddPage />} />
+                    <Route path="detail/:comm_id" element={<MateDetailPage />} />
+                    <Route path="list" element={<MateListPage />} />
+                </Route>
+
+
             </Routes>
         </Router>
     </React.StrictMode>

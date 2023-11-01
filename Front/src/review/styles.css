@@ -1,0 +1,308 @@
+.board-detail-container {
+    max-width: 80%;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    height: 700px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    overflow: auto;
+}
+
+.board-title {
+    font-size: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #333;
+    margin-left: 50px; /* 왼쪽 여백을 조절하여 간격을 설정 */
+}
+
+.board-divider {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 5px 0;
+}
+.reply_divider{
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 5px 0;
+    width: 90%;
+    margin-left: 100px;
+}
+
+.board-content p{
+    font-size: 24px; /* 내용 크기를 더 크게 조절 */
+    line-height: 1.5;
+    color: #555;
+}
+.board-title-container {
+    display: flex;
+    align-items: center;
+}
+
+.solution-content {
+    margin-left: 250px;
+    margin-top: 30px;
+}
+.add-button {
+    display: inline-block;
+    background-color: #353434; /* 배경색상 설정 */
+    color: #fff; /* 글꼴 색상 설정 */
+    padding: 10px 20px; /* 내부 여백 설정 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 버튼 테두리를 둥글게 만듭니다 */
+    cursor: pointer; /* 커서 스타일 변경 */
+    font-size: 16px; /* 글꼴 크기 설정 */
+    margin-left: 1300px;
+    margin-bottom: 30px;
+    margin-top: -40px;
+}
+.add-Title {
+    width: 80%;
+    border-radius: 5px;
+    height: 50px;
+    margin-bottom: 30px;
+}
+.add-select {
+    margin-top: 100px;
+    width: 30%;
+    padding: 10px;
+    borderRadius: 5px;
+    border: 1px solid #ccc;
+    backgroundColor: #f5f5f5;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 8px;
+}
+.cancle-button {
+    background-color: #353434; /* 배경색상 설정 */
+    color: #fff; /* 글꼴 색상 설정 */
+    padding: 10px 20px; /* 내부 여백 설정 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 버튼 테두리를 둥글게 만듭니다 */
+    cursor: pointer; /* 커서 스타일 변경 */
+    font-size: 16px; /* 글꼴 크기 설정 */
+    margin-left: 50px;
+}
+.return-list {
+    background-color: #353434; /* 배경색상 설정 */
+    margin-bottom: 30px;
+    color: #fff; /* 글꼴 색상 설정 */
+    padding: 10px 20px; /* 내부 여백 설정 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 버튼 테두리를 둥글게 만듭니다 */
+    cursor: pointer; /* 커서 스타일 변경 */
+    font-size: 16px; /* 글꼴 크기 설정 */
+    margin-left: 1700px;
+}
+.date-reg {
+    margin-top: 30px;
+}
+.title-name {
+    font-size: 40px; /* 원하는 크기로 조절 */
+    color: #333; /* 글씨 색상 변경 */
+    font-weight: bold; /* 글씨 두껍게 표시 */
+    text-transform: capitalize; /* 글씨 대문자로 변환 (선택 사항) */
+}
+.category-box {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    color: #333;
+}
+.row-tr{
+    margin-bottom: 10px; /* 원하는 간격 크기 설정 */
+}
+.comment {
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.reply-user-id {
+   margin-left: 10px;
+}
+
+.reply-content {
+    flex-grow: 1;
+    margin-left: 60px;
+}
+
+.reply-reg-date {
+    margin-left: 40px;
+}
+.reply-comment-user-id {
+    margin-left: 10px;
+}
+
+.reply-comment-content {
+    flex-grow: 1;
+    margin-left: 60px;
+}
+
+.reply-comment-reg-date {
+    margin-left: 40px;
+}
+.comment-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0; /* 위아래 간격 조정 */
+}
+
+.reply-user-id {
+    margin-right: 10px; /* 사용자 ID와 내용 사이의 간격 조정 */
+}
+
+.reply-content {
+    flex-grow: 1; /* 내용이 남은 공간을 모두 채우도록 함 */
+}
+
+.reply-reg-date {
+    margin-left: 10px; /* 내용과 날짜 사이의 간격 조정 */
+}
+.board-detail-reply-container {
+    max-width: 60%;
+    height: 150px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-left: 450px;
+    margin-bottom: 400px;
+}
+.board-detail-reply-data {
+
+    width: 80%;
+    height: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-left: 110px;
+    margin-bottom: 300px;
+    margin-top: 50px;
+}
+
+.reply-add{
+    width: 80%;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 150px;
+
+}
+.add-reply-button {
+    position: relative;
+    top: -40px;
+    display: inline-block;
+    background-color: #353434; /* 배경색상 설정 */
+    color: #fff; /* 글꼴 색상 설정 */
+    padding: 10px 20px; /* 내부 여백 설정 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 버튼 테두리를 둥글게 만듭니다 */
+    cursor: pointer; /* 커서 스타일 변경 */
+    font-size: 16px; /* 글꼴 크기 설정 */
+    margin-left: 1200px;
+}
+.add-reply-button:hover {
+    background-color: #413b3b; /* 마우스를 올렸을 때 배경 색상 변경 */
+    color: #555; /* 마우스를 올렸을 때 텍스트 색상 변경 */
+}
+.Footer-detailpage-bottom {
+    position: fixed;
+    margin-top: 400px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #333; /* 원하는 배경색으로 변경하세요 */
+    color: white; /* 원하는 글자색으로 변경하세요 */
+    text-align: center;
+    padding: 10px; /* 원하는 패딩값으로 변경하세요 */
+}
+.like-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px; /* 버튼을 둥글게 만듭니다. */
+    background-color: #3498db; /* 배경색상 설정 */
+    color: #fff; /* 글꼴 색상 설정 */
+    font-size: 16px; /* 글꼴 크기 설정 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    transition: background-color 0.3s, transform 0.1s; /* 호버 효과 설정 */
+    cursor: pointer;
+}
+
+.like-button:hover {
+    background-color: #0074a9; /* 호버 시 배경색 변경 */
+    transform: scale(1.05); /* 호버 시 약간 확대됨 */
+}
+.button-heart {
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    margin-top: 400px;
+    margin-left: 1350px;
+}
+.small-button {
+    font-size: 14px; /* 원하는 폰트 크기 설정 */
+    padding: 5px 10px; /* 원하는 여백 설정 */
+    border: 1px solid #ccc; /* 원하는 테두리 스타일 및 색상 설정 */
+    border-radius: 4px; /* 둥근 모서리를 만들 수 있습니다. */
+    background-color: #353434; /* 배경색상 설정 */
+    color: #fff; /* 텍스트 색상 설정 */
+    cursor: pointer; /* 커서를 포인터로 변경하여 버튼으로 보이게 합니다. */
+    transition: background-color 0.3s, color 0.3s; /* 부드러운 전환을 추가합니다. */
+    position: relative;
+    top: -5px;
+    margin-left: 10px;
+
+}
+
+.small-button:hover {
+    background-color: #ddd; /* 마우스를 올렸을 때 배경 색상 변경 */
+    color: #555; /* 마우스를 올렸을 때 텍스트 색상 변경 */
+}
+.reply-reply-button {
+    font-size: 12px; /* 원하는 폰트 크기 설정 */
+    padding: 5px 10px; /* 원하는 여백 설정 */
+    border: 1px solid #ccc;
+    border: none;
+    border-radius: 6px; /* 둥근 모서리를 만들 수 있습니다. */
+    background-color: #353434; /* 배경색상 설정 */
+    color: #fff; /* 텍스트 색상 설정 */
+    cursor: pointer; /* 커서를 포인터로 변경하여 버튼으로 보이게 합니다. */
+    transition: background-color 0.3s, color 0.3s; /* 부드러운 전환을 추가합니다. */
+    position: relative;
+    margin-left: 10px;
+}
+.reply-reply-button:hover {
+    background-color: #ddd; /* 마우스를 올렸을 때 배경 색상 변경 */
+    color: #555; /* 마우스를 올렸을 때 텍스트 색상 변경 */
+}
+.reply-reply-add-container {
+    margin-top: 15px;
+    width: 100%;
+    height: 50px;
+}
+.reply-add {
+    border: none;
+}
+.reply-comment-divider{
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 5px 0;
+    width: 70%;
+    margin-left: 100px;
+}
+.reply-comment-add-container {
+    position: relative;
+    top: 5px;
+    margin-left: 40px;
+}

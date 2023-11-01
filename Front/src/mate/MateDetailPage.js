@@ -7,7 +7,7 @@ import "../static/game-warrior/css/animate.css";
 import "../static/game-warrior/css/bootstrap.min.css";
 import "../static/game-warrior/css/style.css";
 import { useNavigate } from "react-router-dom";
-import "./styles.css";
+import "../review/styles.css";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 function formatDate(rawDate) {
@@ -18,12 +18,12 @@ function formatDate(rawDate) {
     return `${year}.${month}.${day}`;
 }
 
-export function ReviewDetailPage() {
+export function MateDetailPage() {
     const [comment, setComment] = useState('');
     const { comm_id } = useParams();
     const [user_id, setUser_id] = useState('1');
-    const [review, setReview] = useState({ title: '', content: '' });
-    const [comments, setComments] = useState([]);
+    const [mate, setMate] = useState({ title: '', content: '' });
+    const [comments, setComments] = useState([]); // comments로 수정
     const navigate = useNavigate();
     const [isLiked, setIsLiked] = useState(false);
     const [isReplyVisible, setIsReplyVisible] = useState({});
@@ -31,8 +31,7 @@ export function ReviewDetailPage() {
     const [replyComment, setReplyComment] = useState('');
     const [replyComments, setReplyComments] = useState([]);
     const [reply_comment_id, setReply_comment_id] = useState('');
-
-    // 좋아요
+    // 좋아요 구현
     function handleLikeClick(reviewId) {
         axios.post(`http://localhost:8080/detail/like/${comm_id}`)
             .then((response) => {
@@ -66,30 +65,30 @@ export function ReviewDetailPage() {
     }, [comm_id]);
 
     // 디테일 페이지 뿌리기
-    useEffect(() => {
-        axios.get(`http://localhost:8080/show/reviewDetail/${comm_id}`)
+  useEffect(() => {
+        axios.get(`http://localhost:8080/show/mateDetail/${comm_id}`)
             .then((res) => {
                 console.log("Response: ", res);
-                setReview(res.data);
+                setMate(res.data);
             })
             .catch((error) => {
                 console.error("Error: ", error);
             });
     }, [comm_id]);
-
+    // 댓글
     useEffect(() => {
         axios.get(`http://localhost:8080/show/Detail/reply/${comm_id}`)
             .then((res) => {
                 console.log("Response: ", res);
-                setComments(res.data);
+                setComments(res.data); // comments로 수정
             })
             .catch((error) => {
                 console.error("Error: ", error);
             });
     }, [comm_id]);
 
-    const ReviewList = () => {
-        navigate("/review/list");
+    const MateList = () => {
+        navigate("/mate/list");
     };
     // 대댓글 입력시 데이터 들어가게 만드는 메서드
     const handleCommentChange = (e) => {
@@ -131,6 +130,7 @@ export function ReviewDetailPage() {
             return `${daysAgo}일 전`;
         }
     }
+
     // 댓글 작성 후 바로 뿌리기
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -212,21 +212,28 @@ export function ReviewDetailPage() {
             });
     }, [reply_id]);
 
+
     return (
         <>
             <Header />
+
             <div className="board-detail-container">
                 <div className="board-detail">
                     <div className="board-title-container">
                         <h2 className="title-name">제목</h2>
-                        <h1 className="board-title">{review.title}</h1>
+                        <h1 className="board-title">{mate.title}</h1>
                     </div>
-                    <h4 className="date-reg">{formatDate(review.regdate)}</h4>
-                    <hr className="board-divider" />
-                    <div className="board-content" dangerouslySetInnerHTML={{ __html: review.content }} />
+
+                    <h4 className="date-reg">{formatDate(mate.regdate)}</h4>
+                    <hr className="board-divider" /> {/* 제목과 내용을 구분하는 선 */}
+                    <div
+                        className="board-content"
+                        dangerouslySetInnerHTML={{ __html: mate.content }}
+                    />
                     <button className="button-heart" onClick={handleLikeClick}>
                         {isLiked ? <AiFillHeart size="30" /> : <AiOutlineHeart size="30" />}
                     </button>
+
                 </div>
             </div>
             <div className="board-detail-reply-container">
@@ -282,10 +289,10 @@ export function ReviewDetailPage() {
                                         </div>
                                     ))}
                             </div>
-                            ))}
+                        ))}
                 </div>
             </div>
-            <button className="return-list" onClick={ReviewList}>
+            <button className="return-list" onClick={MateList}>
                 돌아가기
             </button>
             <Footer className="Footer-detailpage-bottom" />
