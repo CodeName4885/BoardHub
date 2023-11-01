@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorizeRequests) ->{
 
-                    authorizeRequests.requestMatchers("/join","/login","/profile","/mailconfirm","/usernamecheck","/activateuser","/api/game/list","/api/game/{id}","/api/game/{id}/category", "/api/game/data/{id}","/getmainitem", "/kakaouserinfoadd", "/googleuserinfoadd", "/socialmypage","/api/game/comment/{id}", "/gethotmainitem").permitAll();
+                    authorizeRequests.requestMatchers("/join","/login","/profile","/mailconfirm","/usernamecheck","/activateuser","/api/game/list","/api/game/{id}","/api/game/{id}/category", "/api/game/data/{id}","/getmainitem", "/kakaouserinfoadd", "/googleuserinfoadd", "/socialmypage","/api/game/comment/{id}", "/gethotmainitem","/blogData/**","deleteCommunity/**").permitAll();
 
                     authorizeRequests.requestMatchers("/join","/login","/profile","/mailconfirm","/usernamecheck","/activateuser","/api/game/list","/api/game/{id}","/api/game/{id}/category", "/api/game/data/{id}","/getmainitem", "/kakaouserinfoadd", "/googleuserinfoadd", "/socialmypage","/api/game/comment/{id}","/add/**","/show/**","/show/Detail/**","/show/Detail/reply/**","/detail/like/**","/show/mateDetail/**", "/show/solutionDetail/**", "/show/tradeDetail/**","/add/reply/comment/**", "/show/reply/comment/**", "/up/views/**").permitAll();
 

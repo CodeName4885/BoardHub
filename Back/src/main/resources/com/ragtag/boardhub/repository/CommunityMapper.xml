@@ -132,7 +132,9 @@
     </update>
 
 
-
+    <delete id="deleteCommunity">
+        DELETE community WHERE comm_id = #{comm_id}
+    </delete>
 
 
 

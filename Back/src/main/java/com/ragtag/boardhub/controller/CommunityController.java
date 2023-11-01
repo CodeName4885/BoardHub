@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin (origins = "http://localhost:3000")
+@CrossOrigin(origins = "localhost:3000/")
 public class CommunityController {
     private final CommunityService communityService;
     private final ReplyService replyService;
@@ -217,6 +217,15 @@ public class CommunityController {
           return ResponseEntity.ok("Views incremented successfully");
 
     }
+    @DeleteMapping("/deleteCommunity/{comm_id}")
+    public ResponseEntity<String> deleteCommunity(@PathVariable Long comm_id) {
+        System.out.println("Delete 호출!!!" + comm_id);
+        communityService.deleteCommunity(comm_id);
+        // 삭제가 성공적으로 이루어진 경우
+        return new ResponseEntity<>("게시물이 성공적으로 삭제되었습니다.", HttpStatus.OK);
 
-
+        // 삭제에 실패한 경우
+        // return new ResponseEntity<>("게시물 삭제에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
+

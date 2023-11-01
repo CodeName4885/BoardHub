@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./styles.css"
+import "./styles.css";
+import { PaginationComponent } from "../paging/PaginationComponent";
 
 function formatDate(rawDate) {
     const date = new Date(rawDate);
@@ -10,6 +11,7 @@ function formatDate(rawDate) {
     const day = date.getDate().toString().padStart(2, '0');
     return `${year}.${month}.${day}`;
 }
+
 function getCategoryText(category) {
     switch (category) {
         case 1:
@@ -18,20 +20,29 @@ function getCategoryText(category) {
             return '프리뷰';
         case 3:
             return '모임';
+        default:
+            return '';
     }
 }
+
 export function ReviewListComponent() {
     const [reviewList, setReviewList] = useState([]);
+    const [totalItemsCount, setTotalItemsCount] = useState(0);
     const navigate = useNavigate();
     const [userNickname, setUserNickname] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize] = useState(15); // 페이지당 아이템 수
 
-    const addReviewButton = () => {
-        navigate("/review/add");
-    }
+    // 페이지별 데이터 상태 추가
+    const [pagedData, setPagedData] = useState([]);
+
+    // 데이터를 가져오고 페이지네이션 관련 상태 초기화
     const getReviewList = async () => {
         try {
             const resp = await axios.get('http://localhost:8080/show/reviewsList');
             setReviewList(resp.data);
+            setTotalItemsCount(resp.data.length);
+            setCurrentPage(1); // 페이지를 첫 번째 페이지로 초기화
         } catch (error) {
             console.error("데이터 못불러왕~! : ", error);
         }
@@ -51,6 +62,24 @@ export function ReviewListComponent() {
         getReviewList();
     }, []);
 
+    // 페이지 변경 시 호출되는 함수
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+
+    // reviewList, currentPage를 기반으로 페이지별 데이터 업데이트
+    useEffect(() => {
+        const startIndex = (currentPage - 1) * pageSize;
+        const endIndex = startIndex + pageSize;
+        setPagedData(reviewList.slice(startIndex, endIndex));
+
+        // 페이지별 데이터 업데이트 후 사용자 데이터를 가져옵니다.
+        if (pagedData.length > 0) {
+            const user_ids = pagedData.map((review) => review.user_id);
+            user_ids.forEach((user_id) => getUserData(user_id));
+        }
+    }, [currentPage, pageSize, reviewList, pagedData]);
+
     useEffect(() => {
         if (reviewList.length > 0) {
             const user_ids = reviewList.map((review) => review.user_id);
@@ -61,7 +90,9 @@ export function ReviewListComponent() {
     return (
         <div className="app">
             <p className="solution-content">공략 글</p>
-            <button className="add-button" onClick={addReviewButton}>글 작성하기</button>
+            <button className="add-button" onClick={() => navigate("/review/add")}>
+                글 작성하기
+            </button>
             <div className="center-table">
                 <table className="table table-dark table-striped">
                     <thead>
@@ -75,14 +106,21 @@ export function ReviewListComponent() {
                     </tr>
                     </thead>
                     <tbody>
-                    {reviewList.map((review, index) => (
+                    {pagedData.map((review, index) => (
                         <tr key={index}>
-                            <th scope="row" className="category-box">{getCategoryText(review.category)}</th>
-                            <td onClick={(event) => {
-                                if (event.target.tagName === "TD") {
-                                    navigate(`/review/detail/${review.comm_id}`);
-                                }
-                            }} style={{ cursor: 'pointer' }}>{review.title}</td>
+                            <th scope="row" className="category-box">
+                                {getCategoryText(review.category)}
+                            </th>
+                            <td
+                                onClick={(event) => {
+                                    if (event.target.tagName === "TD") {
+                                        navigate(`/review/detail/${review.comm_id}`);
+                                    }
+                                }}
+                                style={{ cursor: 'pointer' }}
+                            >
+                                {review.title}
+                            </td>
                             <td>{review.count}</td>
                             <td>{userNickname}</td>
                             <td>{review.likes}</td>
@@ -91,6 +129,10 @@ export function ReviewListComponent() {
                     ))}
                     </tbody>
                 </table>
+                <PaginationComponent
+                    activePage={currentPage}
+                    onPageChange={handlePageChange}
+                />
             </div>
         </div>
     );

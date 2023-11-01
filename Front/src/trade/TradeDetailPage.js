@@ -57,6 +57,36 @@ export function TradeDetailPage() {
         }
     }, [token, socialtoken]);
 
+    const deleteClick = () => {
+        const commIdToDelete = comm_id;
+        const shouldDelete = window.confirm('게시물을 삭제하시겠습니까?');
+
+        if (shouldDelete) {
+            deleteCommunity(commIdToDelete);
+        }
+    };
+
+    const deleteCommunity = (commId) => {
+        const serverUrl = 'http://localhost:8080';
+        const requestOptions = {
+            method: 'DELETE', // 오타 수정: 'mehtod' -> 'method'
+            headers: { 'Content-Type': 'application/json' }, // 중괄호 중복 제거
+        };
+
+        fetch(`${serverUrl}/deleteCommunity/${comm_id}`, requestOptions)
+            .then((response) => {
+                if (response.status === 200) {
+                    navigate("/review/list")
+                    console.log('게시물이 성공적으로 삭제되었습니다.');
+                } else {
+                    console.log('게시물 삭제에 실패했습니다.');
+                }
+            })
+            .catch((error) => {
+                console.error('게시물 삭제 중 오류가 발생했습니다:', error);
+            });
+    };
+
     // 좋아요
     function handleLikeClick(tradeId) {
         axios.post(`http://localhost:8080/detail/like/${comm_id}`)
@@ -245,6 +275,7 @@ export function TradeDetailPage() {
                     <div className="board-title-container">
                         <h2 className="title-name">제목</h2>
                         <h1 className="board-title">{trade.title}</h1>
+                        <button className="add-button" onClick={deleteClick}></button>
                     </div>
 
                     <h4 className="date-reg">{formatDate(trade.regdate)}</h4>

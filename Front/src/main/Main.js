@@ -10,9 +10,12 @@ import main from "../static/game-warrior/css/main.module.css";
 import { getHotMainItem, getMainitem } from "../UserApiConfig/ApiService";
 import { useEffect, useState } from "react";
 import Side from "./Side";
+import axios from 'axios';
+
 function Main() {
     const [games, setGames] = useState([]);
     const [hotGames, setHotGames] = useState([]);
+    const [blog, setBlog] = useState([]);
     useEffect(() => {
         getMainitem().then((result) => {
             console.log("result = ", result);
@@ -24,6 +27,18 @@ function Main() {
         })
 
     }, []);
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/show/blog`)
+            .then((res) => {
+                console.log("Response: ", res);
+                setBlog(res.data);
+            })
+            .catch((error) => {
+                console.error("Error: ", error);
+            });
+    }, []);
+
 
     return (
         <>
@@ -146,34 +161,31 @@ function Main() {
                     </div>
                     <h2 className={main["recent-review-title"]}>최근 리뷰</h2>
                     <div className={main["recent-review-card-box"]}>
-                        <div className={main["recent-review-card-wrap"]}>
-                            <div className={main["recent-review-card"]}>
-                                <div
-                                    className={main["recent-review-game-img"]}
-                                ></div>
+                        {blog.slice(0, 4).map((item) => (
+                            <div className={main["recent-review-card-wrap"]} key={item.id}>
+                                <div className={main["recent-review-card"]}>
+                                    <div
+                                        className={main["recent-review-game-img"]}
+                                        style={{
+                                            backgroundImage: `url("${item.image_url}")`,
+                                        }}
+                                    ></div>
+                                </div>
+                                <div className={main["recent-review-game-content-box"]}>
+                                    <p className={main["recent-review-game-title"]}>
+                                        <span dangerouslySetInnerHTML={{ __html: item.title }} />
+                                    </p>
+                                    <a
+                                        href={item.link}
+                                        className={main["recent-review-coment"]}
+                                        dangerouslySetInnerHTML={{ __html: item.description }}
+                                    ></a>
+                                </div>
                             </div>
-                            <div
-                                className={
-                                    main["recent-review-game-content-box"]
-                                }
-                            >
-                                <p className={main["recent-review-game-title"]}>
-                                    Game Title
-                                </p>
-                                <a
-                                    href="#"
-                                    className={main["recent-review-coment"]}
-                                >
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit.
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit.
-                                </a>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </section>
-            </div>
+              </div>
             <Footer />
         </>
     );

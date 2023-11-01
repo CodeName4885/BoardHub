@@ -41,4 +41,5 @@ public interface CommunityRepository {
     Community upViews(Long commId);
 
 
+    void deleteCommunity(Long commId);
 }
