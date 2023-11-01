@@ -146,7 +146,6 @@ public class GameRepositoryImpl implements GameRepository {
     }
 
     @Override
-<<<<<<< HEAD
     public Long getComentCountByGameId(Long gameId) {
         return gameMapper.getComentCountByGameId(gameId);
     }
@@ -154,15 +153,16 @@ public class GameRepositoryImpl implements GameRepository {
     @Override
     public String getComentByGameId(Long gameId) {
         List<String> comentByGameId = gameMapper.getComentByGameId(gameId);
-        if(comentByGameId.isEmpty()){
+        if (comentByGameId.isEmpty()) {
             return "최고의 게임!!";
-        }else {
+        } else {
             return comentByGameId.get(0);
         }
-=======
+    }
+
+    @Override
     public List<Comments> getAllCommentByGameId(Long gameId) {
         return gameMapper.getAllCommentByGameId(gameId);
->>>>>>> hjy
     }
 
 }

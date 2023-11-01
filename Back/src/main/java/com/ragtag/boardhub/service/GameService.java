@@ -34,12 +34,10 @@ public interface GameService {
 
     void saveGameComment(GameComment comment);
 
-<<<<<<< HEAD
     Long getComentCountByGameId(Long gameId);
 
     String getComentByGameId(Long gameId);
-=======
-    List<GameComment> getAllCommentByGameId(Long gameId);
 
->>>>>>> hjy
+
+    List<GameComment> getAllCommentByGameId(Long gameId);
 }

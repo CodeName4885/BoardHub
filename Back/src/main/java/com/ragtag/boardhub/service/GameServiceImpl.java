@@ -153,7 +153,6 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-<<<<<<< HEAD
     public Long getComentCountByGameId(Long gameId) {
         return gameRepository.getComentCountByGameId(gameId);
     }
@@ -161,10 +160,10 @@ public class GameServiceImpl implements GameService {
     @Override
     public String getComentByGameId(Long gameId) {
         return gameRepository.getComentByGameId(gameId);
-=======
+    }
+    @Override
     public List<GameComment> getAllCommentByGameId(Long gameId) {
         return gameRepository.getAllCommentByGameId(gameId).stream().map((comm) -> new GameComment(comm)).collect(Collectors.toList());
->>>>>>> hjy
     }
 
 

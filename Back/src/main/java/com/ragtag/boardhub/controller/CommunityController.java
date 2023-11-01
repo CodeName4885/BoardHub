@@ -18,7 +18,6 @@ import com.ragtag.boardhub.domain.CommunityImg;
 import com.ragtag.boardhub.domain.Reply;
 import com.ragtag.boardhub.domain.Reply_Comment;
 import com.ragtag.boardhub.service.CommunityService;
-<<<<<<< HEAD
 import com.ragtag.boardhub.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,11 +25,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-=======
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
->>>>>>> hjy
+
 
 @RestController
 @RequiredArgsConstructor
@@ -229,7 +227,7 @@ public class CommunityController {
     public ResponseEntity<String> upViews(@PathVariable Long comm_id) {
         Community community = communityService.upViews(comm_id);
         System.out.println("Community Data: " + community);
-          return ResponseEntity.ok("Views incremented successfully");
+        return ResponseEntity.ok("Views incremented successfully");
 
     }
 
