@@ -219,6 +219,18 @@ export async function fetchCommentsByGameId(gameId) {
     }
 }
 
+export async function fetchCommentByUser(userId) {
+    try {
+        const response = await fetch(`${URL}/comment/${userId}`, {
+            method: "get",
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export async function saveGameComment(params) {
     const { gameId } = params;
     try {

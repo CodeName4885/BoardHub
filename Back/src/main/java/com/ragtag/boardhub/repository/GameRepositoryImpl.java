@@ -145,4 +145,9 @@ public class GameRepositoryImpl implements GameRepository {
         gameMapper.saveGameComment(comment);
     }
 
+    @Override
+    public List<Comments> getAllCommentByGameId(Long gameId) {
+        return gameMapper.getAllCommentByGameId(gameId);
+    }
+
 }

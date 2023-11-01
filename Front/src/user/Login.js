@@ -132,6 +132,10 @@ function Login() {
                                                 data
                                             ).then((response) => {
                                                 console.log(response);
+                                                sessionStorage.setItem(
+                                                    "USER_ID",
+                                                    response
+                                                );
                                                 window.location.href = "/";
                                             });
                                         }}

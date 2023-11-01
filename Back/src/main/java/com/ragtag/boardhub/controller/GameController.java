@@ -2,6 +2,7 @@ package com.ragtag.boardhub.controller;
 
 import com.ragtag.boardhub.DTO.game.*;
 import com.ragtag.boardhub.domain.Review;
+import com.ragtag.boardhub.domain.game.Comments;
 import com.ragtag.boardhub.service.GameService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -101,12 +102,16 @@ public class GameController {
     }
 
     @GetMapping("comment/{id}")
-    public ResponseEntity<Review> getGameComment(@PathVariable("id") Long gameId) {
-        return null;
+    public ResponseEntity<List<GameComment>> getGameComments(@PathVariable("id") Long gameId) {
+        List<GameComment> comments = gameService.getAllCommentByGameId(gameId);
+        log.info("comments : {}", comments);
+        return comments != null ? new ResponseEntity<>(comments, HttpStatus.OK) :
+                new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @PostMapping("comment/{id}")
-    public ResponseEntity<Review> postGameComment(@PathVariable("id") Long gameId, @RequestBody GameComment form) {
+    public ResponseEntity<GameComment> postGameComment(@PathVariable("id") Long gameId, @RequestBody GameComment form) {
+        log.info("formdata = {}", form);
         gameService.saveGameComment(form);
         return null;
     }

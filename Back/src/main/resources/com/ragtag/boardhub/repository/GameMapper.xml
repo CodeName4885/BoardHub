@@ -138,6 +138,9 @@
         values(#{comment_id}, #{game_id}, #{user_id}, #{content})
     </insert>
 
-
+    <select id="getAllCommentByGameId">
+        select c.*, u.nickname from comments c
+        join users u on u.user_id = c.user_id where game_id = #{gameId}
+    </select>
 
 </mapper>

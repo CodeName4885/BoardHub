@@ -16,6 +16,7 @@ export function GameDetailComponent() {
     const [game, setGame] = useState(undefined);
     const [loading, setLoading] = useState(true);
     const [categories, setCategories] = useState();
+
     const navigate = useNavigate();
 
     useEffect(() => {

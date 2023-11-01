@@ -59,4 +59,5 @@ public interface GameRepository {
 
     void saveGameComment(Comments comment);
 
+    List<Comments> getAllCommentByGameId(Long gameId);
 }

@@ -95,7 +95,7 @@ public class UserController {
             Date expiratedTime = tokenProvider.getExpirationDate(token);
             log.info("token: {}", token);
             log.info("expiratedTime : {}", expiratedTime);
-            AccessTokenResponse accessTokenResponse = new AccessTokenResponse(token, expiratedTime, user.getUser_status());
+            AccessTokenResponse accessTokenResponse = new AccessTokenResponse(token, expiratedTime, user.getUser_id(), user.getUser_status());
 
             return ResponseEntity.ok(accessTokenResponse);
         }else{
@@ -246,11 +246,16 @@ public class UserController {
         log.info("kakaoUserInfo => {}", kakaouserinfo);
         Boolean result = userService.getSocailUser(kakaouserinfo.getEmail());
         if(!result){
-            userService.addSocailUser(kakaouserinfo);
+            int num = userService.addSocailUser(kakaouserinfo);
+            if(num != 0){
+                Users users = userService.findByUser(kakaouserinfo.getEmail());
+                return ResponseEntity.ok(users.getUser_id());
+            }
         }else{
-            return ResponseEntity.ok("Already exist");
+            Users users = userService.findByUser(kakaouserinfo.getEmail());
+            return ResponseEntity.ok(users.getUser_id());
         }
-        return ResponseEntity.ok("success");
+        return ResponseEntity.ok(userService.findByUser(kakaouserinfo.getEmail()).getUser_id());
     }
 
     @PostMapping("/googleuserinfoadd")
@@ -258,12 +263,18 @@ public class UserController {
         log.info("google user info add start!");
         log.info("googleuserinfo => {}", googleuserinfo);
         Boolean result = userService.getSocailUser(googleuserinfo.getEmail());
+
         if(!result){
-            userService.addSocailUser(googleuserinfo);
+            int num = userService.addSocailUser(googleuserinfo);
+            if(num != 0){
+                Users users = userService.findByUser(googleuserinfo.getEmail());
+                return ResponseEntity.ok(users.getUser_id());
+            }
         }else{
-            return ResponseEntity.ok("Already exist");
+            Users users = userService.findByUser(googleuserinfo.getEmail());
+            return ResponseEntity.ok(users.getUser_id());
         }
-        return ResponseEntity.ok("success");
+        return ResponseEntity.ok(userService.findByUser(googleuserinfo.getEmail()).getUser_id());
     }
 
     @PostMapping("/socialmypage")

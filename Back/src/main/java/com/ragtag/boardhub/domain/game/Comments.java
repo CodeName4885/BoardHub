@@ -13,4 +13,6 @@ public class Comments {
     private String content;
     private LocalDateTime regdate;
 
+    private String nickname;
+
 }

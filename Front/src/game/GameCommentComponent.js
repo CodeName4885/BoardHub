@@ -1,41 +1,77 @@
+import {
+    Avatar,
+    Button as Btn,
+    Flex,
+    Form,
+    Input,
+    List,
+    Modal,
+    Popover,
+    Typography,
+    message,
+} from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Call } from "../UserApiConfig/ApiService";
 import {
     fetchCommentsByGameId,
     saveGameComment,
 } from "./repositories/GameRepository";
-import {
-    Button as Btn,
-    Popover,
-    Modal,
-    message,
-    Input,
-    Form,
-    Flex,
-} from "antd";
 
 const { TextArea } = Input;
+const { Title, Text, Paragraph } = Typography;
 
 export function GameCommentComponent() {
     const params = useParams();
     const { gameId } = params;
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const socialtoken = sessionStorage.getItem("TOKEN");
+    const [userData, setUserData] = useState();
 
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
-    const [commentValue, setCommentValue] = useState();
+    const [comments, setComments] = useState([]);
+    const [userComment, setUserComment] = useState();
     const navigate = useNavigate();
-    const [user, setUser] = useState({
-        userId: 1,
-    });
-    const { userId } = user;
 
     useEffect(() => {
-        getGameComment();
+        getLoginUserData().then((data) => {
+            getAllComments(data);
+        });
     }, [gameId]);
 
-    async function getGameComment() {
-        await fetchCommentsByGameId(gameId);
+    async function getLoginUserData() {
+        if (token !== null) {
+            return Call("/mypage", "POST", null)
+                .then((response) => {
+                    setUserData(response);
+                    return response;
+                })
+                .catch((error) => {
+                    console.error("Error fetching data: ", error);
+                });
+        }
+        if (socialtoken !== null) {
+            const email = sessionStorage.getItem("USER_EMAIL");
+            return Call("/socialmypage", "POST", email).then((response) => {
+                setUserData(response);
+                return response;
+            });
+        }
+    }
+
+    async function getAllComments(user) {
+        await fetchCommentsByGameId(gameId).then((data) => {
+            setComments(data);
+            if (user) {
+                const myComment =
+                    comments.length > 0
+                        ? comments.find((comm) => comm.userId === user.user_id)
+                        : comments.userId == user.user_id && comments;
+                setUserComment(myComment);
+            }
+        });
     }
 
     function onClick() {
@@ -68,9 +104,10 @@ export function GameCommentComponent() {
     }
 
     async function postComment(content) {
+        const { user_id } = userData;
         const params = {
             gameId: gameId,
-            userId: userId,
+            userId: user_id,
             content: content,
         };
         console.log(params);
@@ -79,7 +116,10 @@ export function GameCommentComponent() {
 
     function onFinish(form) {
         const content = form.comment;
-        setCommentValue(content);
+        setUserComment({
+            ...userComment,
+            content: content,
+        });
         postComment(content);
         handleOk();
     }
@@ -89,20 +129,18 @@ export function GameCommentComponent() {
             <div className="mt-4">
                 <h2 style={{ fontWeight: "bold" }}>게임 한줄평</h2>
             </div>
-            {/*     로그인 된 상태에서만 이용 가능 */}
-            <div className="ml-2 mt-4 col-md-5">
-                {user ? (
+            <div className="mt-2 col-md-5">
+                {userData ? (
                     <div>
                         <TextArea
                             rows={4}
-                            value={commentValue}
+                            value={userComment ? userComment.content : ""}
                             style={{
                                 resize: "none",
-                                marginTop: 5,
+                                fontSize: 15,
                             }}
                             readOnly
                             onClick={onClick}
-                            copy
                         />
                     </div>
                 ) : (
@@ -135,44 +173,70 @@ export function GameCommentComponent() {
             >
                 {contextHolder}
                 <Form name="form" layout="vertical" onFinish={onFinish}>
-                    <Form.Item name="comment">
+                    <Form.Item
+                        name="comment"
+                        initialValue={userComment ? userComment.content : ""}
+                    >
                         <TextArea
                             rows={4}
+                            value={userComment ? userComment.content : ""}
                             placeholder="최대 150자"
                             maxLength={150}
-                            style={{ resize: "none", marginTop: 5 }}
-                            value={commentValue}
+                            style={{
+                                resize: "none",
+                                marginTop: 5,
+                                fontSize: 15,
+                            }}
                         />
                     </Form.Item>
                     <Flex justify="flex-end" gap="small">
                         <Btn type="default" onClick={handleCancel}>
                             취소
                         </Btn>
-                        <Btn type="primary" htmlType="submit">
-                            완료
-                        </Btn>
+                        {userData?.user_id == comments?.userId ? (
+                            <Btn type="primary" htmlType="button">
+                                수정
+                            </Btn>
+                        ) : (
+                            <Btn type="primary" htmlType="submit">
+                                완료
+                            </Btn>
+                        )}
                     </Flex>
                 </Form>
             </Modal>
-            {/* <List   
+            <List
                 itemLayout="horizontal"
-                dataSource={data}
+                dataSource={comments}
+                size="large"
+                pagination={{
+                    pageSize: 10,
+                }}
                 renderItem={(item, index) => (
                     <List.Item>
                         <List.Item.Meta
                             avatar={
                                 <Avatar
-                                    src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`}
+                                    shape="square"
+                                    // 프로필 이미지
                                 />
                             }
                             title={
-                                <a href="https://ant.design">{item.title}</a>
+                                <Title level={5} style={{ paddingTop: 3 }}>
+                                    {item.nickname}
+                                </Title>
                             }
-                            description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                            description={
+                                <pre>
+                                    <Text style={{ fontSize: 20 }}>
+                                        {item.content}
+                                    </Text>
+                                </pre>
+                            }
                         />
                     </List.Item>
                 )}
-            /> */}
+            />
         </>
     );
 }

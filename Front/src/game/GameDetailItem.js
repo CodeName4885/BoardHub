@@ -1,9 +1,4 @@
-import { Button } from "react-bootstrap";
-import { Button as Btn, Modal, message, Popover, Flex } from "antd";
-import { useState } from "react";
-import TextArea from "antd/es/input/TextArea";
-import { saveGameComment } from "./repositories/GameRepository";
-import { Link, useNavigate } from "react-router-dom";
+import { Button as Btn } from "antd";
 
 export function GameDetailItem({ game }) {
     const gameInfoStyle = {

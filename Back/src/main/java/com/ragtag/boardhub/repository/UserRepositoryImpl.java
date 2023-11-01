@@ -70,8 +70,8 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     @Override
-    public void addSocailUser(SocailDTO kakaouserinfo) {
-        userMapper.addSocailUser(kakaouserinfo);
+    public int addSocailUser(SocailDTO kakaouserinfo) {
+        return userMapper.addSocailUser(kakaouserinfo);
     }
 
 }
