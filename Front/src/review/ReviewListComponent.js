@@ -41,7 +41,7 @@ export function ReviewListComponent() {
     }, []); // 빈 배열을 전달하여 한 번만 실행되도록 설정
 
     return (
-        <div className="App">
+        <div className="app">
             <p className="solution-content">공략 글</p>
             <button className="add-button" onClick={addReviewButton}>글 작성하기</button>
             <div className="center-table">

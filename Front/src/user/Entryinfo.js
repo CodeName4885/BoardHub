@@ -272,7 +272,6 @@ function Entryinfo() {
             joinData.username &&
             joinData.password &&
             joinData.name &&
-            joinData.nickname &&
             joinData.phone &&
             password === confirmPassword // 비밀번호가 일치하는지 확인
         ) {

@@ -1,3 +1,7 @@
+.app{
+    height: 100vh;
+}
+
 .board-detail-container {
     max-width: 80%;
     margin: 0 auto;
