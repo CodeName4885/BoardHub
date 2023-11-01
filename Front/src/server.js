@@ -131,7 +131,11 @@ app.get('/sse', (req, res) => {
     });
   };
 
+<<<<<<<<< Temporary merge branch 1
+  const intervalId = setInterval(sendRankingData, 3000); // 3초에 한 번 데이터 업데이트
+=========
   const intervalId = setInterval(sendRankingData, 5000); // 3초에 한 번 데이터 업데이트
+>>>>>>>>> Temporary merge branch 2
 
 
   // stop 명령을 입력하면 클라이언트에게 전송 중단
