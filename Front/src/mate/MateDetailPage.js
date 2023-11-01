@@ -9,6 +9,7 @@ import "../static/game-warrior/css/style.css";
 import { useNavigate } from "react-router-dom";
 import "../review/styles.css";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import {Call} from "../UserApiConfig/ApiService";
 
 function formatDate(rawDate) {
     const date = new Date(rawDate);
@@ -21,7 +22,6 @@ function formatDate(rawDate) {
 export function MateDetailPage() {
     const [comment, setComment] = useState('');
     const { comm_id } = useParams();
-    const [user_id, setUser_id] = useState('1');
     const [mate, setMate] = useState({ title: '', content: '' });
     const [comments, setComments] = useState([]); // comments로 수정
     const navigate = useNavigate();
@@ -31,6 +31,32 @@ export function MateDetailPage() {
     const [replyComment, setReplyComment] = useState('');
     const [replyComments, setReplyComments] = useState([]);
     const [reply_comment_id, setReply_comment_id] = useState('');
+
+    const user_id = sessionStorage.getItem("USER_ID");
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const socialtoken = sessionStorage.getItem("TOKEN");
+    const [userData, setUserData] = useState(null);
+    console.log(userData);
+    useEffect(() => {
+        if (token !== null) {
+            Call("/mypage", "POST", null)
+                .then((response) => {
+                    setUserData(response);
+                })
+                .catch((error) => {
+                    console.error("Error fetching data: ", error);
+                });
+        }
+        if(socialtoken !== null){
+            const email = sessionStorage.getItem("USER_EMAIL");
+            Call("/socialmypage", "POST", email)
+                .then((response)=>{
+                    setUserData(response);
+                })
+
+        }
+    }, [token, socialtoken]);
+
     // 좋아요 구현
     function handleLikeClick(reviewId) {
         axios.post(`http://localhost:8080/detail/like/${comm_id}`)
@@ -139,7 +165,7 @@ export function MateDetailPage() {
             reply_id: reply_id,
             comm_id: comm_id,
             content: comment,
-            user_id: user_id,
+            user_id: userData.user_id,
         };
 
         const response = await fetch(`http://localhost:8080/add/reply/${comm_id}`, {
@@ -174,7 +200,7 @@ export function MateDetailPage() {
             reply_id: reply_id,
             content: replyComment, // Make sure this references the correct state variable
             comm_id: comm_id,
-            user_id: user_id,
+            user_id: userData.user_id,
         };
 
         // Send the reply to the server
@@ -254,7 +280,7 @@ export function MateDetailPage() {
                         .map((comment, index) => (
                             <div key={index} className="comment">
                                 <div className="comment-info">
-                                    <span className="reply-user-id">{comment.user_id}</span>
+                                    <span className="reply-user-id">{userData.nickname}</span>
                                     <span className="reply-content">{comment.content}</span>
                                     <span className="reply-reg-date">{getTimeAgo(comment.regdate)}</span>
                                     <button type="button" className="small-button" onClick={() => toggleReply(comment.reply_id)}>
@@ -281,7 +307,7 @@ export function MateDetailPage() {
                                     .map((reply, replyIndex) => (
                                         <div key={replyIndex} className="comment-reply">
                                             <div className="reply-comment-add-container">
-                                                <span className="reply-comment-user-id">{reply.user_id}</span>
+                                                <span className="reply-comment-user-id">{userData.nickname}</span>
                                                 <span className="reply-comment-content">{reply.content}</span>
                                                 <span className="reply-comment-reg-date">{getTimeAgo(reply.regdate)}</span>
                                             </div>

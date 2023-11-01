@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../review/styles.css"
+import {Call} from "../UserApiConfig/ApiService";
 
 function formatDate(rawDate) {
     const date = new Date(rawDate);
@@ -13,6 +14,7 @@ function formatDate(rawDate) {
 export function TradeListComponent() {
     const [tradeList, setTradeList] = useState([]);
     const navigate = useNavigate();
+    const [userNickname, setUserNickname] = useState('');
 
     function getCategoryText(category) {
         switch (category) {
@@ -38,13 +40,28 @@ export function TradeListComponent() {
             console.error("데이터 못불러왕~! : ", error);
         }
     }
+    const getUserData = async (user_id) => {
+        try {
+            const userResp = await axios.get(`http://localhost:8080/show/${user_id}`);
+            console.log(userResp.data.nickname);
+            setUserNickname(userResp.data.nickname);
+        } catch (error) {
+            console.error("닉네임 가져오는 도중 오류 발생: ", error);
+        }
+    }
 
     useEffect(() => {
         getTradeList(); // 컴포넌트가 마운트될 때 데이터를 가져오도록 설정
     }, []); // 빈 배열을 전달하여 한 번만 실행되도록 설정
 
+    useEffect(() => {
+        if (tradeList.length > 0) {
+            const user_ids = tradeList.map((trade) => trade.user_id);
+            user_ids.forEach((user_id) => getUserData(user_id));
+        }
+    }, [tradeList]);
     return (
-        <div className="App">
+        <div className="app">
             <p className="solution-content">공략 글</p>
             <button className="add-button" onClick={addTradeButton}>글 작성하기</button>
             <div className="center-table">
@@ -55,6 +72,7 @@ export function TradeListComponent() {
                         <th>Title</th>
                         <th>조회수</th>
                         <th>추천수</th>
+                        <th>작성자</th>
                         <th>작성일</th>
                     </tr>
                     </thead>
@@ -68,6 +86,7 @@ export function TradeListComponent() {
                                 }
                             }} style={{ cursor: 'pointer' }}>{trade.title}</td>
                             <td>{trade.count}</td>
+                            <td>{userNickname}</td>
                             <td>{trade.likes}</td>
                             <td>{formatDate(trade.regdate)}</td>
                         </tr>

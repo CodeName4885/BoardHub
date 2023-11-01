@@ -12,10 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -292,5 +289,18 @@ public class UserController {
         }else{
             return ResponseEntity.badRequest().body("failed...");
         }
+
+            }
+    @GetMapping("/show/{user_id}")
+    public ResponseEntity<Users> getUserNickname(@PathVariable Long user_id) {
+        System.out.println("User _ ID DATA : " + user_id);
+        Users nickname = userService.getUserNickname(user_id);
+
+        if (nickname != null) {
+            return ResponseEntity.ok(nickname);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
+

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { storage } from "./FireBase";
-import { uploadString, getDownloadURL, ref } from "firebase/storage";
+import { uploadBytes, getDownloadURL, ref } from "firebase/storage";
 
 export function Editor({ onChange }) {
   const quillRef = useRef();
@@ -42,7 +42,7 @@ export function Editor({ onChange }) {
         try {
           const storageRef = ref(storage, `image/${Date.now()}_${file.name}`);
 
-          uploadString(storageRef, file)
+          uploadBytes(storageRef, file)
               .then(async (snapshot) => {
                 const url = await getDownloadURL(snapshot.ref); // Get the image URL
                 console.log("src : ", url);

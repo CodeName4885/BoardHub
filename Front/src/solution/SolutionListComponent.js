@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./styles.css"
 import { useNavigate, useParams } from "react-router-dom";
+import {Call} from "../UserApiConfig/ApiService";
 
 function SolutionListComponent() {
     const [playlist, setPlaylist] = useState([]);
@@ -9,7 +10,7 @@ function SolutionListComponent() {
     const PLAYLIST_ID = 'PLHcUTz5Sl91mLtDdtP-jZGoFPIBij6x70';
     const navigate = useNavigate();
     const [solutionList, setSolutionList] = useState([]);
-
+    const [userNickname, setUserNickname] = useState('');
     function formatDate(rawDate) {
         const date = new Date(rawDate);
         const year = date.getFullYear();
@@ -36,10 +37,26 @@ function SolutionListComponent() {
             console.error("데이터 못불러왕~! : ", error);
         }
     }
+    const getUserData = async (user_id) => {
+        try {
+            const userResp = await axios.get(`http://localhost:8080/show/${user_id}`);
+            console.log(userResp.data.nickname);
+            setUserNickname(userResp.data.nickname);
+        } catch (error) {
+            console.error("닉네임 가져오는 도중 오류 발생: ", error);
+        }
+    }
     useEffect(() => {
         getSolutionList(); // 컴포넌트가 마운트될 때 데이터를 가져오도록 설정
     }, []); // 빈 배열을 전달하여 한 번만 실행되도록 설정
 
+
+    useEffect(() => {
+        if (solutionList.length > 0) {
+            const user_ids = solutionList.map((solution) => solution.user_id);
+            user_ids.forEach((user_id) => getUserData(user_id));
+        }
+    }, [solutionList]);
 
     useEffect(() => {
         axios
@@ -62,7 +79,7 @@ function SolutionListComponent() {
 
 
     return (
-        <div className="App">
+        <div className="app-solution">
             <p className="video-solution">공략 영상</p>
             <button className="add-button" onClick={addSolutionButton}>글 작성하기</button>
             <div className="container" style={{ width: '90%', height: '40%' }}>
@@ -84,8 +101,6 @@ function SolutionListComponent() {
                         ))}
                 </div>
             </div>
-
-
             <div className="additional-div">
                 <p className="solution-content">공략 글</p>
                 <div className="center-table">
@@ -95,6 +110,7 @@ function SolutionListComponent() {
                             <th>#</th>
                             <th>Title</th>
                             <th>조회수</th>
+                            <th>작성자</th>
                             <th>추천수</th>
                             <th>작성일</th>
                         </tr>
@@ -109,6 +125,7 @@ function SolutionListComponent() {
                                     }
                                 }} style={{ cursor: 'pointer' }}>{solution.title}</td>
                                 <td>{solution.count}</td>
+                                <td>{userNickname}</td>
                                 <td>{solution.likes}</td>
                                 <td>{formatDate(solution.regdate)}</td>
                             </tr>

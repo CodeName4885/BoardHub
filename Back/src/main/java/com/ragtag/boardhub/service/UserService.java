@@ -34,4 +34,7 @@ public interface UserService {
     Boolean getSocailUser(String email);
 
     int addSocailUser(SocailDTO kakaouserinfo);
+
+
+    Users getUserNickname(Long user_id);
 }

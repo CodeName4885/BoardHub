@@ -3,6 +3,7 @@ package com.ragtag.boardhub.repository;
 import com.ragtag.boardhub.DTO.userDTO.SocailDTO;
 import com.ragtag.boardhub.domain.Users;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -72,6 +73,11 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public int addSocailUser(SocailDTO kakaouserinfo) {
         return userMapper.addSocailUser(kakaouserinfo);
+    }
+
+    @Override
+    public Users getUserNickname(Long user_id) {
+        return userMapper.getUserNickname(user_id);
     }
 
 }

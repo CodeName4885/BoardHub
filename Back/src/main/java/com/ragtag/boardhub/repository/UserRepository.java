@@ -29,4 +29,7 @@ public interface UserRepository {
     int getSocailUser(String email);
 
     int addSocailUser(SocailDTO kakaouserinfo);
+
+
+    Users getUserNickname(Long user_id);
 }

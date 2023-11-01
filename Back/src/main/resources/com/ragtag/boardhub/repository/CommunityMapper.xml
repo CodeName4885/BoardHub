@@ -14,7 +14,7 @@
 
         <![CDATA[
         INSERT INTO community (comm_id, title, content, count, type, regdate, user_id, category)
-        VALUES (#{comm_id}, #{title}, #{content, jdbcType=VARCHAR}, 0, 1, sysdate, 1, #{category})
+        VALUES (#{comm_id}, #{title}, #{content, jdbcType=VARCHAR}, 0, 1, sysdate, #{user_id}, #{category})
         ]]>
     </insert>
 
@@ -31,7 +31,7 @@
         </selectKey>
         <![CDATA[
         INSERT INTO community (comm_id, title, content, count, type, regdate, user_id, category)
-        VALUES (#{comm_id}, #{title}, #{content, jdbcType=VARCHAR}, 0, 2, sysdate, 1, #{category})
+        VALUES (#{comm_id}, #{title}, #{content, jdbcType=VARCHAR}, 0, 2, sysdate, #{user_id}, #{category})
         ]]>
     </insert>
 
@@ -49,7 +49,7 @@
         </selectKey>
         <![CDATA[
         INSERT INTO community (comm_id, title, content, count, type, regdate, user_id, category)
-        VALUES (#{comm_id}, #{title}, #{content, jdbcType=VARCHAR}, 0, 3, sysdate, 1, #{category})
+        VALUES (#{comm_id}, #{title}, #{content, jdbcType=VARCHAR}, 0, 3, sysdate, #{user_id}, #{category})
         ]]>
     </insert>
 
@@ -65,7 +65,7 @@
         </selectKey>
         <![CDATA[
         INSERT INTO community (comm_id, title, content, count, type, regdate, user_id, category)
-        VALUES (#{comm_id}, #{title}, #{content, jdbcType=VARCHAR}, 0, 4, sysdate, 1, #{category})
+        VALUES (#{comm_id}, #{title}, #{content, jdbcType=VARCHAR}, 0, 4, sysdate, #{user_id}, #{category})
         ]]>
     </insert>
 

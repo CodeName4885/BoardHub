@@ -1,15 +1,18 @@
+.app{
+    height: 100vh;
+}
+
 .board-detail-container {
     max-width: 80%;
     margin: 0 auto;
     margin-top: 50px;
     margin-bottom: 50px;
-    height: 700px;
+    height: auto;
     padding: 20px;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    overflow: auto;
 }
 
 .board-title {
@@ -37,6 +40,7 @@
     font-size: 24px; /* 내용 크기를 더 크게 조절 */
     line-height: 1.5;
     color: #555;
+    margin-top: 30px;
 }
 .board-title-container {
     display: flex;
@@ -133,7 +137,8 @@
 }
 
 .reply-reg-date {
-    margin-left: 40px;
+    position: absolute;
+    left: 1400px;
 }
 .reply-comment-user-id {
     margin-left: 10px;
@@ -259,9 +264,8 @@
     color: #fff; /* 텍스트 색상 설정 */
     cursor: pointer; /* 커서를 포인터로 변경하여 버튼으로 보이게 합니다. */
     transition: background-color 0.3s, color 0.3s; /* 부드러운 전환을 추가합니다. */
-    position: relative;
-    top: -5px;
-    margin-left: 10px;
+    position: absolute;
+    margin-left: 900px;
 
 }
 
@@ -279,8 +283,8 @@
     color: #fff; /* 텍스트 색상 설정 */
     cursor: pointer; /* 커서를 포인터로 변경하여 버튼으로 보이게 합니다. */
     transition: background-color 0.3s, color 0.3s; /* 부드러운 전환을 추가합니다. */
-    position: relative;
-    margin-left: 10px;
+    position: absolute;
+    left: 1200px;
 }
 .reply-reply-button:hover {
     background-color: #ddd; /* 마우스를 올렸을 때 배경 색상 변경 */

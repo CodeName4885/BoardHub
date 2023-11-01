@@ -1,13 +1,38 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Editor } from '../upload/Editor';
 import { useNavigate } from "react-router-dom";
 import "./styles.css"
+import {Call} from "../UserApiConfig/ApiService";
 export function ReviewAddComponent() {
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('1');
     const [editorContent, setEditorContent] = useState(''); // 에디터 내용을 저장할 상태
     const navigate = useNavigate();
 
+    const user_id = sessionStorage.getItem("USER_ID");
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const socialtoken = sessionStorage.getItem("TOKEN");
+    const [userData, setUserData] = useState(null);
+    console.log(userData);
+    useEffect(() => {
+        if (token !== null) {
+            Call("/mypage", "POST", null)
+                .then((response) => {
+                    setUserData(response);
+                })
+                .catch((error) => {
+                    console.error("Error fetching data: ", error);
+                });
+        }
+        if(socialtoken !== null){
+            const email = sessionStorage.getItem("USER_EMAIL");
+            Call("/socialmypage", "POST", email)
+                .then((response)=>{
+                    setUserData(response);
+                })
+
+        }
+    }, [token, socialtoken]);
 
     const cancleButton = () => {
         navigate("/review/list");
@@ -37,6 +62,7 @@ export function ReviewAddComponent() {
                     title: title,
                     category: category,
                     content: editorContent, // 에디터 내용을 전송
+                    user_id: userData.user_id,
                 }),
             });
 

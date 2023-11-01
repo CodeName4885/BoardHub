@@ -144,4 +144,12 @@ public class UserServiceImpl implements UserService {
     public int addSocailUser(SocailDTO kakaouserinfo) {
         return userRepository.addSocailUser(kakaouserinfo);
     }
+
+    @Override
+    public Users getUserNickname(Long user_id) {
+        System.out.println("user_id SErvice :" + user_id);
+        return userRepository.getUserNickname(user_id);
+    }
+
+
 }

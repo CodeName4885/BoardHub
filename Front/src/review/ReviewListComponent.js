@@ -23,6 +23,7 @@ function getCategoryText(category) {
 export function ReviewListComponent() {
     const [reviewList, setReviewList] = useState([]);
     const navigate = useNavigate();
+    const [userNickname, setUserNickname] = useState('');
 
     const addReviewButton = () => {
         navigate("/review/add");
@@ -30,18 +31,35 @@ export function ReviewListComponent() {
     const getReviewList = async () => {
         try {
             const resp = await axios.get('http://localhost:8080/show/reviewsList');
-            setReviewList(resp.data); // 서버에서 받은 데이터를 상태로 설정
+            setReviewList(resp.data);
         } catch (error) {
             console.error("데이터 못불러왕~! : ", error);
         }
     }
 
+    const getUserData = async (user_id) => {
+        try {
+            const userResp = await axios.get(`http://localhost:8080/show/${user_id}`);
+            console.log(userResp.data.nickname);
+            setUserNickname(userResp.data.nickname);
+        } catch (error) {
+            console.error("닉네임 가져오는 도중 오류 발생: ", error);
+        }
+    }
+
     useEffect(() => {
-        getReviewList(); // 컴포넌트가 마운트될 때 데이터를 가져오도록 설정
-    }, []); // 빈 배열을 전달하여 한 번만 실행되도록 설정
+        getReviewList();
+    }, []);
+
+    useEffect(() => {
+        if (reviewList.length > 0) {
+            const user_ids = reviewList.map((review) => review.user_id);
+            user_ids.forEach((user_id) => getUserData(user_id));
+        }
+    }, [reviewList]);
 
     return (
-        <div className="App">
+        <div className="app">
             <p className="solution-content">공략 글</p>
             <button className="add-button" onClick={addReviewButton}>글 작성하기</button>
             <div className="center-table">
@@ -51,6 +69,7 @@ export function ReviewListComponent() {
                         <th>#</th>
                         <th>Title</th>
                         <th>조회수</th>
+                        <th>작성자</th>
                         <th>추천수</th>
                         <th>작성일</th>
                     </tr>
@@ -60,11 +79,12 @@ export function ReviewListComponent() {
                         <tr key={index}>
                             <th scope="row" className="category-box">{getCategoryText(review.category)}</th>
                             <td onClick={(event) => {
-                               if (event.target.tagName == "TD") {
+                                if (event.target.tagName === "TD") {
                                     navigate(`/review/detail/${review.comm_id}`);
                                 }
                             }} style={{ cursor: 'pointer' }}>{review.title}</td>
                             <td>{review.count}</td>
+                            <td>{userNickname}</td>
                             <td>{review.likes}</td>
                             <td>{formatDate(review.regdate)}</td>
                         </tr>
