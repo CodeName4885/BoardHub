@@ -152,5 +152,15 @@ public class GameServiceImpl implements GameService {
         gameRepository.saveGameComment(comment.toEntity());
     }
 
+    @Override
+    public Long getComentCountByGameId(Long gameId) {
+        return gameRepository.getComentCountByGameId(gameId);
+    }
+
+    @Override
+    public String getComentByGameId(Long gameId) {
+        return gameRepository.getComentByGameId(gameId);
+    }
+
 
 }

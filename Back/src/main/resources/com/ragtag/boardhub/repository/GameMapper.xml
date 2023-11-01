@@ -138,6 +138,17 @@
         values(#{comment_id}, #{game_id}, #{user_id}, #{content})
     </insert>
 
+    <select id="getComentByGameId" resultType="String">
+        <![CDATA[
+            select * from (
+                select content from comments where game_id = #{gameId}
+            ) where ROWNUM <= 1
+        ]]>
+    </select>
+
+    <select id="getComentCountByGameId" resultType="Long">
+        select count(*) from comments where game_id = #{gameId}
+    </select>
 
 
 </mapper>

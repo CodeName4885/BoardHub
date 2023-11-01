@@ -1,5 +1,6 @@
 package com.ragtag.boardhub.controller;
 
+import com.ragtag.boardhub.DTO.GameInfoToMain;
 import com.ragtag.boardhub.DTO.game.GameResponse;
 import com.ragtag.boardhub.service.GameService;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,13 +22,39 @@ public class HomeController {
     public ResponseEntity<?> getmainitem(){
         log.info("Main data response!!");
         List<GameResponse> list = gameService.getList();
-        log.info("gameService ; {}", list);
-        List<GameResponse> subList;
-        if(list.size() > 4){
-            subList = list.subList(0, 4);
-        }else {
-            subList = list;
+        List<GameInfoToMain> newList = new ArrayList<>();
+        for (int i = 0; i < 4 && i < list.size(); i++) {
+            GameResponse item = list.get(i);
+            GameInfoToMain newItem = new GameInfoToMain();
+            newItem.setGameId(item.getGameId());
+            newItem.setTitle(item.getTitle());
+            newItem.setThumbnail(item.getImage());
+            newItem.setComent_count(gameService.getComentCountByGameId(item.getGameId()));
+            newItem.setComent(gameService.getComentByGameId(item.getGameId()));
+            newList.add(newItem);
         }
-        return ResponseEntity.ok(subList);
+
+        return ResponseEntity.ok(newList);
+
     }
+
+    @GetMapping("/gethotmainitem")
+    public ResponseEntity<?> getHotMainItem(){
+        List<GameResponse> list = gameService.getList();
+        List<GameInfoToMain> newList = new ArrayList<>();
+        for (int i = 4; i < 7 && i < list.size(); i++) {
+            GameResponse item = list.get(i);
+            GameInfoToMain newItem = new GameInfoToMain();
+            newItem.setGameId(item.getGameId());
+            newItem.setTitle(item.getTitle());
+            newItem.setThumbnail(item.getImage());
+            newItem.setComent_count(gameService.getComentCountByGameId(item.getGameId()));
+            newItem.setComent(gameService.getComentByGameId(item.getGameId()));
+            newList.add(newItem);
+        }
+        return ResponseEntity.ok(newList);
+    }
+
+
 }
+
