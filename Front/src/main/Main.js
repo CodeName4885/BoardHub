@@ -6,20 +6,23 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
-import boardgame1 from "../static/game-warrior/img/slider-1.jpg";
-import boardgame2 from "../static/game-warrior/img/slider-2.jpg";
 import main from "../static/game-warrior/css/main.module.css";
-import { getMainitem } from "../UserApiConfig/ApiService";
+import { getHotMainItem, getMainitem } from "../UserApiConfig/ApiService";
 import { useEffect, useState } from "react";
 import Side from "./Side";
 function Main() {
     const [games, setGames] = useState([]);
-
+    const [hotGames, setHotGames] = useState([]);
     useEffect(() => {
         getMainitem().then((result) => {
             console.log("result = ", result);
             setGames(result);
         });
+        getHotMainItem().then((result) => {
+            console.log("result = ", result);
+            setHotGames(result);
+        })
+
     }, []);
 
     return (
@@ -32,24 +35,30 @@ function Main() {
                 <section className={main["slide-wrap"]}>
                     <Swiper
                         modules={[Pagination, Scrollbar, A11y, Autoplay]}
-                        spaceBetween={0}
-                        slidesPerView={1}
+                        spaceBetween={10}
+                        slidesPerView={2}
                         pagination={{ clickable: true }}
                         scrollbar={{ draggable: true }}
                         autoplay={{ delay: 2500, disableOnInteraction: false }}
                         onSlideChange={() => console.log("slide change")}
                         onSwiper={(swiper) => console.log(swiper)}
                     >
-                        <SwiperSlide>
-                            <div className={main["slideImg-box"]}>
-                                <img src={boardgame1} />
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <div className={main["slideImg-box"]}>
-                                <img src={boardgame2} />
-                            </div>
-                        </SwiperSlide>
+                        {games.map((item)=>{
+                           return( <SwiperSlide>
+                                <a href={`/game/detail/${item.gameId}`}>
+                                    <div className={main["slideImg-box"]}
+                                        style={{
+                                            backgroundImage: `url("${item.thumbnail}")`,
+                                            backgroundSize: "cover",
+                                            backgroundRepeat: "no-repeat",
+                                            backgroundPosition: "center",
+                                        }}
+                                    >
+                                </div>
+                                </a>
+                            </SwiperSlide>
+                           );
+                        })}
                     </Swiper>
                 </section>
                 <section className={main["categori-wrap"]}>
@@ -60,7 +69,7 @@ function Main() {
                                 className={main["card-wrap"]}
                                 style={{
                                     position: "relative",
-                                    backgroundImage: `url("${item.image}")`,
+                                    backgroundImage: `url("${item.thumbnail}")`,
                                     backgroundSize: "cover",
                                     backgroundRepeat: "no-repeat",
                                     backgroundPosition: "center",
@@ -78,18 +87,17 @@ function Main() {
                                     }}
                                 ></div>
                                 <div className={main["game-info-box"]}>
-                                    <a className={main["game-title"]} href="#">
+                                    <a href={`/game/detail/${item.gameId}`} className={main["game-title"]} >
                                         {item.title}
                                     </a>
                                     <p className={main["game-coment"]}>
-                                        Lorem ipsum dolor sit amet, consectetur
-                                        adipiscing elit.
+                                        {item.coment}
                                     </p>
                                     <a
                                         className={main["game-coment-count"]}
                                         href="#"
                                     >
-                                        <span>3</span> Comments
+                                        <span>{item.coment_count}</span> Comments
                                     </a>
                                 </div>
                             </div>
@@ -102,60 +110,34 @@ function Main() {
                     </div>
                     <h2 className={main["hot-game-title"]}>인기 게임</h2>
                     <div className={main["hot-game-card-box"]}>
-                        <div className={main["hot-game-card-wrap"]}>
-                            <div className={main["hot-game-img-box"]}></div>
-                            <div className={main["hot-game-info-box"]}>
-                                <a className={main["hot-game-title"]} href="#">
-                                    Suspendisse ut justo tem por, rutrum
-                                </a>
-                                <p className={main["hot-game-coment"]}>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit.
-                                </p>
-                                <a
-                                    className={main["hot-game-coment-count"]}
-                                    href="#"
-                                >
-                                    <span>3</span> Comments
-                                </a>
-                            </div>
-                        </div>
-                        <div className={main["hot-game-card-wrap"]}>
-                            <div className={main["hot-game-img-box"]}></div>
-                            <div className={main["hot-game-info-box"]}>
-                                <a className={main["hot-game-title"]} href="#">
-                                    Suspendisse ut justo tem por, rutrum
-                                </a>
-                                <p className={main["hot-game-coment"]}>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit.
-                                </p>
-                                <a
-                                    className={main["hot-game-coment-count"]}
-                                    href="#"
-                                >
-                                    <span>3</span> Comments
-                                </a>
-                            </div>
-                        </div>
-                        <div className={main["hot-game-card-wrap"]}>
-                            <div className={main["hot-game-img-box"]}></div>
-                            <div className={main["hot-game-info-box"]}>
-                                <a className={main["hot-game-title"]} href="#">
-                                    Suspendisse ut justo tem por, rutrum
-                                </a>
-                                <p className={main["hot-game-coment"]}>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit.
-                                </p>
-                                <a
-                                    className={main["hot-game-coment-count"]}
-                                    href="#"
-                                >
-                                    <span>3</span> Comments
-                                </a>
-                            </div>
-                        </div>
+                        {hotGames.map((item) => {
+                            return (
+                                <div className={main["hot-game-card-wrap"]}>
+                                    <div className={main["hot-game-img-box"]}
+                                        style={{
+                                            backgroundImage: `url("${item.thumbnail}")`,
+                                            backgroundSize: "cover",
+                                            backgroundRepeat: "no-repeat",
+                                            backgroundPosition: "center"
+                                        }}
+                                    ></div>
+                                    <div className={main["hot-game-info-box"]}>
+                                        <a className={main["hot-game-title"]} href={`/game/detail/${item.gameId}`}>
+                                            {item.title}
+                                        </a>
+                                        <p className={main["hot-game-coment"]}>
+                                            {item.coment}
+                                        </p>
+                                        <a
+                                            className={main["hot-game-coment-count"]}
+                                            href="#"
+                                        >
+                                            <span>{item.coment_count}</span> Comments
+                                        </a>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
                 </section>
                 <section className={main["recent-review-wrap"]}>
@@ -184,73 +166,6 @@ function Main() {
                                 >
                                     Lorem ipsum dolor sit amet, consectetur
                                     adipiscing elit.
-                                </a>
-                            </div>
-                        </div>
-                        <div className={main["recent-review-card-wrap"]}>
-                            <div className={main["recent-review-card"]}>
-                                <div
-                                    className={main["recent-review-game-img"]}
-                                ></div>
-                            </div>
-                            <div
-                                className={
-                                    main["recent-review-game-content-box"]
-                                }
-                            >
-                                <p className={main["recent-review-game-title"]}>
-                                    Game Title
-                                </p>
-                                <a
-                                    href="#"
-                                    className={main["recent-review-coment"]}
-                                >
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit.
-                                </a>
-                            </div>
-                        </div>
-                        <div className={main["recent-review-card-wrap"]}>
-                            <div className={main["recent-review-card"]}>
-                                <div
-                                    className={main["recent-review-game-img"]}
-                                ></div>
-                            </div>
-                            <div
-                                className={
-                                    main["recent-review-game-content-box"]
-                                }
-                            >
-                                <p className={main["recent-review-game-title"]}>
-                                    Game Title
-                                </p>
-                                <a
-                                    href="#"
-                                    className={main["recent-review-coment"]}
-                                >
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit.
-                                </a>
-                            </div>
-                        </div>
-                        <div className={main["recent-review-card-wrap"]}>
-                            <div className={main["recent-review-card"]}>
-                                <div
-                                    className={main["recent-review-game-img"]}
-                                ></div>
-                            </div>
-                            <div
-                                className={
-                                    main["recent-review-game-content-box"]
-                                }
-                            >
-                                <p className={main["recent-review-game-title"]}>
-                                    Game Title
-                                </p>
-                                <a
-                                    href="#"
-                                    className={main["recent-review-coment"]}
-                                >
                                     Lorem ipsum dolor sit amet, consectetur
                                     adipiscing elit.
                                 </a>

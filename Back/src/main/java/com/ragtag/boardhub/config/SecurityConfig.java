@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorizeRequests) ->{
-                    authorizeRequests.requestMatchers("/join","/login","/profile","/mailconfirm","/usernamecheck","/activateuser","/api/game/list","/api/game/{id}","/api/game/{id}/category", "/api/game/data/{id}","/getmainitem", "/kakaouserinfoadd", "/googleuserinfoadd", "/socialmypage","/api/game/comment/{id}","/add/**","/show/**","/show/Detail/**","/show/Detail/reply/**","/detail/like/**","/show/mateDetail/**", "/show/solutionDetail/**", "/show/tradeDetail/**","/add/reply/comment/**", "/show/reply/comment/**", "/up/views/**").permitAll();
+                    authorizeRequests.requestMatchers("/join","/login","/profile","/mailconfirm","/usernamecheck","/activateuser","/api/game/list","/api/game/{id}","/api/game/{id}/category", "/api/game/data/{id}","/getmainitem", "/kakaouserinfoadd", "/googleuserinfoadd", "/socialmypage","/api/game/comment/{id}").permitAll();
                     authorizeRequests.requestMatchers("/mypage","/refresh","/modifynickname","/modifyphone","/drawuser","/usernamechk","/emailchk","/getusername","/modifypassword").authenticated();
                     authorizeRequests.requestMatchers("/admin/**")
                             .hasRole("ADMIN");

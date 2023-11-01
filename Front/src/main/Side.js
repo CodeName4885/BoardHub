@@ -13,9 +13,22 @@ function Side() {
             setRankingData(eventData.rankingData);
         };
 
-        return () => {
-            eventSource.close();
-        };
+        window.addEventListener('beforeunload', () => {
+            if (eventSource) {
+              eventSource.close();
+            }
+          });
+      
+          return () => {
+            if (eventSource) {
+              eventSource.close();
+            }
+            window.removeEventListener('beforeunload', () => {
+              if (eventSource) {
+                eventSource.close();
+              }
+            });
+          };
     }, []);
 
 

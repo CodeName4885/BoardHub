@@ -59,4 +59,7 @@ public interface GameRepository {
 
     void saveGameComment(Comments comment);
 
+    Long getComentCountByGameId(Long gameId);
+
+    String getComentByGameId(Long gameId);
 }
