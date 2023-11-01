@@ -131,11 +131,7 @@ app.get('/sse', (req, res) => {
     });
   };
 
-<<<<<<< HEAD
   const intervalId = setInterval(sendRankingData, 5000); // 3초에 한 번 데이터 업데이트
-=======
-  const intervalId = setInterval(sendRankingData, 3000); // 3초에 한 번 데이터 업데이트
->>>>>>> subKDH
 
   // stop 명령을 입력하면 클라이언트에게 전송 중단
   const rl = readline.createInterface({
