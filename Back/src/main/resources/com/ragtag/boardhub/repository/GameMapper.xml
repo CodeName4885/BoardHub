@@ -139,7 +139,7 @@
     </insert>
 
 
-    <select id="getComentByGameId" resultType="String">
+    <select id="getCommentByGameId" resultType="String">
         <![CDATA[
             select * from (
                 select content from comments where game_id = #{gameId}
@@ -147,7 +147,7 @@
         ]]>
     </select>
 
-    <select id="getComentCountByGameId" resultType="Long">
+    <select id="getCommentCountByGameId" resultType="Long">
         select count(*) from comments where game_id = #{gameId}
     </select>
 

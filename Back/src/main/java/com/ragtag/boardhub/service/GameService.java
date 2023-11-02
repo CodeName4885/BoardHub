@@ -32,12 +32,11 @@ public interface GameService {
 
     void mappingData(GameForm form);
 
-    void saveGameComment(GameComment comment);
+    int saveGameComment(GameComment comment);
 
-    Long getComentCountByGameId(Long gameId);
+    Long getCommentCountByGameId(Long gameId);
 
-    String getComentByGameId(Long gameId);
-
+    String getCommentByGameId(Long gameId);
 
     List<GameComment> getAllCommentByGameId(Long gameId);
 }

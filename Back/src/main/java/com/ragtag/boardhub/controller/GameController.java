@@ -44,14 +44,14 @@ public class GameController {
     }
 
     @PutMapping(value = "{id}", consumes = "application/json")
-    public ResponseEntity<GameResponse> putGame(@PathVariable("id") Long gameId, @RequestBody GameForm form) {
+    public ResponseEntity<Void> putGame(@PathVariable("id") Long gameId, @RequestBody GameForm form) {
         log.info("gameId : {}", gameId);
         log.info("form : {}", form);
         boolean result = gameService.updateGame(form);
         if(result) {
             gameService.mappingData(form);
         }
-        return null;
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
@@ -110,10 +110,10 @@ public class GameController {
     }
 
     @PostMapping("comment/{id}")
-    public ResponseEntity<GameComment> postGameComment(@PathVariable("id") Long gameId, @RequestBody GameComment form) {
+    public ResponseEntity<Integer> postGameComment(@PathVariable("id") Long gameId, @RequestBody GameComment form) {
         log.info("formdata = {}", form);
-        gameService.saveGameComment(form);
-        return null;
+        int result = gameService.saveGameComment(form);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

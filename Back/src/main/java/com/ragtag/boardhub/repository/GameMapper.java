@@ -68,11 +68,11 @@ public interface GameMapper {
     void addPubMapping(@Param("gameId") Long gameId,
                        @Param("publisherId") Long publisherId);
 
-    void saveGameComment(Comments comment);
+    int saveGameComment(Comments comment);
 
-    Long getComentCountByGameId(Long gameId);
+    Long getCommentCountByGameId(Long gameId);
 
-    List<String> getComentByGameId(Long gameId);
+    List<String> getCommentByGameId(Long gameId);
 
     List<Comments> getAllCommentByGameId(Long gameId);
 

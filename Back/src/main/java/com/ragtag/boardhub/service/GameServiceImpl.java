@@ -148,18 +148,17 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public void saveGameComment(GameComment comment) {
-        gameRepository.saveGameComment(comment.toEntity());
+    public int saveGameComment(GameComment comment) {
+        return gameRepository.saveGameComment(comment.toEntity());
+    }
+
+    public Long getCommentCountByGameId(Long gameId) {
+        return gameRepository.getCommentCountByGameId(gameId);
     }
 
     @Override
-    public Long getComentCountByGameId(Long gameId) {
-        return gameRepository.getComentCountByGameId(gameId);
-    }
-
-    @Override
-    public String getComentByGameId(Long gameId) {
-        return gameRepository.getComentByGameId(gameId);
+    public String getCommentByGameId(Long gameId) {
+        return gameRepository.getCommentByGameId(gameId);
     }
     @Override
     public List<GameComment> getAllCommentByGameId(Long gameId) {

@@ -57,10 +57,10 @@ public interface GameRepository {
 
     void addPubMapping(Long gameId, Long publisherId);
 
-    void saveGameComment(Comments comment);
+    int saveGameComment(Comments comment);
 
-    Long getComentCountByGameId(Long gameId);
+    Long getCommentCountByGameId(Long gameId);
 
-    String getComentByGameId(Long gameId);
+    String getCommentByGameId(Long gameId);
     List<Comments> getAllCommentByGameId(Long gameId);
 }
