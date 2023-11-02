@@ -54,7 +54,7 @@ export function ReviewListComponent() {
             console.log(userResp.data.nickname);
             setUserNickname(userResp.data.nickname);
         } catch (error) {
-            console.error("닉네임 가져오는 도중 오류 발생: ", error);
+            // console.error("닉네임 가져오는 도중 오류 발생: ", error);
         }
     }
 

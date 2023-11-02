@@ -163,14 +163,6 @@ function Main() {
                     <div className={main["recent-review-card-box"]}>
                         {blog.slice(0, 4).map((item) => (
                             <div className={main["recent-review-card-wrap"]} key={item.id}>
-                                <div className={main["recent-review-card"]}>
-                                    <div
-                                        className={main["recent-review-game-img"]}
-                                        style={{
-                                            backgroundImage: `url("${item.image_url}")`,
-                                        }}
-                                    ></div>
-                                </div>
                                 <div className={main["recent-review-game-content-box"]}>
                                     <p className={main["recent-review-game-title"]}>
                                         <span dangerouslySetInnerHTML={{ __html: item.title }} />
