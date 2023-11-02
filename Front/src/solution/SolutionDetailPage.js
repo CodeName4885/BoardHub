@@ -9,6 +9,7 @@ import "../static/game-warrior/css/style.css";
 import { useNavigate } from "react-router-dom";
 import "../review/styles.css";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import {Call} from "../UserApiConfig/ApiService";
 
 function formatDate(rawDate) {
     const date = new Date(rawDate);
@@ -21,7 +22,6 @@ function formatDate(rawDate) {
 export function SolutionDetailPage() {
     const [comment, setComment] = useState('');
     const { comm_id } = useParams();
-    const [user_id, setUser_id] = useState('1');
     const [review, setReview] = useState({ title: '', content: '' });
     const [comments, setComments] = useState([]); // comments로 수정
     const navigate = useNavigate();
@@ -31,6 +31,61 @@ export function SolutionDetailPage() {
     const [replyComment, setReplyComment] = useState('');
     const [replyComments, setReplyComments] = useState([]);
     const [reply_comment_id, setReply_comment_id] = useState('');
+
+    const user_id = sessionStorage.getItem("USER_ID");
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    const socialtoken = sessionStorage.getItem("TOKEN");
+    const [userData, setUserData] = useState(null);
+    console.log(userData);
+    useEffect(() => {
+        if (token !== null) {
+            Call("/mypage", "POST", null)
+                .then((response) => {
+                    setUserData(response);
+                })
+                .catch((error) => {
+                    console.error("Error fetching data: ", error);
+                });
+        }
+        if(socialtoken !== null){
+            const email = sessionStorage.getItem("USER_EMAIL");
+            Call("/socialmypage", "POST", email)
+                .then((response)=>{
+                    setUserData(response);
+                })
+
+        }
+    }, [token, socialtoken]);
+
+    const deleteClick = () => {
+        const commIdToDelete = comm_id;
+        const shouldDelete = window.confirm('게시물을 삭제하시겠습니까?');
+
+        if (shouldDelete) {
+            deleteCommunity(commIdToDelete);
+        }
+    };
+
+    const deleteCommunity = (commId) => {
+        const serverUrl = 'http://localhost:8080';
+        const requestOptions = {
+            method: 'DELETE', // 오타 수정: 'mehtod' -> 'method'
+            headers: { 'Content-Type': 'application/json' }, // 중괄호 중복 제거
+        };
+
+        fetch(`${serverUrl}/deleteCommunity/${comm_id}`, requestOptions)
+            .then((response) => {
+                if (response.status === 200) {
+                    navigate("/review/list")
+                    console.log('게시물이 성공적으로 삭제되었습니다.');
+                } else {
+                    console.log('게시물 삭제에 실패했습니다.');
+                }
+            })
+            .catch((error) => {
+                console.error('게시물 삭제 중 오류가 발생했습니다:', error);
+            });
+    };
 
     // 좋아요
     function handleLikeClick(reviewId) {
@@ -137,7 +192,7 @@ export function SolutionDetailPage() {
             reply_id: reply_id,
             comm_id: comm_id,
             content: comment,
-            user_id: user_id,
+            user_id: userData.user_id,
         };
 
         const response = await fetch(`http://localhost:8080/add/reply/${comm_id}`, {
@@ -172,7 +227,7 @@ export function SolutionDetailPage() {
             reply_id: reply_id,
             content: replyComment, // Make sure this references the correct state variable
             comm_id: comm_id,
-            user_id: user_id,
+            user_id: userData.user_id,
         };
 
         // Send the reply to the server
@@ -219,6 +274,7 @@ export function SolutionDetailPage() {
                     <div className="board-title-container">
                         <h2 className="title-name">제목</h2>
                         <h1 className="board-title">{review.title}</h1>
+                        <button className="add-button" onClick={deleteClick}></button>
                     </div>
 
                     <h4 className="date-reg">{formatDate(review.regdate)}</h4>
@@ -251,7 +307,7 @@ export function SolutionDetailPage() {
                         .map((comment, index) => (
                             <div key={index} className="comment">
                                 <div className="comment-info">
-                                    <span className="reply-user-id">{comment.user_id}</span>
+                                    <span className="reply-user-id">{userData.nickname}</span>
                                     <span className="reply-content">{comment.content}</span>
                                     <span className="reply-reg-date">{getTimeAgo(comment.regdate)}</span>
                                     <button type="button" className="small-button" onClick={() => toggleReply(comment.reply_id)}>
@@ -278,7 +334,7 @@ export function SolutionDetailPage() {
                                     .map((reply, replyIndex) => (
                                         <div key={replyIndex} className="comment-reply">
                                             <div className="reply-comment-add-container">
-                                                <span className="reply-comment-user-id">{reply.user_id}</span>
+                                                <span className="reply-comment-user-id">{userData.nickname}</span>
                                                 <span className="reply-comment-content">{reply.content}</span>
                                                 <span className="reply-comment-reg-date">{getTimeAgo(reply.regdate)}</span>
                                             </div>

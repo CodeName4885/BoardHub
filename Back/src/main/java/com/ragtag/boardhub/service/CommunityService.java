@@ -38,8 +38,9 @@ public interface CommunityService {
     void likeReview(Long comm_id);
 
 
-    Community upViews(Long commId);
+    Community upViews(Long comm_id);
 
 
+    void deleteCommunity(Long comm_id);
 }
 

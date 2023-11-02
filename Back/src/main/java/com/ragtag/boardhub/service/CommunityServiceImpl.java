@@ -102,6 +102,10 @@ public class CommunityServiceImpl implements CommunityService {
       return communityRepository.upViews(comm_id);
     }
 
+    @Override
+    public void deleteCommunity(Long comm_id) {
+        communityRepository.deleteCommunity(comm_id);
+    }
 
 
 }

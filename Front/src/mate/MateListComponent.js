@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../review/styles.css"
+import "../review/styles.css";
+import { PaginationComponent } from "../paging/PaginationComponent";
 
 function formatDate(rawDate) {
     const date = new Date(rawDate);
@@ -10,67 +11,75 @@ function formatDate(rawDate) {
     const day = date.getDate().toString().padStart(2, '0');
     return `${year}.${month}.${day}`;
 }
+
+function getCategoryText(category) {
+    switch (category) {
+        case 1:
+            return '리뷰';
+        case 2:
+            return '프리뷰';
+        case 3:
+            return '모임';
+        default:
+            return '';
+    }
+}
+
 export function MateListComponent() {
     const [mateList, setMateList] = useState([]);
+    const [totalItemsCount, setTotalItemsCount] = useState(0);
     const navigate = useNavigate();
+    const [userNickname, setUserNickname] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize] = useState(15); // 페이지당 아이템 수
 
-    function getCategoryText(category) {
-        switch (category) {
-            case 1:
-                return '서울';
-            case 2:
-                return '경기';
-            case 3:
-                return '부산';
-            case 4:
-                return '대구';
-            case 5:
-                return '인천';
-            case 6:
-                return '대전';
-            case 7:
-                return '광주';
-            case 8:
-                return '울산';
-            case 9:
-                return '세종';
-            case 10:
-                return '충청북도';
-            case 11:
-                return '충청남도';
-            case 12:
-                return '전라북도';
-            case 13:
-                return '전라남도';
-            case 14:
-                return '경상북도';
-            case 15:
-                return '경상남도';
-            case 16:
-                return '제주';
-
-        }
-    }
+    const [pagedData, setPagedData] = useState([]);
 
     const addMateButton = () => {
         navigate("/mate/add");
     }
-    const getmateList = async () => {
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+
+    const getMateList = async () => {
         try {
             const resp = await axios.get('http://localhost:8080/show/mateList');
-            setMateList(resp.data); // 서버에서 받은 데이터를 상태로 설정
+            setMateList(resp.data);
+            setTotalItemsCount(resp.data.length);
         } catch (error) {
             console.error("데이터 못불러왕~! : ", error);
         }
     }
 
+    const getUserData = async (user_id) => {
+        try {
+            const userResp = await axios.get(`http://localhost:8080/show/user/${user_id}`);
+            console.log(userResp.data.nickname);
+            setUserNickname(userResp.data.nickname);
+        } catch (error) {
+            console.error("닉네임 가져오는 도중 오류 발생: ", error);
+        }
+    }
+
     useEffect(() => {
-        getmateList(); // 컴포넌트가 마운트될 때 데이터를 가져오도록 설정
-    }, []); // 빈 배열을 전달하여 한 번만 실행되도록 설정
+        getMateList();
+    }, []);
+
+    useEffect(() => {
+        if (mateList.length > 0) {
+            const startIndex = (currentPage - 1) * pageSize;
+            const endIndex = startIndex + pageSize;
+            const pagedData = mateList.slice(startIndex, endIndex);
+
+            setPagedData(pagedData); // pagedData를 설정
+        }
+    }, [currentPage, pageSize, mateList]);
 
     return (
         <div className="app">
-            <p className="solution-content">공략 글</p>
+            <p className="solution-content">Mate 글</p>
             <button className="add-button" onClick={addMateButton}>글 작성하기</button>
             <div className="center-table">
                 <table className="table table-dark table-striped">
@@ -79,26 +88,34 @@ export function MateListComponent() {
                         <th>#</th>
                         <th>Title</th>
                         <th>조회수</th>
+                        <th>작성자</th>
                         <th>추천수</th>
                         <th>작성일</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {mateList.map((mate, index) => (
+                    {pagedData.map((mate, index) => (
                         <tr key={index}>
-                            <th scope="row" className="category-box">{getCategoryText(mate.category)}</th>
+                            <th scope="row" className="category-box">{mate.category}</th> {/* 카테고리 값 수정 */}
                             <td onClick={(event) => {
-                                if (event.target.tagName == "TD") {
+                                if (event.target.tagName === "TD") {
                                     navigate(`/mate/detail/${mate.comm_id}`);
                                 }
                             }} style={{ cursor: 'pointer' }}>{mate.title}</td>
                             <td>{mate.count}</td>
+                            <td>{userNickname}</td>
                             <td>{mate.likes}</td>
                             <td>{formatDate(mate.regdate)}</td>
                         </tr>
                     ))}
                     </tbody>
                 </table>
+                <PaginationComponent
+                    activePage={currentPage}
+                    itemsCountPerPage={pageSize}
+                    totalItemsCount={totalItemsCount}
+                    onPageChange={handlePageChange}
+                />
             </div>
         </div>
     );

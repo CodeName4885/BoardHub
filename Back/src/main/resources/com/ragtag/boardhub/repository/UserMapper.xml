@@ -58,4 +58,8 @@
         insert into users(user_id, username, password, profile, name, nickname, user_status, phone, user_email, user_role, user_reg, log_date)
         values(#{user_id}, #{email}, 1234, #{profileimage}, #{name}, #{name}, 1, 1, #{email}, 'ROLE_USER', sysdate, sysdate)
     </insert>
+
+    <select id="getUserNickname" resultType="com.ragtag.boardhub.domain.Users">
+        SELECT nickname FROM users WHERE user_id = #{user_id}
+    </select>
 </mapper>

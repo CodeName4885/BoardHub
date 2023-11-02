@@ -98,6 +98,10 @@ public class CommunityRepositoryImpl implements CommunityRepository {
         return communityMapper.upViews(comm_id);
     }
 
+    @Override
+    public void deleteCommunity(Long comm_id) {
+        communityMapper.deleteCommunity(comm_id);
+    }
 
 
 }

@@ -51,4 +51,5 @@ public interface CommunityMapper {
     Community upViews(Long commId);
 
 
+     void deleteCommunity(Long comm_id);
 }
