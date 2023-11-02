@@ -276,7 +276,7 @@ export function ReviewDetailPage() {
                     <div className="board-title-container">
                         <h2 className="title-name">제목</h2>
                         <h1 className="board-title">{review.title}</h1>
-                        <button className="add-button" onClick={deleteClick}></button>
+                        <button className="add-delete-button" onClick={deleteClick}>삭 제</button>
                     </div>
                     <h4 className="date-reg">{formatDate(review.regdate)}</h4>
                     <hr className="board-divider" />

@@ -338,7 +338,7 @@ export function MateDetailPage() {
                                     .map((reply, replyIndex) => (
                                         <div key={replyIndex} className="comment-reply">
                                             <div className="reply-comment-add-container">
-                                                <span className="reply-comment-user-id">{userData.nickname}</span>
+                                                <span className="reply-comment-user-id">다람쥐</span>
                                                 <span className="reply-comment-content">{reply.content}</span>
                                                 <span className="reply-comment-reg-date">{getTimeAgo(reply.regdate)}</span>
                                             </div>

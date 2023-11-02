@@ -31,22 +31,18 @@ public class HttpClient {
             throw new RuntimeException("검색어 인코딩 실패", e);
         }
 
-        String apiURL = "https://openapi.naver.com/v1/search/blog?query=" + text; // JSON 결과
+        String apiURL = "https://openapi.naver.com/v1/search/blog?query=" + text;
 
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("X-Naver-Client-Id", clientId);
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         String responseBody = get(apiURL, requestHeaders);
 
-        // 네이버 API로부터 정보를 가져와서 BlogNaver 객체 생성
         List<BlogNaver> blogNaverList = createBlogNaverListFromApiResponse(responseBody);
 
-        // HTTP POST 요청을 보내 컨트롤러에 정보 전송
         for (BlogNaver blogNaver : blogNaverList) {
             sendPostRequestToController(blogNaver);
         }
-
-        System.out.println("HTTP POST 요청이 완료되었습니다.");
     }
 
     private static String get(String apiUrl, Map<String, String> requestHeaders) {
@@ -56,11 +52,10 @@ public class HttpClient {
             for (Map.Entry<String, String> header : requestHeaders.entrySet()) {
                 con.setRequestProperty(header.getKey(), header.getValue());
             }
-
             int responseCode = con.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
+            if (responseCode == HttpURLConnection.HTTP_OK) {
                 return readBody(con.getInputStream());
-            } else { // 오류 발생
+            } else {
                 return readBody(con.getErrorStream());
             }
         } catch (IOException e) {

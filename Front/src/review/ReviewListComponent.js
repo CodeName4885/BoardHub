@@ -101,12 +101,13 @@ export function ReviewListComponent() {
 
     return (
         <div className="app">
-            <p className="solution-content">공략 글</p>
+            <p className="solution-content">게임 후기</p>
             <button className="add-button" onClick={() => navigate("/review/add")}>
                 글 작성하기
             </button>
             <div className="center-table">
-                <table className="table table-dark table-striped">
+                        <p className="solution-content">블로그 후기</p>
+                <table className="table table-dark table-striped">  
                     <thead>
                     <tr className="row-tr">
                         <th>Title</th>

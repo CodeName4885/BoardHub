@@ -1,5 +1,5 @@
 .app{
-    height: 100vh;
+    height: 200vh;
 }
 
 .board-detail-container {
@@ -16,13 +16,26 @@
 }
 
 .board-title {
-    font-size: 40px;
+    font-size: 30px;
     margin-top: 20px;
     margin-bottom: 20px;
     color: #333;
     margin-left: 50px; /* 왼쪽 여백을 조절하여 간격을 설정 */
 }
-
+.add-delete-button {
+    display: inline-block;
+    background-color: #353434; /* 배경색상 설정 */
+    color: #fff; /* 글꼴 색상 설정 */
+    padding: 10px 20px; /* 내부 여백 설정 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 버튼 테두리를 둥글게 만듭니다 */
+    cursor: pointer; /* 커서 스타일 변경 */
+    font-size: 16px; /* 글꼴 크기 설정 */
+    margin-left: 1800px;
+    margin-bottom: 30px;
+    position: absolute;
+    top: 160px;
+}
 .board-divider {
     border: none;
     border-top: 1px solid #ccc;
@@ -106,7 +119,7 @@
     margin-top: 30px;
 }
 .title-name {
-    font-size: 40px; /* 원하는 크기로 조절 */
+    font-size: 30px; /* 원하는 크기로 조절 */
     color: #333; /* 글씨 색상 변경 */
     font-weight: bold; /* 글씨 두껍게 표시 */
     text-transform: capitalize; /* 글씨 대문자로 변환 (선택 사항) */

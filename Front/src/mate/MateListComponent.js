@@ -15,13 +15,15 @@ function formatDate(rawDate) {
 function getCategoryText(category) {
     switch (category) {
         case 1:
-            return '리뷰';
+            return '서울';
         case 2:
-            return '프리뷰';
+            return '경기';
         case 3:
-            return '모임';
-        default:
-            return '';
+            return '부산';
+        case 4:
+            return '대구';
+        case 5:
+            return '인천';
     }
 }
 
@@ -100,7 +102,7 @@ export function MateListComponent() {
                     <tbody>
                     {pagedData.map((mate, index) => (
                         <tr key={index}>
-                            <th scope="row" className="category-box">{mate.category}</th> {/* 카테고리 값 수정 */}
+                            <th scope="row" className="category-box">{getCategoryText(mate.category)}</th> {/* 카테고리 값 수정 */}
                             <td onClick={(event) => {
                                 if (event.target.tagName === "TD") {
                                     navigate(`/mate/detail/${mate.comm_id}`);
