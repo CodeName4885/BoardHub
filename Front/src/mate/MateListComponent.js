@@ -68,14 +68,18 @@ export function MateListComponent() {
     }, []);
 
     useEffect(() => {
-        if (mateList.length > 0) {
-            const startIndex = (currentPage - 1) * pageSize;
-            const endIndex = startIndex + pageSize;
-            const pagedData = mateList.slice(startIndex, endIndex);
+        const startIndex = (currentPage - 1) * pageSize;
+        const endIndex = startIndex + pageSize;
+        const pagedDataSlice = mateList.slice(startIndex, endIndex);
+        setPagedData(pagedDataSlice);
 
-            setPagedData(pagedData); // pagedData를 설정
+        // 페이지별 데이터 업데이트 후 사용자 데이터를 가져옵니다.
+        if (pagedDataSlice.length > 0) {
+            const user_ids = pagedDataSlice.map((mate) => mate.user_id);
+            user_ids.forEach((user_id) => getUserData(user_id));
         }
     }, [currentPage, pageSize, mateList]);
+
 
     return (
         <div className="app">

@@ -70,14 +70,16 @@ export function TradeListComponent() {
     useEffect(() => {
         const startIndex = (currentPage - 1) * pageSize;
         const endIndex = startIndex + pageSize;
-        setPagedData(tradeList.slice(startIndex, endIndex));
+        const pagedDataSlice = tradeList.slice(startIndex, endIndex);
+        setPagedData(pagedDataSlice);
 
         // 페이지별 데이터 업데이트 후 사용자 데이터를 가져옵니다.
-        if (pagedData.length > 0) {
-            const user_ids = pagedData.map((trade) => trade.user_id);
+        if (pagedDataSlice.length > 0) {
+            const user_ids = pagedDataSlice.map((trade) => trade.user_id);
             user_ids.forEach((user_id) => getUserData(user_id));
         }
-    }, [currentPage, pageSize, tradeList, pagedData]);
+    }, [currentPage, pageSize, tradeList]);
+
 
     useEffect(() => {
         if (tradeList.length > 0) {

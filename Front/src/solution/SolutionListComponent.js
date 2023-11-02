@@ -76,14 +76,16 @@ export function SolutionListComponent() {
     useEffect(() => {
         const startIndex = (currentPage - 1) * pageSize;
         const endIndex = startIndex + pageSize;
-        setPagedData(solutionList.slice(startIndex, endIndex));
+        const pagedDataSlice = solutionList.slice(startIndex, endIndex);
+        setPagedData(pagedDataSlice);
 
         // 페이지별 데이터 업데이트 후 사용자 데이터를 가져옵니다.
-        if (pagedData.length > 0) {
-            const user_ids = pagedData.map((solution) => solution.user_id);
+        if (pagedDataSlice.length > 0) {
+            const user_ids = pagedDataSlice.map((solution) => solution.user_id);
             user_ids.forEach((user_id) => getUserData(user_id));
         }
-    }, [currentPage, pageSize, solutionList, pagedData]);
+    }, [currentPage, pageSize, solutionList]);
+
 
     useEffect(() => {
         if (solutionList.length > 0) {

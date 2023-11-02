@@ -28,6 +28,7 @@ function getCategoryText(category) {
 export function ReviewListComponent() {
     const [reviewList, setReviewList] = useState([]);
     const [totalItemsCount, setTotalItemsCount] = useState(0);
+    const [blog, setBlog] = useState([]);
     const navigate = useNavigate();
     const [userNickname, setUserNickname] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
@@ -51,12 +52,12 @@ export function ReviewListComponent() {
     const getUserData = async (user_id) => {
         try {
             const userResp = await axios.get(`http://localhost:8080/show/${user_id}`);
-            console.log(userResp.data.nickname);
             setUserNickname(userResp.data.nickname);
         } catch (error) {
-            console.error("닉네임 가져오는 도중 오류 발생: ", error);
+
         }
     }
+
 
     useEffect(() => {
         getReviewList();
@@ -67,18 +68,18 @@ export function ReviewListComponent() {
         setCurrentPage(page);
     };
 
-    // reviewList, currentPage를 기반으로 페이지별 데이터 업데이트
     useEffect(() => {
         const startIndex = (currentPage - 1) * pageSize;
         const endIndex = startIndex + pageSize;
-        setPagedData(reviewList.slice(startIndex, endIndex));
+        const pagedDataSlice = reviewList.slice(startIndex, endIndex);
+        setPagedData(pagedDataSlice);
 
         // 페이지별 데이터 업데이트 후 사용자 데이터를 가져옵니다.
-        if (pagedData.length > 0) {
-            const user_ids = pagedData.map((review) => review.user_id);
+        if (pagedDataSlice.length > 0) {
+            const user_ids = pagedDataSlice.map((review) => review.user_id);
             user_ids.forEach((user_id) => getUserData(user_id));
         }
-    }, [currentPage, pageSize, reviewList, pagedData]);
+    }, [currentPage, pageSize, reviewList]);
 
     useEffect(() => {
         if (reviewList.length > 0) {
@@ -87,12 +88,47 @@ export function ReviewListComponent() {
         }
     }, [reviewList]);
 
+    useEffect(() => {
+        axios.get(`http://localhost:8080/show/blog`)
+            .then((res) => {
+                console.log("Response: ", res);
+                setBlog(res.data);
+            })
+            .catch((error) => {
+                console.error("Error: ", error);
+            });
+    }, []);
+
     return (
         <div className="app">
             <p className="solution-content">공략 글</p>
             <button className="add-button" onClick={() => navigate("/review/add")}>
                 글 작성하기
             </button>
+            <div className="center-table">
+                <table className="table table-dark table-striped">
+                    <thead>
+                    <tr className="row-tr">
+                        <th>Title</th>
+                        <th>Content</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {blog.slice(0, 5).map((item, index) => (
+                        <tr key={index}>
+                            <td className="recent-review-game-title" dangerouslySetInnerHTML={{ __html: item.title }} />
+                            <td>
+                                <a
+                                    href={item.link}
+                                    className="recent-review-coment"
+                                    dangerouslySetInnerHTML={{ __html: item.description }}
+                                />
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
             <div className="center-table">
                 <table className="table table-dark table-striped">
                     <thead>

@@ -23,14 +23,15 @@ export function ReviewAddComponent() {
                 .catch((error) => {
                     console.error("Error fetching data: ", error);
                 });
-        }
-        if(socialtoken !== null){
+        } else if (socialtoken !== null) {
             const email = sessionStorage.getItem("USER_EMAIL");
             Call("/socialmypage", "POST", email)
-                .then((response)=>{
+                .then((response) => {
                     setUserData(response);
                 })
-
+                .catch((error) => {
+                    console.error("Error fetching data: ", error);
+                });
         }
     }, [token, socialtoken]);
 
