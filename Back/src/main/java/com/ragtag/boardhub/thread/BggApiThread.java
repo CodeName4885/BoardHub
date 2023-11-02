@@ -78,7 +78,7 @@ public class BggApiThread {
 class MyThread extends Thread {
 
     public void run() {
-        int index = 36;
+        int index = 0;
         while (true) {
             try {
                 System.out.println("일하는 중...");

@@ -29,8 +29,8 @@ public class HomeController {
             newItem.setGameId(item.getGameId());
             newItem.setTitle(item.getTitle());
             newItem.setThumbnail(item.getImage());
-            newItem.setComent_count(gameService.getComentCountByGameId(item.getGameId()));
-            newItem.setComent(gameService.getComentByGameId(item.getGameId()));
+            newItem.setComent_count(gameService.getCommentCountByGameId(item.getGameId()));
+            newItem.setComent(gameService.getCommentByGameId(item.getGameId()));
             newList.add(newItem);
         }
 
@@ -48,8 +48,8 @@ public class HomeController {
             newItem.setGameId(item.getGameId());
             newItem.setTitle(item.getTitle());
             newItem.setThumbnail(item.getImage());
-            newItem.setComent_count(gameService.getComentCountByGameId(item.getGameId()));
-            newItem.setComent(gameService.getComentByGameId(item.getGameId()));
+            newItem.setComent_count(gameService.getCommentCountByGameId(item.getGameId()));
+            newItem.setComent(gameService.getCommentByGameId(item.getGameId()));
             newList.add(newItem);
         }
         return ResponseEntity.ok(newList);

@@ -1,5 +1,5 @@
 import {
-    Avatar,
+    Alert,
     Button as Btn,
     Flex,
     Form,
@@ -124,43 +124,54 @@ export function GameCommentComponent() {
         handleOk();
     }
 
+    console.log(userData);
+
     return (
         <>
-            <div className="mt-4">
+            <div className="mt-4 row align-items-center">
                 <h2 style={{ fontWeight: "bold" }}>게임 한줄평</h2>
-            </div>
-            <div className="mt-2 col-md-5">
-                {userData ? (
-                    <div>
-                        <TextArea
-                            rows={4}
-                            value={userComment ? userComment.content : ""}
-                            style={{
-                                resize: "none",
-                                fontSize: 15,
-                            }}
-                            readOnly
-                            onClick={onClick}
-                        />
-                    </div>
-                ) : (
-                    <Popover
-                        title={"로그인이 필요한 서비스입니다."}
-                        content={
-                            <Btn
-                                size="small"
-                                type="link"
-                                onClick={(e) => navigate("/login")}
+
+                <div className="ml-3">
+                    {userData ? (
+                        userComment ? (
+                            <Popover
+                                title={"이전 작성 내용"}
+                                content={
+                                    <pre>
+                                        <Text>
+                                            {userComment && userComment.content}
+                                        </Text>
+                                    </pre>
+                                }
                             >
-                                로그인 하러 가기
+                                <Btn onClick={onClick} type={"primary"}>
+                                    한줄평 수정
+                                </Btn>
+                            </Popover>
+                        ) : (
+                            <Btn onClick={onClick} type={"primary"}>
+                                한줄평 작성
                             </Btn>
-                        }
-                    >
-                        <Btn onClick={onClick} type={"dashed"} disabled>
-                            한줄평 작성
-                        </Btn>
-                    </Popover>
-                )}
+                        )
+                    ) : (
+                        <Popover
+                            title={"로그인이 필요한 서비스입니다."}
+                            content={
+                                <Btn
+                                    size="small"
+                                    type="link"
+                                    onClick={(e) => navigate("/login")}
+                                >
+                                    로그인 하러 가기
+                                </Btn>
+                            }
+                        >
+                            <Btn onClick={onClick} type={"dashed"} disabled>
+                                한줄평 작성
+                            </Btn>
+                        </Popover>
+                    )}
+                </div>
             </div>
             <Modal
                 title="한줄평"
@@ -205,33 +216,40 @@ export function GameCommentComponent() {
                     </Flex>
                 </Form>
             </Modal>
+
             <List
                 itemLayout="horizontal"
-                dataSource={comments}
+                dataSource={
+                    comments.length > 0
+                        ? comments
+                        : ["작성된 한줄평이 없습니다."]
+                }
                 size="large"
-                pagination={{
-                    pageSize: 10,
-                }}
+                pagination={comments.length > 10 ? { pageSize: 10 } : ""}
                 renderItem={(item, index) => (
                     <List.Item>
                         <List.Item.Meta
-                            avatar={
-                                <Avatar
-                                    shape="square"
-                                    // 프로필 이미지
-                                />
-                            }
                             title={
-                                <Title level={5} style={{ paddingTop: 3 }}>
-                                    {item.nickname}
-                                </Title>
+                                comments.length > 0 && (
+                                    <Title level={5} style={{ paddingTop: 3 }}>
+                                        {item.nickname}
+                                    </Title>
+                                )
                             }
                             description={
-                                <pre>
-                                    <Text style={{ fontSize: 20 }}>
-                                        {item.content}
-                                    </Text>
-                                </pre>
+                                comments.length > 0 ? (
+                                    <pre>
+                                        <Text style={{ fontSize: 20 }}>
+                                            {item.content}
+                                        </Text>
+                                    </pre>
+                                ) : (
+                                    <Alert
+                                        message={item}
+                                        type="warning"
+                                        style={{ fontSize: 20 }}
+                                    />
+                                )
                             }
                         />
                     </List.Item>
