@@ -146,7 +146,8 @@ app.get("/sse", (req, res) => {
             res.end();
         }
     });
-    app.listen(port, () => {
-        console.log(`서버가 ${port}번 포트에서 실행 중입니다.`);
-    });
+});
+
+app.listen(port, () => {
+    console.log(`서버가 ${port}번 포트에서 실행 중입니다.`);
 });
