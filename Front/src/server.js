@@ -1,5 +1,3 @@
-// npm install react-chartjs-2 chart.js
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
