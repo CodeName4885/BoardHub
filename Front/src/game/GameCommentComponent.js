@@ -33,13 +33,14 @@ export function GameCommentComponent() {
     const [messageApi, contextHolder] = message.useMessage();
     const [comments, setComments] = useState([]);
     const [userComment, setUserComment] = useState();
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         getLoginUserData().then((data) => {
             getAllComments(data);
         });
-    }, [gameId]);
+    }, [gameId, loading == true]);
 
     async function getLoginUserData() {
         if (token !== null) {
@@ -64,6 +65,7 @@ export function GameCommentComponent() {
     async function getAllComments(user) {
         await fetchCommentsByGameId(gameId).then((data) => {
             setComments(data);
+            setLoading(false);
             if (user) {
                 const myComment =
                     comments.length > 0
@@ -111,7 +113,11 @@ export function GameCommentComponent() {
             content: content,
         };
         console.log(params);
-        await saveGameComment(params);
+        await saveGameComment(params).then((res) => {
+            if (res === 1) {
+                setLoading(true);
+            }
+        });
     }
 
     function onFinish(form) {

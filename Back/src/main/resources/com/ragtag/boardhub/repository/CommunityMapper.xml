@@ -78,19 +78,19 @@
     <!-- show -->
 
     <select id="showReview" resultType="com.ragtag.boardhub.domain.Community">
-        SELECT * FROM community WHERE type = 1
+        SELECT c.*, u.nickname FROM community c join users u  on c.user_id = u.user_id  WHERE type = 1
     </select>
 
     <select id="showTrade" resultType="com.ragtag.boardhub.domain.Community">
-        SELECT * FROM community WHERE type = 2
+        SELECT c.*, u.nickname FROM community c join users u  on c.user_id = u.user_id WHERE type = 2
     </select>
 
     <select id="showSolution" resultType="com.ragtag.boardhub.domain.Community">
-        SELECT * FROM community WHERE type = 3
+        SELECT c.*, u.nickname FROM community c join users u  on c.user_id = u.user_id WHERE type = 3
     </select>
 
     <select id="showMate" resultType="com.ragtag.boardhub.domain.Community">
-        SELECT * FROM community WHERE type = 4
+        SELECT c.*, u.nickname FROM community c join users u  on c.user_id = u.user_id WHERE type = 4
     </select>
 
 

@@ -1,38 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import "./styles.css"
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./styles.css";
 import { useNavigate } from "react-router-dom";
 import { PaginationComponent } from "../paging/PaginationComponent";
 
 function formatDate(rawDate) {
     const date = new Date(rawDate);
     const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
     return `${year}.${month}.${day}`;
 }
 
 function getCategoryText(category) {
     switch (category) {
         case 1:
-            return '판매';
+            return "판매";
         case 2:
-            return '구매';
+            return "구매";
         case 3:
-            return '완료';
+            return "완료";
         default:
-            return '';
+            return "";
     }
 }
 
 export function SolutionListComponent() {
     const [playlist, setPlaylist] = useState([]);
-    const API_KEY = 'AIzaSyA-maf-Jt5IaKj7r8Xugc14SNxhLB3bGds';
-    const PLAYLIST_ID = 'PLHcUTz5Sl91mLtDdtP-jZGoFPIBij6x70';
+    const API_KEY = "AIzaSyA-maf-Jt5IaKj7r8Xugc14SNxhLB3bGds";
+    const PLAYLIST_ID = "PLHcUTz5Sl91mLtDdtP-jZGoFPIBij6x70";
     const [solutionList, setSolutionList] = useState([]);
     const [totalItemsCount, setTotalItemsCount] = useState(0);
     const navigate = useNavigate();
-    const [userNickname, setUserNickname] = useState('');
+    const [userNickname, setUserNickname] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize] = useState(15); // 페이지당 아이템 수
 
@@ -41,28 +41,32 @@ export function SolutionListComponent() {
 
     const addSolutionButton = () => {
         navigate("/solution/add");
-    }
+    };
 
     // 데이터를 가져오고 페이지네이션 관련 상태 초기화
     const getSolutionList = async () => {
         try {
-            const resp = await axios.get('http://localhost:8080/show/solutionList');
+            const resp = await axios.get(
+                "http://localhost:8080/show/solutionList"
+            );
             setSolutionList(resp.data);
             setTotalItemsCount(resp.data.length);
             setCurrentPage(1); // 페이지를 첫 번째 페이지로 초기화
         } catch (error) {
             console.error("데이터 못불러왕~! : ", error);
         }
-    }
+    };
 
     const getUserData = async (user_id) => {
         try {
-            const userResp = await axios.get(`http://localhost:8080/show/user/${user_id}`);
+            const userResp = await axios.get(
+                `http://localhost:8080/show/user/${user_id}`
+            );
             setUserNickname(userResp.data.nickname);
         } catch (error) {
             console.error("닉네임 가져오는 도중 오류 발생: ", error);
         }
-    }
+    };
 
     useEffect(() => {
         getSolutionList();
@@ -83,14 +87,14 @@ export function SolutionListComponent() {
             const user_ids = pagedData.map((solution) => solution.user_id);
             user_ids.forEach((user_id) => getUserData(user_id));
         }
-    }, [currentPage, pageSize, solutionList, pagedData]);
+    }, [currentPage, pageSize, solutionList.length < 1, pagedData.length < 1]);
 
     useEffect(() => {
         if (solutionList.length > 0) {
             const user_ids = solutionList.map((solution) => solution.user_id);
             user_ids.forEach((user_id) => getUserData(user_id));
         }
-    }, [solutionList]);
+    }, []);
 
     useEffect(() => {
         axios
@@ -98,23 +102,23 @@ export function SolutionListComponent() {
                 `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=12&playlistId=${PLAYLIST_ID}&key=${API_KEY}`
             )
             .then((res) => {
-                const items = res.data.items.map(item => {
+                const items = res.data.items.map((item) => {
                     // Split the title at '|', and use the part before the '|' character
-                    const titleParts = item.snippet.title.split('|');
+                    const titleParts = item.snippet.title.split("|");
                     item.snippet.title = titleParts[0].trim();
                     return item;
                 });
                 setPlaylist(items);
             })
             .catch((error) => {
-                console.error('API 요청에 실패했습니다:', error);
+                console.error("API 요청에 실패했습니다:", error);
             });
     }, []);
 
     return (
         <div className="app-solution">
             <p className="video-solution">공략 영상</p>
-            <div className="container" style={{ width: '90%', height: '40%' }}>
+            <div className="container" style={{ width: "90%", height: "40%" }}>
                 <div className="video-list">
                     {playlist &&
                         playlist.map((video, idx) => (
@@ -128,7 +132,9 @@ export function SolutionListComponent() {
                                     allowFullScreen
                                     title={video.snippet.title}
                                 ></iframe>
-                                <p className="video-title">{video.snippet.title}</p>
+                                <p className="video-title">
+                                    {video.snippet.title}
+                                </p>
                             </div>
                         ))}
                 </div>
@@ -136,33 +142,47 @@ export function SolutionListComponent() {
             <div className="additional-div">
                 <p className="solution-content">공략 글</p>
                 <div className="center-table">
-                <button className="add-solution-button" onClick={addSolutionButton}>글 작성하기</button>
+                    <button
+                        className="add-solution-button"
+                        onClick={addSolutionButton}
+                    >
+                        글 작성하기
+                    </button>
                     <table className="table table-dark table-striped">
                         <thead>
-                        <tr className="row-tr">
-                            <th>#</th>
-                            <th>Title</th>
-                            <th>조회수</th>
-                            <th>작성자</th>
-                            <th>추천수</th>
-                            <th>작성일</th>
-                        </tr>
+                            <tr className="row-tr">
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>조회수</th>
+                                <th>작성자</th>
+                                <th>추천수</th>
+                                <th>작성일</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {pagedData.map((solution, index) => (
-                            <tr key={index}>
-                                <th scope="row" className="category-box">{getCategoryText(solution.category)}</th>
-                                <td onClick={(event) => {
-                                    if (event.target.tagName == "TD") {
-                                        navigate(`/solution/detail/${solution.comm_id}`);
-                                    }
-                                }} style={{ cursor: 'pointer' }}>{solution.title}</td>
-                                <td>{solution.count}</td>
-                                <td>{userNickname}</td>
-                                <td>{solution.likes}</td>
-                                <td>{formatDate(solution.regdate)}</td>
-                            </tr>
-                        ))}
+                            {pagedData.map((solution, index) => (
+                                <tr key={index}>
+                                    <th scope="row" className="category-box">
+                                        {getCategoryText(solution.category)}
+                                    </th>
+                                    <td
+                                        onClick={(event) => {
+                                            if (event.target.tagName == "TD") {
+                                                navigate(
+                                                    `/solution/detail/${solution.comm_id}`
+                                                );
+                                            }
+                                        }}
+                                        style={{ cursor: "pointer" }}
+                                    >
+                                        {solution.title}
+                                    </td>
+                                    <td>{solution.count}</td>
+                                    <td>{solution.nickname}</td>
+                                    <td>{solution.likes}</td>
+                                    <td>{formatDate(solution.regdate)}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                     <PaginationComponent

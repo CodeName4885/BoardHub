@@ -54,9 +54,13 @@ export function GameFormComponent() {
 
     async function applyChange() {
         if (gameId) {
-            await editGame(values);
+            await editGame(values).then((res) => {
+                if (res) navigate(`/game/detail/${gameId}`);
+            });
         } else {
-            await createGame(values);
+            await createGame(values).then((res) => {
+                if (res) navigate("/game/list");
+            });
         }
     }
 
