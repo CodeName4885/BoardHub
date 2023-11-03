@@ -14,4 +14,6 @@ public class Community {
     private LocalDateTime regdate;
     private Long user_id;
     private Long category;
+
+    private String nickname;
 }

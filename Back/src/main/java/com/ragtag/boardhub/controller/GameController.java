@@ -44,14 +44,14 @@ public class GameController {
     }
 
     @PutMapping(value = "{id}", consumes = "application/json")
-    public ResponseEntity<Void> putGame(@PathVariable("id") Long gameId, @RequestBody GameForm form) {
+    public ResponseEntity<Boolean> putGame(@PathVariable("id") Long gameId, @RequestBody GameForm form) {
         log.info("gameId : {}", gameId);
         log.info("form : {}", form);
         boolean result = gameService.updateGame(form);
         if(result) {
             gameService.mappingData(form);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
 

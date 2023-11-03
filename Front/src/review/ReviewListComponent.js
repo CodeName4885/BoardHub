@@ -32,6 +32,7 @@ export function ReviewListComponent() {
     const [userNickname, setUserNickname] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize] = useState(15); // 페이지당 아이템 수
+    const [blog, setBlog] = useState([]);
 
     // 페이지별 데이터 상태 추가
     const [pagedData, setPagedData] = useState([]);
@@ -39,12 +40,13 @@ export function ReviewListComponent() {
     // 데이터를 가져오고 페이지네이션 관련 상태 초기화
     const getReviewList = async () => {
         try {
-            const resp = await axios.get(
-                "http://localhost:8080/show/reviewsList"
-            );
-            setReviewList(resp.data);
-            setTotalItemsCount(resp.data.length);
-            setCurrentPage(1); // 페이지를 첫 번째 페이지로 초기화
+            const resp = await axios
+                .get("http://localhost:8080/show/reviewsList")
+                .then((res) => {
+                    setReviewList(res.data);
+                    setTotalItemsCount(res.data.length);
+                    setCurrentPage(1); // 페이지를 첫 번째 페이지로 초기화
+                });
         } catch (error) {
             console.error("데이터 못불러왕~! : ", error);
         }
@@ -71,6 +73,8 @@ export function ReviewListComponent() {
         setCurrentPage(page);
     };
 
+    console.log(pagedData);
+
     // reviewList, currentPage를 기반으로 페이지별 데이터 업데이트
     useEffect(() => {
         const startIndex = (currentPage - 1) * pageSize;
@@ -82,7 +86,7 @@ export function ReviewListComponent() {
             const user_ids = pagedData.map((review) => review.user_id);
             user_ids.forEach((user_id) => getUserData(user_id));
         }
-    }, [currentPage, pageSize, pagedData.length < 1]);
+    }, [currentPage, pageSize, reviewList.length < 1, pagedData.length < 1]);
 
     useEffect(() => {
         if (reviewList.length > 0) {
@@ -91,15 +95,59 @@ export function ReviewListComponent() {
         }
     }, []);
 
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8080/show/blog`)
+            .then((res) => {
+                console.log("Response: ", res);
+                setBlog(res.data);
+            })
+            .catch((error) => {
+                console.error("Error: ", error);
+            });
+    }, []);
+
     return (
         <div className="app">
-            <p className="solution-content">공략 글</p>
+            <p className="solution-content">게임 후기</p>
             <button
                 className="add-button"
                 onClick={() => navigate("/review/add")}
             >
                 글 작성하기
             </button>
+            <div className="center-table">
+                <p className="solution-content">블로그 후기</p>
+                <table className="table table-dark table-striped">
+                    <thead>
+                        <tr className="row-tr">
+                            <th>Title</th>
+                            <th>Content</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {blog.slice(0, 5).map((item, index) => (
+                            <tr key={index}>
+                                <td
+                                    className="recent-review-game-title"
+                                    dangerouslySetInnerHTML={{
+                                        __html: item.title,
+                                    }}
+                                />
+                                <td>
+                                    <a
+                                        href={item.link}
+                                        className="recent-review-coment"
+                                        dangerouslySetInnerHTML={{
+                                            __html: item.description,
+                                        }}
+                                    />
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
             <div className="center-table">
                 <table className="table table-dark table-striped">
                     <thead>
@@ -131,7 +179,7 @@ export function ReviewListComponent() {
                                     {review.title}
                                 </td>
                                 <td>{review.count}</td>
-                                <td>{userNickname}</td>
+                                <td>{review.nickname}</td>
                                 <td>{review.likes}</td>
                                 <td>{formatDate(review.regdate)}</td>
                             </tr>
