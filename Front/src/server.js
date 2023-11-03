@@ -132,8 +132,6 @@ app.get("/sse", (req, res) => {
         });
     };
 
-    const intervalId = setInterval(sendRankingData, 5000); // 3초에 한 번 데이터 업데이트
-
     // stop 명령을 입력하면 클라이언트에게 전송 중단
     const rl = readline.createInterface({
         input: process.stdin,
@@ -146,6 +144,10 @@ app.get("/sse", (req, res) => {
             res.end();
         }
     });
+});
+
+app.listen(port, () => {
+    console.log(`서버가 ${port}번 포트에서 실행 중입니다.`);
 });
 
 app.listen(port, () => {
