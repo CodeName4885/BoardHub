@@ -1,5 +1,6 @@
 .app {
-    height: 100vh;
+    height: auto;
+    margin-bottom: 50px;
 }
 
 .board-detail-container {

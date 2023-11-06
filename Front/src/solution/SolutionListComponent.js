@@ -27,8 +27,8 @@ function getCategoryText(category) {
 
 export function SolutionListComponent() {
     const [playlist, setPlaylist] = useState([]);
-    const API_KEY = "AIzaSyA-maf-Jt5IaKj7r8Xugc14SNxhLB3bGds";
-    const PLAYLIST_ID = "PLHcUTz5Sl91mLtDdtP-jZGoFPIBij6x70";
+    const API_KEY = "";
+    const PLAYLIST_ID = "";
     const [solutionList, setSolutionList] = useState([]);
     const [totalItemsCount, setTotalItemsCount] = useState(0);
     const navigate = useNavigate();

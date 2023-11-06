@@ -1,4 +1,4 @@
-const REST_API_KEY = "247ee3e6b3ce18bf1d6e0d148480c675";
+const REST_API_KEY = "";
 
 const REDIRECT_URI = "http://localhost:3000/auth/kakao/callback";
 

@@ -161,7 +161,7 @@ function Main() {
                     </div>
                     <h2 className={main["recent-review-title"]}>최근 리뷰</h2>
                     <div className={main["recent-review-card-box"]}>
-                        {blog.slice(0, 4).map((item) => (
+                        {blog.slice(0, 4).map((item, index) => (
                             <div className={main["recent-review-card-wrap"]} key={item.id}>
                                 <div className={main["recent-review-game-content-box"]}>
                                     <p className={main["recent-review-game-title"]}>
