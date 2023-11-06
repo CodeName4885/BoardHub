@@ -52,12 +52,16 @@
              - 아이디 중복 체크 : 아이디 중복시 사용 불가능
              - 랜덤 닉네임 : 닉네임을 작성하지 않고 등록시 랜덤으로 닉네임 부여
 
-          <img src="./image/join.gif" alt="로그인 GIF" width="800px" height="500px">
+          <img src="./image/join.gif" alt="회원가입 GIF" width="800px" height="500px">
           <br>
           <br>
          -> 마이 페이지 : 비밀번호 및 닉네임, 전화 번소 수정
 
              - 비밀번호 변경 : 자신의 아이디 입력후 이메일인증을하고 비밀번호 변경 가능
              - 닉네임, 전화번호 변경 : 변경 버튼 클릭시 입력창 생성 바로 변경 가능
+        
+          <img src="./image/modify.gif" alt="회원가입 GIF" width="800px" height="500px">
+          <br>
+          <br>
 
         
