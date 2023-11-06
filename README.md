@@ -6,7 +6,7 @@
 
   2. 프로젝트 설명
 
-  3. 팀원 내용
+  3. 향후 과제
 
 # [프로젝트 개요]
 
@@ -91,16 +91,24 @@
              - 리뷰 작성 : 에디터를 이용하여 리뷰를 작성할 수 있음
              - 리뷰 리스트 : 작성한 리뷰를 리스트로 보여짐
   
-          <img src="./image/reviewlist.gif" alt="회원가입 GIF" width="800px" height="500px">
-          <br>
-          <br>
+        <img src="./image/reviewlist.gif" alt="회원가입 GIF" width="800px" height="500px">
+        <br>
+        <br>
         -> 리뷰 상세 및 영상 공략 : 리뷰 상세와 영상공략이있는 페이지
 
              - 리뷰 상세 : 작성한 리뷰를 상세하게 보여짐
              - 리뷰 댓글 : 댓글을 작성 가능, 댓글에 댓글 까지 구현
              - 영상 공략 : YouTube 영상을 볼 수있음, 자신만의 공략을 작성할 수도 있음
 
-          <img src="./image/reviewreplyandyoutube.gif" alt="회원가입 GIF" width="800px" height="500px">
-          <br>
-          <br>
-              
+        <img src="./image/reviewreplyandyoutube.gif" alt="회원가입 GIF" width="800px" height="500px">
+        <br>
+        <br>
+
+ # [향후 과제]
+
+   1. 평점 기능 추가 및 좋아요와 찜 기능 추가
+   2. 커뮤니티 UI 개선
+   3. 실시간 랭킹 자체 실시간 데이터로 개선 - 위 평점 기능을 추가해서 변경 가능
+   4. 지도 기능 추가 - 메이트 구할 때 유용하게 사용 
+   5. 관리자 기능 추가 - 사용자가 보드게임을 수정 또는 추가 요청을 관리할 수 있음 
+
